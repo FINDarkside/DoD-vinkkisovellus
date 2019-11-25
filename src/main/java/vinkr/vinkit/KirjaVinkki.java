@@ -43,7 +43,7 @@ public class KirjaVinkki implements Vinkki {
 	}
 
 	public String getTekijanSukunimi() {
-		return this.tekija.substring(0, this.tekija.indexOf(",") - 1);
+		return this.tekija.substring(0, this.tekija.indexOf(","));
 	}
 	
 	public String getTekijanEtunimi() {
@@ -65,6 +65,29 @@ public class KirjaVinkki implements Vinkki {
 	public String getKustantaja() {
 		return this.kustantaja;
 	}
+	
+	public String getJulkaisutiedot() {
+		String julkaisutiedot = "";
+		if (!this.julkaisupaikka.equals("")) {
+			julkaisutiedot += this.julkaisupaikka;
+			if (!this.kustantaja.equals("")) {
+				julkaisutiedot += ": ";
+			} else if (this.julkaisuvuosi != 0) {
+				julkaisutiedot += ", ";
+			}
+		}
+		if (!this.kustantaja.equals("")) {
+			julkaisutiedot += this.kustantaja;
+			if (this.julkaisuvuosi != 0) {
+				julkaisutiedot += ", ";
+			}
+		}
+		if (this.julkaisuvuosi != 0) {
+			julkaisutiedot += this.julkaisuvuosi;
+		}
+		return julkaisutiedot;
+	}
+	
 
 	// Setterit
 	
@@ -103,7 +126,7 @@ public class KirjaVinkki implements Vinkki {
 		}
 		tuloste += "Nimeke: " + this.nimeke + NL;
 		if (!this.julkaisupaikka.equals("") || !this.kustantaja.equals("") || this.julkaisuvuosi != 0) {
-			tuloste += muotoileJulkaisutiedot() + NL;
+			tuloste += "Julkaisutiedot: " + getJulkaisutiedot() + NL;
 		}
 		if (!this.ISBN.equals("")) {
 			tuloste += "ISBN: " + this.ISBN + NL; 
@@ -119,7 +142,7 @@ public class KirjaVinkki implements Vinkki {
 		}
 		string += this.nimeke;
 		if (this.julkaisuvuosi != 0) {
-			string += "(" + this.getJulkaisuvuosi() + ")";
+			string += " (" + this.getJulkaisuvuosi() + ")";
 		}
 		return string;
 	}
@@ -131,28 +154,6 @@ public class KirjaVinkki implements Vinkki {
         SimpleDateFormat ft = new SimpleDateFormat("yyMMddhhmmssMs");
         String id = ft.format(nykyhetki);
         return id;
-	}
-	
-	private String muotoileJulkaisutiedot() {
-		String julkaisutiedot = "Julkaisutiedot: ";
-		if (!this.julkaisupaikka.equals("")) {
-			julkaisutiedot += this.julkaisupaikka;
-			if (!this.kustantaja.equals("")) {
-				julkaisutiedot += ": ";
-			} else if (this.julkaisuvuosi != 0) {
-				julkaisutiedot += ", ";
-			}
-		}
-		if (!this.kustantaja.equals("")) {
-			julkaisutiedot += this.kustantaja;
-			if (this.julkaisuvuosi != 0) {
-				julkaisutiedot += ", ";
-			}
-		}
-		if (this.julkaisuvuosi != 0) {
-			julkaisutiedot += this.julkaisuvuosi;
-		}
-		return julkaisutiedot;
 	}
 
 }

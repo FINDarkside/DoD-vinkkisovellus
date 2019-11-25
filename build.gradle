@@ -29,10 +29,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
-application {
-    // Define the main class for the application
-    mainClassName = 'vinkr.App'
-}
+
+// Define the main class for the application
+mainClassName = 'vinkr.App'
+
 
 run {
     standardInput = System.in

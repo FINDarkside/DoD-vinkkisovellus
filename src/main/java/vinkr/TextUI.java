@@ -33,7 +33,9 @@ public class TextUI {
         String kirjoittaja = getInput("Kirjoittaja");
         String otsikko = getInput("Otsikko");
         String isbn = getInput("ISBN");
-        KirjaVinkki kirjaVinkki = new KirjaVinkki(kirjoittaja, otsikko, isbn);
+        KirjaVinkki kirjaVinkki = new KirjaVinkki(otsikko);
+        kirjaVinkki.setTekija(kirjoittaja);
+        kirjaVinkki.setISBN(isbn);
         app.lisaaVinkki(kirjaVinkki);
         output.println("Kirja lisätty");
     }
