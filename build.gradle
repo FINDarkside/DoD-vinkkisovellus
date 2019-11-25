@@ -33,3 +33,11 @@ application {
     // Define the main class for the application
     mainClassName = 'vinkr.App'
 }
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}
+
