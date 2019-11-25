@@ -10,7 +10,7 @@ public class KirjaVinkki implements Vinkki {
 	private String nimeke;
 	private String tyyppi = "kirja";
 	private String tekija = ""; // Tekijän nimi tallennetaan muodossa "Sukunimi, Etunimi"
-	private String ISBN = "";
+	private String isbn = "";
 	private int julkaisuvuosi = 0;
 	private String julkaisupaikka = "";
 	private String kustantaja = "";
@@ -51,7 +51,7 @@ public class KirjaVinkki implements Vinkki {
 	}
 	
 	public String getISBN() {
-		return this.ISBN;
+		return this.isbn;
 	}
 
 	public int getJulkaisuvuosi() {
@@ -72,17 +72,15 @@ public class KirjaVinkki implements Vinkki {
 			julkaisutiedot += this.julkaisupaikka;
 			if (!this.kustantaja.equals("")) {
 				julkaisutiedot += ": ";
-			} else if (this.julkaisuvuosi != 0) {
-				julkaisutiedot += ", ";
 			}
 		}
 		if (!this.kustantaja.equals("")) {
 			julkaisutiedot += this.kustantaja;
-			if (this.julkaisuvuosi != 0) {
-				julkaisutiedot += ", ";
-			}
 		}
 		if (this.julkaisuvuosi != 0) {
+			if (!this.kustantaja.equals("") || !this.julkaisupaikka.equals("")) {
+				julkaisutiedot += ", ";
+			}
 			julkaisutiedot += this.julkaisuvuosi;
 		}
 		return julkaisutiedot;
@@ -100,8 +98,8 @@ public class KirjaVinkki implements Vinkki {
 		this.tekija = tekija;
 	}
 	
-	public void setISBN(String ISBN) {
-		this.ISBN = ISBN;
+	public void setISBN(String isbn) {
+		this.isbn = isbn;
 	}
 
 	public void setJulkaisuvuosi(int julkaisuvuosi) {
@@ -128,8 +126,8 @@ public class KirjaVinkki implements Vinkki {
 		if (!this.julkaisupaikka.equals("") || !this.kustantaja.equals("") || this.julkaisuvuosi != 0) {
 			tuloste += "Julkaisutiedot: " + getJulkaisutiedot() + NL;
 		}
-		if (!this.ISBN.equals("")) {
-			tuloste += "ISBN: " + this.ISBN + NL; 
+		if (!this.isbn.equals("")) {
+			tuloste += "ISBN: " + this.isbn + NL;
 		}
 		return tuloste;
 	}
@@ -149,7 +147,7 @@ public class KirjaVinkki implements Vinkki {
 
 	// Apumetodit
 	
-	private String luoID( ) {
+	private String luoID() {
 		Date nykyhetki = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyMMddhhmmssMs");
         String id = ft.format(nykyhetki);
