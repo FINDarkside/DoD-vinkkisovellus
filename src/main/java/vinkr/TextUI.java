@@ -1,5 +1,6 @@
 package vinkr;
 
+import vinkr.vinkit.KirjaVinkki;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -22,7 +23,7 @@ public class TextUI {
         this.output.println("lisaa: Lisää kirja");
         while (true) {
             String komento = getInput("Komento");
-            if (komento.equals("add")) {
+            if (komento.equals("lisaa")) {
                 lisaaKirja();
             }
         }
@@ -33,7 +34,7 @@ public class TextUI {
         String otsikko = getInput("Otsikko");
         String isbn = getInput("ISBN");
         KirjaVinkki kirjaVinkki = new KirjaVinkki(kirjoittaja, otsikko, isbn);
-        app.lisaaKirja(kirjaVinkki);
+        app.lisaaVinkki(kirjaVinkki);
         output.println("Kirja lisätty");
     }
 

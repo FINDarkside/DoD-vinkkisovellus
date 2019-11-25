@@ -2,16 +2,17 @@ package vinkr;
 
 import java.util.ArrayList;
 import java.util.List;
+import vinkr.vinkit.Vinkki;
 
 public class Vinkr {
 
-    private List<KirjaVinkki> vinkit = new ArrayList<KirjaVinkki>();
+    private List<Vinkki> vinkit = new ArrayList<Vinkki>();
 
-    public void lisaaKirja(KirjaVinkki kirja) {
-        vinkit.add(kirja);
+    public void lisaaVinkki(Vinkki vinkki) {
+        vinkit.add(vinkki);
     }
 
-    public List<KirjaVinkki> getKirjat() {
+    public List<Vinkki> getVinkit() {
         return vinkit;
     }
 
