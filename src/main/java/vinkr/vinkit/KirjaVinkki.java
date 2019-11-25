@@ -119,7 +119,7 @@ public class KirjaVinkki implements Vinkki {
 		}
 		string += this.nimeke;
 		if (this.julkaisuvuosi != 0) {
-			string += "(" + this.getJulkaisuvuosi() + ")"
+			string += "(" + this.getJulkaisuvuosi() + ")";
 		}
 		return string;
 	}
