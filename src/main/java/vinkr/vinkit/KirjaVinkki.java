@@ -148,5 +148,3 @@ public class KirjaVinkki implements Vinkki {
 	}
 
 }
-
-
