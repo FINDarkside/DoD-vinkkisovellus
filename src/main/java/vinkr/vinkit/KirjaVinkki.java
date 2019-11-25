@@ -113,7 +113,15 @@ public class KirjaVinkki implements Vinkki {
 
 	@Override
 	public String toString() {
-		return this.getTekijanSukunimi() + ": " + this.getOtsikko() + "(" + this.getJulkaisuvuosi() + ")";
+		String string = "";
+		if (!this.tekija.equals("")) {
+			string += this.getTekijanSukunimi() + ": ";
+		}
+		string += this.nimeke;
+		if (this.julkaisuvuosi != 0) {
+			string += "(" + this.getJulkaisuvuosi() + ")"
+		}
+		return string;
 	}
 
 	// Apumetodit
