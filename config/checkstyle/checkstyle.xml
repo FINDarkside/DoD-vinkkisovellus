@@ -82,6 +82,12 @@
             <property name="checkEmptyJavadoc" value="true"/>
         </module>
 
+        <module name="RegexpSinglelineJava">
+             <property name="format" value="\t"/>
+             <property name="message" value="Indent must use spaces"/>
+             <property name="ignoreComments" value="true"/>
+       </module>
+
     </module>
 
     <!-- File Length -->
