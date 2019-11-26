@@ -65,7 +65,7 @@ public class TextUI {
     private void listaaVinkit() {
         output.println();
         for (Vinkki vinkki : app.getVinkit()) {
-            System.out.println(vinkki.tulosta());
+            output.println(vinkki.tulosta());
         }
     }
 
