@@ -1,7 +1,8 @@
-package vinkr;
+package vinkr.vinkit;
 
 import static org.junit.Assert.*;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,6 +29,17 @@ public class KirjaVinkkiTest {
 		assertEquals("Vinkattavan kirjan nimi", vinkki.getOtsikko());
 	}
 
+	@Test
+	public void vinkinTunnuksenNoutoOnnistuu() {
+		Assert.assertTrue(vinkki.getID().matches("[0-9]{16}"));
+	}
+	
+	@Test
+	public void kirjanOtsikonMuuttoOnnistuu() {
+		vinkki.setOtsikko("Vinkatun kirjan uusi nimi");
+		assertEquals("Vinkatun kirjan uusi nimi", vinkki.getOtsikko());
+	}
+	
 	@Test
 	public void kirjanTekijanLisaysJaNoutoOnnistuu() {
 		vinkki.setTekija("Sukunimi, Etunimi");

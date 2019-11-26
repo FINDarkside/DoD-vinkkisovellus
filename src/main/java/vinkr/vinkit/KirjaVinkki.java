@@ -69,19 +69,19 @@ public class KirjaVinkki implements Vinkki {
 	public String getJulkaisutiedot() {
 		String julkaisutiedot = "";
 		if (!this.julkaisupaikka.equals("")) {
-			julkaisutiedot += this.julkaisupaikka;
+			julkaisutiedot += this.getJulkaisupaikka();
 			if (!this.kustantaja.equals("")) {
 				julkaisutiedot += ": ";
 			}
 		}
 		if (!this.kustantaja.equals("")) {
-			julkaisutiedot += this.kustantaja;
+			julkaisutiedot += this.getKustantaja();
 		}
 		if (this.julkaisuvuosi != 0) {
 			if (!this.kustantaja.equals("") || !this.julkaisupaikka.equals("")) {
 				julkaisutiedot += ", ";
 			}
-			julkaisutiedot += this.julkaisuvuosi;
+			julkaisutiedot += this.getJulkaisuvuosi();
 		}
 		return julkaisutiedot;
 	}
