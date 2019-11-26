@@ -32,13 +32,13 @@ public class TextUI {
     }
 
     private void tulostaKomennot() {
-        this.output.println("Komennot:");
-        this.output.println("lisaa: Lisää kirja");
-        this.output.println("listaa: Listaa kaikki lukuvinkit");
-        this.output.println("lopeta: Sulkee sovelluksen");
+        output.println("Komennot:");
+        output.println("lisaa: Lisää kirja");
+        output.println("listaa: Listaa kaikki lukuvinkit");
+        output.println("lopeta: Sulkee sovelluksen");
     }
 
-    private void kasitteleKomento (String komento) {
+    private void kasitteleKomento(String komento) {
         switch (komento) {
             case "lisaa":
                 lisaaKirja();
