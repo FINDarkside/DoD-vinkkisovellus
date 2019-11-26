@@ -3,8 +3,6 @@
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
 version: 2
-orbs:
-  codecov: codecov/codecov@1.0.2
 jobs:
   build:
     docker:
@@ -45,6 +43,3 @@ jobs:
       - run: bash ./gradlew check
       - run: bash ./gradlew jacocoTestReport
       - run: bash <(curl -s https://codecov.io/bash)
-
-      - codecov/upload:
-          file: build/reports/jacoco/test/jacocoTestReport.xml
