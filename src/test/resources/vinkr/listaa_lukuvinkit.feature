@@ -14,3 +14,4 @@ Feature: Käyttäjä voi listata järjestelmässä olevat lukuvinkit
         Given Uusi kirjavinkki, kirjoittajalla "Knuth, Donald", otsikolla "The Art of Computer Programming" ja jonka ISBN on "0-201-03801-3" lisätään
         When  komento "listaa" annetaan ohjelmalle
         Then  ohjelma vastaa tulosteella, jossa kohdat "Tekijä: Knuth, Donald", "Nimeke: The Art of Computer Programming" ja "ISBN: 0-201-03801-3"
+

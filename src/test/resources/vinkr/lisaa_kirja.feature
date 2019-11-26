@@ -14,3 +14,4 @@ Feature: Käyttäjä voi lisätä järjestelmään kirjamuotoisen lukuvinkin, jo
         Given komento "lisaa" annetaan ohjelmalle
         When  kirjoittaja "Martin, Robert", otsikko "" ja ISBN "978-0132350884" annetaan
         Then  ohjelma vastaa tulosteella "Kirjaa ei lisätty - kirjalle täytyy antaa otsikko"
+
