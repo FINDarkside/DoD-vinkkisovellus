@@ -30,23 +30,23 @@ public class Stepdefs {
     }
     
     @When("kirjoittaja {string}, otsikko {string} ja ISBN {string} annetaan")
-    public void kirjoittajaOtsikkojaISBNannetaan(String kirjoittaja, String otsikko, String ISBN) {
+    public void kirjoittajaOtsikkojaISBNannetaan(String kirjoittaja, String otsikko, String isbn) {
         
-       input += kirjoittaja + "\n";
-       input += otsikko + "\n";
-       input += ISBN + "\n";
-       input += "lopeta\n";
+        input += kirjoittaja + "\n";
+        input += otsikko + "\n";
+        input += isbn + "\n";
+        input += "lopeta\n";
 
-       uiInput = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
-       uiOutput = new ByteArrayOutputStream();
+        uiInput = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
+        uiOutput = new ByteArrayOutputStream();
        
-       app = new Vinkr();
-       ui = new TextUI(app, uiInput, uiOutput);
-       ui.run();
+        app = new Vinkr();
+        ui = new TextUI(app, uiInput, uiOutput);
+        ui.run();
     }    
     
     @Then("ohjelma vastaa tulosteella {string}")
-    public void ohjelmaVastaaHalutullaTulosteella (String odotettuTuloste) throws UnsupportedEncodingException {
+    public void ohjelmaVastaaHalutullaTulosteella(String odotettuTuloste) throws UnsupportedEncodingException {
         
         assertTrue(uiOutput.toString("UTF-8").contains(odotettuTuloste));
     }  
