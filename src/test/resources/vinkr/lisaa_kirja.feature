@@ -10,8 +10,3 @@ Feature: Käyttäjä voi lisätä järjestelmään kirjamuotoisen lukuvinkin, jo
         When  kirjoittaja "", otsikko "Clean Code: A Handbook of Agile Software Craftsmanship" ja ISBN "" annetaan
         Then  ohjelma vastaa tulosteella "Kirja lisätty"
 
-    Scenario: Kirjaa ei lisätä, kun otsikkoa ei anneta
-        Given komento "lisaa" annetaan ohjelmalle
-        When  kirjoittaja "Martin, Robert", otsikko "" ja ISBN "978-0132350884" annetaan
-        Then  ohjelma vastaa tulosteella "Kirjaa ei lisätty - kirjalle täytyy antaa otsikko"
-
