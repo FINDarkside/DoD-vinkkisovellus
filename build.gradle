@@ -27,11 +27,16 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:3.1.0'
 }
 
-application {
-    // Define the main class for the application
-    mainClassName = 'vinkr.App'
+
+// Define the main class for the application
+mainClassName = 'vinkr.App'
+
+
+run {
+    standardInput = System.in
 }
 
 jacocoTestReport {
@@ -40,4 +45,3 @@ jacocoTestReport {
         html.enabled true
     }
 }
-
