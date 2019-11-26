@@ -20,6 +20,13 @@ public class KirjaVinkki implements Vinkki {
         this.nimeke = otsikko;
     }
 
+    public KirjaVinkki(String otsikko, String tekija, String isbn) {
+        this.id = luoID();
+        this.nimeke = otsikko;
+        this.tekija = tekija;
+        this.isbn = isbn;
+    }
+
     // Getterit
     @Override
     public String getID() {
