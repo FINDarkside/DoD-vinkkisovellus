@@ -1,6 +1,7 @@
 package vinkr;
 
 import vinkr.vinkit.KirjaVinkki;
+import vinkr.vinkit.Vinkki;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -19,13 +20,34 @@ public class TextUI {
     }
 
     public void run() {
-        this.output.println("Komennot");
-        this.output.println("lisaa: Lisää kirja");
+        tulostaKomennot();
+
         while (true) {
             String komento = getInput("Komento");
-            if (komento.equals("lisaa")) {
-                lisaaKirja();
+            if (komento.equals("lopeta")) {
+                break;
             }
+            kasitteleKomento(komento);
+        }
+    }
+
+    private void tulostaKomennot() {
+        this.output.println("Komennot:");
+        this.output.println("lisaa: Lisää kirja");
+        this.output.println("listaa: Listaa kaikki lukuvinkit");
+        this.output.println("lopeta: Sulkee sovelluksen");
+    }
+
+    private void kasitteleKomento (String komento) {
+        switch (komento) {
+            case "lisaa":
+                lisaaKirja();
+                break;
+            case "listaa":
+                listaaVinkit();
+                break;
+            default:
+                output.println("Komentoa ei tunnistettu");
         }
     }
 
@@ -38,6 +60,13 @@ public class TextUI {
         kirjaVinkki.setISBN(isbn);
         app.lisaaVinkki(kirjaVinkki);
         output.println("Kirja lisätty");
+    }
+
+    private void listaaVinkit() {
+        System.out.println();
+        for (Vinkki vinkki : app.getVinkit()) {
+            System.out.println(vinkki.tulosta());
+        }
     }
 
     private String getInput(String name) {
