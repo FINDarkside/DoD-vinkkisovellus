@@ -29,11 +29,11 @@ public class Stepdefs {
         input += komento + "\n";
     }
     
-    @When("kirjoittaja {string}, otsikko {string} ja ISBN {string} annetaan")
-    public void kirjoittajaOtsikkojaISBNannetaan(String kirjoittaja, String otsikko, String isbn) {
+    @When("otsikko {string}, kirjoittaja {string} ja ISBN {string} annetaan")
+    public void kirjoittajaOtsikkojaISBNannetaan(String otsikko, String kirjoittaja, String isbn) {
         
-        input += kirjoittaja + "\n";
         input += otsikko + "\n";
+        input += kirjoittaja + "\n";
         input += isbn + "\n";
         input += "lopeta\n";
 
