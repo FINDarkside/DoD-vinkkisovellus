@@ -14,6 +14,7 @@ import vinkr.vinkit.Vinkki;
 public class TextUITest {
     
     Vinkr vinkr;
+    Validoija validoija;
     TextUI ui;
     PrintStream uiInput;
     ByteArrayOutputStream uiOutput;
@@ -32,7 +33,10 @@ public class TextUITest {
         vinkit.add(new KirjaVinkki("Refactoring", "Fowler, Martin", "0201485672"));
         vinkr = mock(Vinkr.class);
         when(vinkr.getVinkit()).thenReturn(vinkit);
-        
+        validoija = mock(Validoija.class);
+        when(validoija.validoiOtsikko(anyString())).thenReturn(true);
+        when(validoija.validoiTekija(anyString())).thenReturn(true);
+        when(validoija.validoiIsbn(anyString())).thenReturn(true);
         ui = new TextUI(vinkr, input, uiOutput);
     }
     
