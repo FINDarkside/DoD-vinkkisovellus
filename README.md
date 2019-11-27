@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/Ohjelmistotuotanto-DoD/vinkr.svg?style=svg)](https://circleci.com/gh/Ohjelmistotuotanto-DoD/vinkr)
 [![codecov](https://codecov.io/gh/Ohjelmistotuotanto-DoD/vinkr/branch/master/graph/badge.svg)](https://codecov.io/gh/Ohjelmistotuotanto-DoD/vinkr)
 
-**vinkr** on syksyn 2019 Ohjelmistotuotanto-kurssin miniprojekti, jossa tehtävänä on tarkoitus luoda lukuvinkkejä hallinnoiva sovellus. Sovellusta käytetään tekstikäyttöliittymällä kometorivin kautta.
+**vinkr** on syksyn 2019 Ohjelmistotuotanto-kurssin miniprojekti, jossa tehtävänä on tarkoitus luoda lukuvinkkejä hallinnoiva sovellus. Sovellusta käytetään tekstikäyttöliittymällä komentorivin kautta.
 
 ### Asennus- ja käyttöohje
 
@@ -11,7 +11,7 @@ Hanki sovellus kloonaamalla tämä Git-repositorio:
 <pre>
 git clone git@github.com:Ohjelmistotuotanto-DoD/vinkr.git
 </pre>
-tai lataa projekti ZIP-tiedostona painamalla oikean yläkulman vihreää "Clone or download" -nappia ja valitsemalla "Download ZIP". Pura ZIP haluamaasi kansioon.
+tai lataa projekti ZIP-tiedostona painamalla oikean yläkulman vihreää "Clone or download" -nappia ja valitsemalla "Download ZIP". Pura ZIP haluamaasi sijaintiin.
 
 Avaa terminaali projektin juureen ja käynnistä sovellus komennolla:
 <pre>
