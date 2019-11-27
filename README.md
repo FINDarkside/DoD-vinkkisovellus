@@ -28,3 +28,7 @@ nyt tekstikäyttöliittymän tulisi käynnistyä ja listata sinulle käytettävi
 ### Definition of done
 
 [Projektin definition of done](https://github.com/Ohjelmistotuotanto-DoD/vinkr/blob/master/definitionOfDone.md)
+
+### Burndown-käyrä
+
+[Taskien edistyminen ja burndown-käyrä](https://docs.google.com/spreadsheets/d/1IaOlbvyjOnPDexS8vWC0Q_28GK2p_VH0qf8ubIVeSeo/edit?usp=sharing)
