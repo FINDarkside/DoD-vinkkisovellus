@@ -4,5 +4,5 @@ hyvänä käytänteenä on laittaa README:stä linkki hyväksymäkriteerit mää
 * Asiakas pääsee näkemään koko ajan koodin ja testien tilanteen CI-palvelusta
 * Koodin ylläpidettävyyden tulee olla mahdollisimman hyvä
 järkevä nimeäminen
-* järkevä/selkeä ja perusteltu arkkitehtuuri
-* Buildi, checkstyle ja testit menee läpi CI palvelussa. 
+* Järkevä/selkeä ja perusteltu arkkitehtuuri
+* Buildi, checkstyle ja testit menee läpi CI palvelussa 
