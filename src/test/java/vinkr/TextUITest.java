@@ -43,8 +43,8 @@ public class TextUITest {
     @Test
     public void lisaaKomentoLisaaKirjan() {
         uiInput.println("lisaa");
-        uiInput.println("Dijkstra, Edsger");
         uiInput.println("A Discipline of Programming");
+        uiInput.println("Dijkstra, Edsger");
         uiInput.println("013215871X");
         uiInput.println("lopeta");
         ui.run();
