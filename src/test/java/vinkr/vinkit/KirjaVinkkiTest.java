@@ -16,7 +16,7 @@ public class KirjaVinkkiTest {
 
     @Before
     public void setUp() throws Exception {
-        vinkki = new KirjaVinkki("Vinkattavan kirjan nimi");
+        vinkki = new KirjaVinkki("Vinkattavan kirjan nimi", "", "");
     }
 
     @Test
