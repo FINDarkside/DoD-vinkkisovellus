@@ -11,7 +11,7 @@ Hanki sovellus kloonaamalla tämä Git-repositorio:
 <pre>
 git clone git@github.com:Ohjelmistotuotanto-DoD/vinkr.git
 </pre>
-tai lataa projekti ZIP-tiedostona painamalla oikean yläkulman vihreää "Clone or download" -nappia ja pura se haluamaasi kansioon.
+tai lataa projekti ZIP-tiedostona painamalla oikean yläkulman vihreää "Clone or download" -nappia ja valitsemalla "Download ZIP". Pura ZIP haluamaasi kansioon.
 
 Avaa terminaali projektin juureen ja käynnistä sovellus komennolla:
 <pre>
