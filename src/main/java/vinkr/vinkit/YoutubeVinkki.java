@@ -70,11 +70,10 @@ public class YoutubeVinkki implements Vinkki {
     // Tulostus
     @Override
     public String tulosta() {
-        String tuloste = "Tyyppi: YouTube-video" + NL;
+        String tuloste = "Tyyppi: YouTube-video" + NL + "Otsikko: " + this.getOtsikko() + NL;
         if (!this.getKanava().equals("")) {
             tuloste += "Kanava: " + this.getKanava() + NL;
         }
-        tuloste += "Otsikko: " + this.getOtsikko() + NL;
         if (this.getJulkaisupvm() != null) {
             tuloste += "Julkaistu: " + PVMMUOTO.format(this.getJulkaisupvm()) + NL;
         }
@@ -86,7 +85,7 @@ public class YoutubeVinkki implements Vinkki {
     public String toString() {
         String string = this.getOtsikko();
         if (this.getJulkaisupvm() != null) {
-            string += " (" + this.getJulkaisupvm() + ")";
+            string += " (" + PVMMUOTO.format(this.getJulkaisupvm()) + ")";
         }
         string += " [" + this.getUrl().toString() + "]";
         return string;

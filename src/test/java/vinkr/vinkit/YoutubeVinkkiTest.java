@@ -79,20 +79,20 @@ public class YoutubeVinkkiTest {
     
     @Test
     public void otsikonJaUrlinTulostusToimii() {
-        assertEquals("Tyyppi: Youtube-video" + NL + "Otsikko: Introduction to Scrum - 7 Minutes" + NL + "URL: https://www.youtube.com/watch?v=9TycLR0TqFA" + NL, vinkki.tulosta());
+        assertEquals("Tyyppi: YouTube-video" + NL + "Otsikko: Introduction to Scrum - 7 Minutes" + NL + "URL: https://www.youtube.com/watch?v=9TycLR0TqFA" + NL, vinkki.tulosta());
     }
 
     @Test
     public void otsikonUrlinJaKanavanTulostusToimii() {
         vinkki.setKanava("Uzility");
-        assertEquals("Tyyppi: Artikkeli" + NL + "Kanava: Uzility" + NL + "Otsikko: Introduction to Scrum - 7 Minutes" + NL + "URL: https://www.youtube.com/watch?v=9TycLR0TqFA" + NL, vinkki.tulosta());
+        assertEquals("Tyyppi: YouTube-video" + NL + "Otsikko: Introduction to Scrum - 7 Minutes" + NL + "Kanava: Uzility" + NL + "URL: https://www.youtube.com/watch?v=9TycLR0TqFA" + NL, vinkki.tulosta());
     }
 
     @Test
     public void taydellistenTietojenTulostusToimii() throws Exception {
         vinkki.setKanava("Uzility");
         vinkki.setJulkaisupvm(muoto.parse("26.07.2014"));
-        assertEquals("Tyyppi: Artikkeli" + NL + "Kanava: Uzility" + NL + "Otsikko: Introduction to Scrum - 7 Minutes" + NL + "Julkaistu: 26.07.2014" + NL + "URL: https://www.youtube.com/watch?v=9TycLR0TqFA" + NL, vinkki.tulosta());
+        assertEquals("Tyyppi: YouTube-video" + NL + "Otsikko: Introduction to Scrum - 7 Minutes" + NL + "Kanava: Uzility" + NL + "Julkaistu: 26.07.2014" + NL + "URL: https://www.youtube.com/watch?v=9TycLR0TqFA" + NL, vinkki.tulosta());
     }
 
 }

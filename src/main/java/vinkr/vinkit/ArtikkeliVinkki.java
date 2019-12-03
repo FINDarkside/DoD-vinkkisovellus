@@ -88,11 +88,10 @@ public class ArtikkeliVinkki implements Vinkki {
     // Tulostus
     @Override
     public String tulosta() {
-        String tuloste = "Tyyppi: Artikkeli" + NL;
+        String tuloste = "Tyyppi: Artikkeli" + NL + "Otsikko: " + this.getOtsikko() + NL;
         if (!this.getTekija().equals("")) {
             tuloste += "Kirjoittaja: " + this.getTekija() + NL;
         }
-        tuloste += "Otsikko: " + this.getOtsikko() + NL;
         if (!this.getJulkaisu().equals("")) {
             tuloste += "Lähde: " + getJulkaisu() + NL;
         }
@@ -107,7 +106,7 @@ public class ArtikkeliVinkki implements Vinkki {
     public String toString() {
         String string = this.getOtsikko();
         if (this.getJulkaisupvm() != null) {
-            string += " (" + this.getJulkaisupvm() + ")";
+            string += " (" + PVMMUOTO.format(this.getJulkaisupvm()) + ")";
         }
         string += " [" + this.getUrl().toString() + "]";
         return string;
