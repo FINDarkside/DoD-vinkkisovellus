@@ -4,25 +4,22 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ArtikkeliVinkki implements Vinkki {
-
-    public static final String NL = System.getProperty("line.separator");
+public class YoutubeVinkki implements Vinkki {
     private String id;
     private String otsikko;
-    private String tyyppi = "artikkeli";
-    private String tekija = ""; // Tekijän nimi tallennetaan muodossa "Sukunimi, Etunimi"
-    private String julkaisu = "";
+    private String tyyppi = "youtube";
+    private String kanava;
     private Date julkaisupvm = null;
-    private URL url = null; 
-
-    public ArtikkeliVinkki(URL url, String otsikko, String tekija) {
+    private URL url; 
+    
+    public YoutubeVinkki(URL url, String otsikko, String kanava) {
         this.id = luoID();
         this.otsikko = otsikko;
-        this.tekija = tekija;
+        this.kanava = kanava;
         this.url = url;
     }
     
-    // Getterit
+ // Getterit
     @Override
     public String getID() {
         return this.id;
@@ -38,22 +35,10 @@ public class ArtikkeliVinkki implements Vinkki {
         return this.tyyppi;
     }
 
-    public String getTekija() {
-        return this.tekija;
-    }
-
-    public String getTekijanSukunimi() {
-        return this.tekija.substring(0, this.tekija.indexOf(","));
-    }
-
-    public String getTekijanEtunimi() {
-        return this.tekija.substring(this.tekija.indexOf(",") + 2);
+    public String getKanava() {
+        return this.kanava;
     }
     
-    public String getJulkaisu() {
-        return this.julkaisu;
-    }
-
     public Date getJulkaisupvm() {
         return this.julkaisupvm;
     }
@@ -61,29 +46,25 @@ public class ArtikkeliVinkki implements Vinkki {
     public URL getUrl() {
         return this.url;
     }
-
-    // Setterit
+    
+ // Setterit
     @Override
     public void setOtsikko(String otsikko) {
         this.otsikko = otsikko;
     }
 
-    public void setTekija(String tekija) {
-        this.tekija = tekija;
-    }
-
-    public void setJulkaisu(String julkaisu) {
-        this.julkaisu = julkaisu;
+    public void setKanava(String kanava) {
+        this.kanava = kanava;
     }
 
     public void setJulkaisupvm(Date julkaisupvm) {
         this.julkaisupvm = julkaisupvm;
     }
     
-    public void setUrl(URL url) {
+    public void setURL(URL url) {
         this.url = url;
     }
-    
+
     @Override
     public String tulosta() {
         // TODO Auto-generated method stub
@@ -91,7 +72,7 @@ public class ArtikkeliVinkki implements Vinkki {
     }
 
     
- // Apumetodit
+    // Apumetodit
     private String luoID() {
         Date nykyhetki = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyMMddhhmmssMs");

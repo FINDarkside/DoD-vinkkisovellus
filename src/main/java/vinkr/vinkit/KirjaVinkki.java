@@ -15,10 +15,6 @@ public class KirjaVinkki implements Vinkki {
     private String julkaisupaikka = "";
     private String kustantaja = "";
 
-    public KirjaVinkki(String otsikko) {
-        this.id = luoID();
-        this.nimeke = otsikko;
-    }
 
     public KirjaVinkki(String otsikko, String tekija, String isbn) {
         this.id = luoID();
