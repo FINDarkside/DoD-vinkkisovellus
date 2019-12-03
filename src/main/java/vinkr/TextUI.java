@@ -70,7 +70,7 @@ public class TextUI {
 
     private URL kysyUrl() {
         while (true) {
-            String osoite = getInput("Videon osoite");
+            String osoite = getInput("URL-osoite:");
 
             try {
                 URL url = new URL(osoite);
