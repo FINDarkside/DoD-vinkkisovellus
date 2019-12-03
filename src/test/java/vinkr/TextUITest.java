@@ -62,6 +62,19 @@ public class TextUITest {
             assertTrue(output.contains(vinkki.tulosta()));
         }
     }
+
+    @Test
+    public void apuaKomentoListaaKomennot() {
+        uiInput.println("apua");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains("apua"));
+        assertTrue(output.contains("lisaa"));
+        assertTrue(output.contains("listaa"));
+        assertTrue(output.contains("lopeta"));
+    }
     
     private String getOutput() {
         return new String(uiOutput.toByteArray());

@@ -22,7 +22,7 @@ public class TextUI {
     }
 
     public void run() {
-        tulostaKomennot();
+        listaaKomennot();
 
         while (true) {
             String komento = getInput("Komento");
@@ -30,11 +30,13 @@ public class TextUI {
                 break;
             }
             kasitteleKomento(komento);
+            tulostaVinkkiApukomennosta();
         }
     }
 
-    private void tulostaKomennot() {
-        output.println("Komennot:");
+    private void listaaKomennot() {
+        output.println("Kaikki käytettävissä olevat komennot:");
+        output.println("apua: Tulostaa tämän listan uudestaan");
         output.println("lisaa: Lisää kirja");
         output.println("listaa: Listaa kaikki lukuvinkit");
         output.println("lopeta: Sulkee sovelluksen");
@@ -48,9 +50,17 @@ public class TextUI {
             case "listaa":
                 listaaVinkit();
                 break;
+            case "apua":
+                listaaKomennot();
+                break;
             default:
                 output.println("Komentoa ei tunnistettu");
         }
+    }
+
+    private void tulostaVinkkiApukomennosta() {
+        output.println();
+        output.println("Jos tahdot nähdä kaikki komennot, kirjoita 'apua'");
     }
 
     private void lisaaKirja() {
