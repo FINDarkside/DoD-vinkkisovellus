@@ -31,7 +31,7 @@ public class KirjaVinkkiTest {
 
     @Test
     public void vinkinTunnuksenNoutoOnnistuu() {
-        Assert.assertTrue(vinkki.getID().matches("[0-9]{16}"));
+        Assert.assertTrue(vinkki.getID().matches("[0-9]{14,16}"));
     }
 
     @Test
