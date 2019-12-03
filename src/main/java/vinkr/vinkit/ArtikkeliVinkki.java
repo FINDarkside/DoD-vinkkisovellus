@@ -7,13 +7,14 @@ import java.util.Date;
 public class ArtikkeliVinkki implements Vinkki {
 
     public static final String NL = System.getProperty("line.separator");
+    public static final SimpleDateFormat PVMMUOTO = new SimpleDateFormat("dd.MM.yyy");
     private String id;
     private String otsikko;
     private String tyyppi = "artikkeli";
     private String tekija = ""; // Tekijän nimi tallennetaan muodossa "Sukunimi, Etunimi"
     private String julkaisu = "";
     private Date julkaisupvm = null;
-    private URL url = null; 
+    private URL url; 
 
     public ArtikkeliVinkki(URL url, String otsikko, String tekija) {
         this.id = luoID();
@@ -84,12 +85,34 @@ public class ArtikkeliVinkki implements Vinkki {
         this.url = url;
     }
     
+    // Tulostus
     @Override
     public String tulosta() {
-        // TODO Auto-generated method stub
-        return null;
+        String tuloste = "Tyyppi: Artikkeli" + NL;
+        if (!this.getTekija().equals("")) {
+            tuloste += "Kirjoittaja: " + this.getTekija() + NL;
+        }
+        tuloste += "Otsikko: " + this.getOtsikko() + NL;
+        if (!this.getJulkaisu().equals("")) {
+            tuloste += "Lähde: " + getJulkaisu() + NL;
+        }
+        if (this.getJulkaisupvm() != null) {
+            tuloste += "Julkaistu: " + PVMMUOTO.format(this.getJulkaisupvm()) + NL;
+        }
+        tuloste += "URL: " + this.getUrl().toString() + NL;
+        return tuloste;
     }
-
+    
+    @Override
+    public String toString() {
+        String string = this.getOtsikko();
+        if (this.getJulkaisupvm() != null) {
+            string += " (" + this.getJulkaisupvm() + ")";
+        }
+        string += " [" + this.getUrl().toString() + "]";
+        return string;
+    }
+    
     
  // Apumetodit
     private String luoID() {

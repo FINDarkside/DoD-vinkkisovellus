@@ -18,10 +18,12 @@ public class YoutubeVinkkiTest {
 
     private static final String NL = System.getProperty("line.separator");
     private YoutubeVinkki vinkki;
+    private SimpleDateFormat muoto;
 
     @Before
     public void setUp() throws Exception {
         vinkki = new YoutubeVinkki(new URL("https://www.youtube.com/watch?v=9TycLR0TqFA"), "Introduction to Scrum - 7 Minutes", "");
+        muoto = new SimpleDateFormat("dd.MM.yyy");
     }
 
     @Test
@@ -64,53 +66,33 @@ public class YoutubeVinkkiTest {
         assertEquals("https://www.youtube.com/watch?v=XU0llRltyFM", vinkki.getUrl().toString());
     }    
     
-/*
     @Test
-    public void otsikonMerkkijonoesitysToimii() {
-        assertEquals("Vinkattavan kirjan nimi", vinkki.toString());
+    public void otsikonJaUrlinMerkkijonoesitysToimii() {
+        assertEquals("Introduction to Scrum - 7 Minutes [https://www.youtube.com/watch?v=9TycLR0TqFA]", vinkki.toString());
     }
 
     @Test
-    public void tekijanJaOtsikonMerkkijonoesitysToimii() {
-        vinkki.setTekija("Sukunimi, Etunimi");
-        assertEquals("Sukunimi: Vinkattavan kirjan nimi", vinkki.toString());
-    }
-
-    @Test
-    public void otsikonJaVuodenMerkkijonoesitysToimii() {
-        vinkki.setJulkaisuvuosi(2019);
-        assertEquals("Vinkattavan kirjan nimi (2019)", vinkki.toString());
-    }
-
-    @Test
-    public void taydellinenMerkkijonoesitysToimii() {
-        vinkki.setTekija("Sukunimi, Etunimi");
-        vinkki.setJulkaisuvuosi(2019);
-        assertEquals("Sukunimi: Vinkattavan kirjan nimi (2019)", vinkki.toString());
+    public void taydellinenMerkkijonoesitysToimii() throws Exception {
+        vinkki.setJulkaisupvm(muoto.parse("26.07.2014"));
+        assertEquals("Introduction to Scrum - 7 Minutes (26.07.2014) [https://www.youtube.com/watch?v=9TycLR0TqFA]", vinkki.toString());
     }
     
     @Test
-    public void otsikonTulostusToimii() {
-        assertEquals("Nimeke: Vinkattavan kirjan nimi" + NL, vinkki.tulosta());
+    public void otsikonJaUrlinTulostusToimii() {
+        assertEquals("Tyyppi: Youtube-video" + NL + "Otsikko: Introduction to Scrum - 7 Minutes" + NL + "URL: https://www.youtube.com/watch?v=9TycLR0TqFA" + NL, vinkki.tulosta());
     }
 
     @Test
-    public void tekijanOtsikonJaISBNnTulostusToimii() {
-        vinkki.setTekija("Sukunimi, Etunimi");
-        vinkki.setISBN("1-4346-636-43633");
-        assertEquals("Tekijä: Sukunimi, Etunimi" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "ISBN: 1-4346-636-43633" + NL, vinkki.tulosta());
+    public void otsikonUrlinJaKanavanTulostusToimii() {
+        vinkki.setKanava("Uzility");
+        assertEquals("Tyyppi: Artikkeli" + NL + "Kanava: Uzility" + NL + "Otsikko: Introduction to Scrum - 7 Minutes" + NL + "URL: https://www.youtube.com/watch?v=9TycLR0TqFA" + NL, vinkki.tulosta());
     }
 
     @Test
-    public void taydellistenTietojenTulostusToimii() {
-        vinkki.setTekija("Sukunimi, Etunimi");
-        vinkki.setISBN("1-4346-636-43633");
-        vinkki.setJulkaisupaikka("Paikka");
-        vinkki.setKustantaja("Kustannusyhtiö Oy");
-        vinkki.setJulkaisuvuosi(2019);
-        assertEquals("Tekijä: Sukunimi, Etunimi" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "Julkaisutiedot: Paikka: Kustannusyhtiö Oy, 2019" + NL + "ISBN: 1-4346-636-43633" + NL, vinkki.tulosta());
+    public void taydellistenTietojenTulostusToimii() throws Exception {
+        vinkki.setKanava("Uzility");
+        vinkki.setJulkaisupvm(muoto.parse("26.07.2014"));
+        assertEquals("Tyyppi: Artikkeli" + NL + "Kanava: Uzility" + NL + "Otsikko: Introduction to Scrum - 7 Minutes" + NL + "Julkaistu: 26.07.2014" + NL + "URL: https://www.youtube.com/watch?v=9TycLR0TqFA" + NL, vinkki.tulosta());
     }
-    
-    */
 
 }

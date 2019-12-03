@@ -113,10 +113,10 @@ public class KirjaVinkki implements Vinkki {
         this.kustantaja = kustantaja;
     }
 
-    // Tulostus
+ // Tulostus
     @Override
     public String tulosta() {
-        String tuloste = "";
+        String tuloste = "Tyyppi: Kirja" + NL;
         if (!this.tekija.equals("")) {
             tuloste += "Tekijä: " + this.tekija + NL;
         }

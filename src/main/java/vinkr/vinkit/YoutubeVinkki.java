@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class YoutubeVinkki implements Vinkki {
+    public static final String NL = System.getProperty("line.separator");
+    public static final SimpleDateFormat PVMMUOTO = new SimpleDateFormat("dd.MM.yyy");
     private String id;
     private String otsikko;
     private String tyyppi = "youtube";
@@ -65,12 +67,30 @@ public class YoutubeVinkki implements Vinkki {
         this.url = url;
     }
 
+    // Tulostus
     @Override
     public String tulosta() {
-        // TODO Auto-generated method stub
-        return null;
+        String tuloste = "Tyyppi: YouTube-video" + NL;
+        if (!this.getKanava().equals("")) {
+            tuloste += "Kanava: " + this.getKanava() + NL;
+        }
+        tuloste += "Otsikko: " + this.getOtsikko() + NL;
+        if (this.getJulkaisupvm() != null) {
+            tuloste += "Julkaistu: " + PVMMUOTO.format(this.getJulkaisupvm()) + NL;
+        }
+        tuloste += "URL: " + this.getUrl().toString() + NL;
+        return tuloste;
     }
 
+    @Override
+    public String toString() {
+        String string = this.getOtsikko();
+        if (this.getJulkaisupvm() != null) {
+            string += " (" + this.getJulkaisupvm() + ")";
+        }
+        string += " [" + this.getUrl().toString() + "]";
+        return string;
+    }
     
     // Apumetodit
     private String luoID() {

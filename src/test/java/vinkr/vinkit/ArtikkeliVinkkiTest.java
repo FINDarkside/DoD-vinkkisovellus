@@ -18,10 +18,12 @@ public class ArtikkeliVinkkiTest {
 
     private static final String NL = System.getProperty("line.separator");
     private ArtikkeliVinkki vinkki;
+    private SimpleDateFormat muoto;
 
     @Before
     public void setUp() throws Exception {
         vinkki = new ArtikkeliVinkki(new URL("https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram"), "Internet celebrity cat Lil Bub has died", "");
+        muoto = new SimpleDateFormat("dd.MM.yyy");
     }
 
     @Test
@@ -71,7 +73,6 @@ public class ArtikkeliVinkkiTest {
 
     @Test
     public void julkaisupvmAsetusJaMuotoiluOnnistuu() throws Exception {
-        SimpleDateFormat muoto = new SimpleDateFormat("dd.MM.yyy");
         vinkki.setJulkaisupvm(muoto.parse("02.12.2019"));
         assertEquals("02.12.2019", muoto.format(vinkki.getJulkaisupvm()));
     }
@@ -82,53 +83,41 @@ public class ArtikkeliVinkkiTest {
         assertEquals("https://www.theverge.com/circuitbreaker/2019/12/2/20992125/apple-mini-led-ipad-macbook-pro-2020-oled-rumor-kuo", vinkki.getUrl().toString());
     }    
     
-/*
     @Test
-    public void otsikonMerkkijonoesitysToimii() {
-        assertEquals("Vinkattavan kirjan nimi", vinkki.toString());
+    public void otsikonJaUrlinMerkkijonoesitysToimii() {
+        assertEquals("Internet celebrity cat Lil Bub has died [https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram]", vinkki.toString());
     }
 
     @Test
-    public void tekijanJaOtsikonMerkkijonoesitysToimii() {
-        vinkki.setTekija("Sukunimi, Etunimi");
-        assertEquals("Sukunimi: Vinkattavan kirjan nimi", vinkki.toString());
-    }
-
-    @Test
-    public void otsikonJaVuodenMerkkijonoesitysToimii() {
-        vinkki.setJulkaisuvuosi(2019);
-        assertEquals("Vinkattavan kirjan nimi (2019)", vinkki.toString());
-    }
-
-    @Test
-    public void taydellinenMerkkijonoesitysToimii() {
-        vinkki.setTekija("Sukunimi, Etunimi");
-        vinkki.setJulkaisuvuosi(2019);
-        assertEquals("Sukunimi: Vinkattavan kirjan nimi (2019)", vinkki.toString());
+    public void taydellinenMerkkijonoesitysToimii() throws Exception {
+        vinkki.setJulkaisupvm(muoto.parse("02.12.2019"));
+        assertEquals("Internet celebrity cat Lil Bub has died (02.12.2019) [https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram]", vinkki.toString());
     }
     
     @Test
-    public void otsikonTulostusToimii() {
-        assertEquals("Nimeke: Vinkattavan kirjan nimi" + NL, vinkki.tulosta());
+    public void otsikonJaUrlinTulostusToimii() {
+        assertEquals("Tyyppi: Artikkeli" + NL + "Otsikko: Internet celebrity cat Lil Bub has died" + NL + "URL: https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram" + NL, vinkki.tulosta());
     }
 
     @Test
-    public void tekijanOtsikonJaISBNnTulostusToimii() {
-        vinkki.setTekija("Sukunimi, Etunimi");
-        vinkki.setISBN("1-4346-636-43633");
-        assertEquals("Tekijä: Sukunimi, Etunimi" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "ISBN: 1-4346-636-43633" + NL, vinkki.tulosta());
+    public void otsikonUrlinJaTekijanTulostusToimii() {
+        vinkki.setTekija("Lee, Dami");
+        assertEquals("Tyyppi: Artikkeli" + NL + "Otsikko: Internet celebrity cat Lil Bub has died" + NL + "Kirjoittaja: Lee, Dami" + NL + "URL: https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram" + NL, vinkki.tulosta());
     }
 
     @Test
-    public void taydellistenTietojenTulostusToimii() {
-        vinkki.setTekija("Sukunimi, Etunimi");
-        vinkki.setISBN("1-4346-636-43633");
-        vinkki.setJulkaisupaikka("Paikka");
-        vinkki.setKustantaja("Kustannusyhtiö Oy");
-        vinkki.setJulkaisuvuosi(2019);
-        assertEquals("Tekijä: Sukunimi, Etunimi" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "Julkaisutiedot: Paikka: Kustannusyhtiö Oy, 2019" + NL + "ISBN: 1-4346-636-43633" + NL, vinkki.tulosta());
+    public void otsikonUrlinJulkaisunJaTekijanTulostusToimii() {
+        vinkki.setTekija("Lee, Dami");
+        vinkki.setJulkaisu("The Verge");
+        assertEquals("Tyyppi: Artikkeli" + NL + "Otsikko: Internet celebrity cat Lil Bub has died" + NL + "Kirjoittaja: Lee, Dami" + NL + "Lähde: The Verge" + NL + "URL: https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram" + NL, vinkki.tulosta());
     }
-    
-    */
+
+    @Test
+    public void taydellistenTietojenTulostusToimii() throws Exception {
+        vinkki.setTekija("Lee, Dami");
+        vinkki.setJulkaisu("The Verge");
+        vinkki.setJulkaisupvm(muoto.parse("02.12.2019"));
+        assertEquals("Tyyppi: Artikkeli" + NL + "Otsikko: Internet celebrity cat Lil Bub has died" + NL + "Kirjoittaja: Lee, Dami" + NL + "Lähde: The Verge" + NL + "Julkaistu: 02.12.2019" + NL + "URL: https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram" + NL, vinkki.tulosta());
+    }
 
 }
