@@ -61,7 +61,7 @@ public class YoutubeVinkki implements Vinkki {
         this.julkaisupvm = julkaisupvm;
     }
     
-    public void setURL(URL url) {
+    public void setUrl(URL url) {
         this.url = url;
     }
 
