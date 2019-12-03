@@ -18,15 +18,18 @@ public class TextUI {
     private final Scanner input;
     private final PrintStream output;
     private final Validoija validoija;
+    private final Logo logo;
 
     public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream) {
         this.app = app;
         this.input = new Scanner(inputStream);
         this.output = new PrintStream(outputStream);
         this.validoija = new Validoija();
+        this.logo = new Logo();
     }
 
     public void run() {
+        output.println(logo.logoStringiksi());
         listaaKomennot();
 
         while (true) {
