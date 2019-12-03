@@ -38,7 +38,8 @@ public class Stepdefs {
     
     @When("otsikko {string}, kirjoittaja {string} ja ISBN {string} annetaan")
     public void kirjoittajaOtsikkojaISBNannetaan(String otsikko, String kirjoittaja, String isbn) {
-        
+
+        input += "kirja" + "\n";
         input += otsikko + "\n";
         input += kirjoittaja + "\n";
         input += isbn + "\n";
