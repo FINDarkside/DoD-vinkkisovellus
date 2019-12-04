@@ -47,6 +47,7 @@ public class TextUI {
         output.println("  apua: Tulostaa tämän listan uudestaan");
         output.println("  lisaa: Lisää uusi lukuvinkki");
         output.println("  listaa: Listaa kaikki lukuvinkit");
+        output.println("  tallenna: tallentaa vinkit");
         output.println("  lopeta: Sulkee sovelluksen");
     }
 
