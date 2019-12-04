@@ -2,32 +2,30 @@ package vinkr;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.junit.rules.Timeout;
 import static org.mockito.Mockito.*;
 import vinkr.vinkit.KirjaVinkki;
 import vinkr.vinkit.Vinkki;
 
 public class TextUITest {
-    
+
     Vinkr vinkr;
     Validoija validoija;
     TextUI ui;
     PrintStream uiInput;
     ByteArrayOutputStream uiOutput;
     ArrayList<Vinkki> vinkit;
-    
+    Tallennus tallennus;
+
     @Before
     public void setUp() throws IOException {
         PipedOutputStream uiInputPiped = new PipedOutputStream();
         uiInput = new PrintStream(uiInputPiped, true);
         PipedInputStream input = new PipedInputStream(uiInputPiped);
-        
+
         uiOutput = new ByteArrayOutputStream();
-        
+
         vinkit = new ArrayList<>();
         vinkit.add(new KirjaVinkki("Formal Development of Programs and Proofs", "Dijkstra, Edsger", "978-0201172379"));
         vinkit.add(new KirjaVinkki("Refactoring", "Fowler, Martin", "0201485672"));
@@ -37,9 +35,12 @@ public class TextUITest {
         when(validoija.validoiOtsikko(anyString())).thenReturn(true);
         when(validoija.validoiTekija(anyString())).thenReturn(true);
         when(validoija.validoiIsbn(anyString())).thenReturn(true);
-        ui = new TextUI(vinkr, input, uiOutput);
+
+        tallennus = mock(Tallennus.class);
+        when(vinkr.serialisoi()).thenReturn("{}");
+        ui = new TextUI(vinkr, input, uiOutput, tallennus);
     }
-    
+
     @Test
     public void lisaaKomentoLisaaKirjan() {
         uiInput.println("lisaa");
@@ -51,13 +52,13 @@ public class TextUITest {
         ui.run();
         verify(vinkr).lisaaVinkki(any());
     }
-    
+
     @Test
     public void listaaKomentoTulostaaKirjat() {
         uiInput.println("listaa");
         uiInput.println("lopeta");
         ui.run();
-        
+
         String output = getOutput();
         for (Vinkki vinkki : vinkit) {
             assertTrue(output.contains(vinkki.tulosta()));
@@ -76,7 +77,16 @@ public class TextUITest {
         assertTrue(output.contains("listaa"));
         assertTrue(output.contains("lopeta"));
     }
-    
+
+    @Test
+    public void tallennaKomentoTallentaaJson() throws IOException {
+        uiInput.println("tallenna");
+        uiInput.println("lopeta");
+        ui.run();
+        verify(vinkr).serialisoi();
+        verify(tallennus).tallenna(anyString());
+    }
+
     private String getOutput() {
         return new String(uiOutput.toByteArray());
     }

@@ -1,15 +1,13 @@
 package vinkr;
 
-import vinkr.vinkit.ArtikkeliVinkki;
-import vinkr.vinkit.KirjaVinkki;
-import vinkr.vinkit.Vinkki;
-import vinkr.vinkit.YoutubeVinkki;
+import java.io.IOException;
+import vinkr.vinkit.*;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class TextUI {
@@ -19,13 +17,15 @@ public class TextUI {
     private final PrintStream output;
     private final Validoija validoija;
     private final Logo logo;
+    private final Tallennus tallennus;
 
-    public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream) {
+    public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Tallennus tallennus) {
         this.app = app;
         this.input = new Scanner(inputStream);
         this.output = new PrintStream(outputStream);
         this.validoija = new Validoija();
         this.logo = new Logo();
+        this.tallennus = tallennus;
     }
 
     public void run() {
@@ -47,6 +47,7 @@ public class TextUI {
         output.println("  apua: Tulostaa tämän listan uudestaan");
         output.println("  lisaa: Lisää uusi lukuvinkki");
         output.println("  listaa: Listaa kaikki lukuvinkit");
+        output.println("  tallenna: tallentaa vinkit");
         output.println("  lopeta: Sulkee sovelluksen");
     }
 
@@ -60,6 +61,9 @@ public class TextUI {
                 break;
             case "apua":
                 listaaKomennot();
+                break;
+            case "tallenna":
+                tallenna();
                 break;
             default:
                 output.println("Komentoa ei tunnistettu");
@@ -157,7 +161,7 @@ public class TextUI {
             }
         }
     }
-    
+
     private String kysyKirjoittaja() {
         while (true) {
             String kirjoittaja = getInput("Kirjoittaja");
@@ -168,7 +172,7 @@ public class TextUI {
             }
         }
     }
-    
+
     private String kysyIsbn() {
         while (true) {
             String isbn = getInput("ISBN");
@@ -179,12 +183,22 @@ public class TextUI {
             }
         }
     }
-    
+
     private void listaaVinkit() {
         output.println();
         for (Vinkki vinkki : app.getVinkit()) {
             output.println(vinkki.getTyyppi().substring(0, 1).toUpperCase() + vinkki.getTyyppi().substring(1));
             output.println(vinkki.tulosta());
+        }
+    }
+
+    private void tallenna() {
+        String json = app.serialisoi();
+        try {
+            tallennus.tallenna(json);
+        } catch (IOException ex) {
+            output.println("Tallennus epäonnistui");
+            System.out.println(ex);
         }
     }
 
