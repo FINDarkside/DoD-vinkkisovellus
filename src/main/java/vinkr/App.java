@@ -13,11 +13,12 @@ public class App {
     public static void main(String[] args) throws URISyntaxException {
         String currentFolder = new File(TextUI.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
         Path savePath = Paths.get(currentFolder, "vinkit.json");
+        Tallennus tallennus = new Tallennus(savePath);
         Vinkr app = new Vinkr();
         if (Files.exists(savePath)) {
             String json;
             try {
-                json = Files.readString(savePath);
+                json = tallennus.lataa();
                 app = Vinkr.deserialisoi(json);
             } catch (IOException | JsonParseException ex) {
                 System.out.println("Vinkkien lataus tiedostosta " + savePath + " epäonnistui.");
@@ -26,7 +27,7 @@ public class App {
         } else {
             System.out.println(savePath + " doesn't exist");
         }
-        TextUI ui = new TextUI(app, System.in, System.out, savePath);
+        TextUI ui = new TextUI(app, System.in, System.out, tallennus);
         ui.run();
     }
 }

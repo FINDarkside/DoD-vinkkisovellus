@@ -17,15 +17,15 @@ public class TextUI {
     private final PrintStream output;
     private final Validoija validoija;
     private final Logo logo;
-    private final Path tallennusTiedosto;
+    private final Tallennus tallennus;
 
-    public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Path tallennusTiedosto) {
+    public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Tallennus tallennus) {
         this.app = app;
         this.input = new Scanner(inputStream);
         this.output = new PrintStream(outputStream);
         this.validoija = new Validoija();
         this.logo = new Logo();
-        this.tallennusTiedosto = tallennusTiedosto;
+        this.tallennus = tallennus;
     }
 
     public void run() {
@@ -194,7 +194,7 @@ public class TextUI {
     private void tallenna() {
         String json = app.serialisoi();
         try {
-            Files.writeString(tallennusTiedosto, json);
+            tallennus.tallenna(json);
         } catch (IOException ex) {
             output.println("Tallennus epäonnistui");
             System.out.println(ex);
