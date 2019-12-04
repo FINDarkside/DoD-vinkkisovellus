@@ -5,6 +5,7 @@ import vinkr.vinkit.*;
 
 import java.io.*;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,11 +14,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
-import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
-import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
-
 public class TextUI {
 
+    public static final String NL = System.getProperty("line.separator");
     private final Vinkr app;
     private final Scanner input;
     private final PrintStream output;
@@ -261,20 +260,21 @@ public class TextUI {
             if (validoija.validoiLinkki(vinkki) == true) {
                 try {
                     app.getVinkit().get(Integer.parseInt(vinkki) - 1).avaaLinkki();
-                } catch (UnsupportedOperatingSystemException e) {
-                    output.println("Virhe: Käyttöjärjestelmä ei tue toimintoa");
-                } catch (BrowserLaunchingInitializingException e) {
-                    output.println("Virhe: Selaimen käynnistys ei onnistu");
+                } catch (URISyntaxException e) {
+                    output.println("Virhe: URL-osoite ei ole kelvollinen");
+                } catch (IOException e) {
+                    output.println("Virhe: Linkin avaaminen ei onnistu");
                 } catch (Exception e) {
                     output.println("Virhe: Vinkki ei sisällä linkkiä");
                 }
-                break;  
+                String viesti = input.nextLine();
+                output.println(viesti + NL);
+                break;
             } else {
                 output.println("Virhe: Anna kelvollinen vinkin numero");
             }
         }
     }
-    
 
     private void tallenna() {
         String json = app.serialisoi();

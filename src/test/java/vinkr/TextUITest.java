@@ -13,7 +13,8 @@ import vinkr.vinkit.Vinkki;
 import vinkr.vinkit.YoutubeVinkki;
 
 public class TextUITest {
-
+    
+    public static final String NL = System.getProperty("line.separator");
     Vinkr vinkr;
     Validoija validoija;
     TextUI ui;
@@ -128,6 +129,20 @@ public class TextUITest {
         assertTrue(output.contains("listaa"));
         assertTrue(output.contains("lopeta"));
     }
+
+    /*
+    @Test
+    public void linkinAvaaminenToimii() {
+        uiInput.println("avaa");
+        uiInput.println("3");
+        uiInput.println(NL);
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains("Opening in existing browser session."));
+    }
+    */
 
     @Test
     public void tallennaKomentoTallentaaJson() throws IOException {

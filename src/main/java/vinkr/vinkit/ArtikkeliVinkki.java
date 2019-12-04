@@ -1,11 +1,10 @@
 package vinkr.vinkit;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import edu.stanford.ejalbert.BrowserLauncher;
-import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
-import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 
 public class ArtikkeliVinkki implements Vinkki {
 
@@ -115,11 +114,10 @@ public class ArtikkeliVinkki implements Vinkki {
         return string;
     }
     
- // Linkin avaaminen
+    // Linkin avaaminen
     @Override
-    public void avaaLinkki() throws BrowserLaunchingInitializingException, UnsupportedOperatingSystemException {
-        BrowserLauncher avaaja = new BrowserLauncher();
-        avaaja.openURLinBrowser(this.getUrl().toString());
+    public void avaaLinkki() throws IOException, URISyntaxException {
+        java.awt.Desktop.getDesktop().browse(this.getUrl().toURI());
     }
     
  // Apumetodit
