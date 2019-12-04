@@ -9,7 +9,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import org.junit.After;
 import static org.junit.Assert.*;
 
 public class Stepdefs {
@@ -198,7 +197,7 @@ public class Stepdefs {
         uiOutput = new ByteArrayOutputStream();
        
         app = new Vinkr();
-        ui = new TextUI(app, uiInput, uiOutput);
+        ui = new TextUI(app, uiInput, uiOutput, null);
         ui.run();
     }
 }
