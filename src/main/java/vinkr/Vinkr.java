@@ -1,19 +1,18 @@
 package vinkr;
 
 import com.google.gson.Gson;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import vinkr.vinkit.*;
 
 public class Vinkr {
 
-    private static final Gson gson = new Gson();
+    private static final Gson GSON = new Gson();
 
     private List<Vinkki> vinkit = new ArrayList<Vinkki>();
 
     public static Vinkr deserialisoi(String json) {
-        TallennusData tallennus = gson.fromJson(json, TallennusData.class);
+        TallennusData tallennus = GSON.fromJson(json, TallennusData.class);
         Vinkr vinkr = new Vinkr();
         vinkr.vinkit.addAll(tallennus.artikkelit);
         vinkr.vinkit.addAll(tallennus.kirjat);
@@ -42,7 +41,7 @@ public class Vinkr {
                 throw new RuntimeException("Tuntematon Vinkki luokka");
             }
         }
-        return gson.toJson(data);
+        return GSON.toJson(data);
     }
 
 }
