@@ -17,7 +17,11 @@ tai lataa projekti ZIP-tiedostona painamalla oikean yläkulman vihreää "Clone 
 
 #### Buildaaminen
 
-TODO
+Komento
+<pre>
+./gradlew build
+</pre>
+luo kansioon _build/libs_ ajettavan jar-tiedoston _vinkr-all.jar_.
 
 #### Ajaminen
 
@@ -26,6 +30,12 @@ Avaa terminaali projektin juureen ja käynnistä sovellus komennolla:
 ./gradlew run -q --console=plain
 </pre>
 nyt tekstikäyttöliittymän tulisi käynnistyä.
+
+Jar-tiedoston voi ajaa komennolla:
+<pre>
+java -jar vinkr-all.jar
+</pre>
+Huomaa että buildattaessa jar ei sijaitse projektin juuressa.
 
 #### Käyttäminen
 
