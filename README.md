@@ -7,17 +7,29 @@
 
 ### Asennus- ja käyttöohje
 
+#### Lataaminen
+
 Hanki sovellus kloonaamalla tämä Git-repositorio:
 <pre>
 git clone git@github.com:Ohjelmistotuotanto-DoD/vinkr.git
 </pre>
 tai lataa projekti ZIP-tiedostona painamalla oikean yläkulman vihreää "Clone or download" -nappia ja valitsemalla "Download ZIP". Pura ZIP haluamaasi sijaintiin.
 
+#### Buildaaminen
+
+TODO
+
+#### Ajaminen
+
 Avaa terminaali projektin juureen ja käynnistä sovellus komennolla:
 <pre>
 ./gradlew run -q --console=plain
 </pre>
-nyt tekstikäyttöliittymän tulisi käynnistyä ja listata sinulle käytettävissä olevat komennot.
+nyt tekstikäyttöliittymän tulisi käynnistyä.
+
+#### Käyttäminen
+
+Kun projekti käynnistyy, tekstikäyttöliittymä toivottaa sinut tervetulleeksi näyttävällä taideteoksella sekä listaamalla kaikki käytettävissä olevat komennot ja niiden toiminnallisuuden. Ohjelmaa käytetään näillä komennoilla, ja komennot sekä toiminnallisuudet saat uudestaan näkyviin 'apua'-komennolla.
 
 ### Backlogit
 
@@ -25,10 +37,16 @@ nyt tekstikäyttöliittymän tulisi käynnistyä ja listata sinulle käytettävi
 
 [Sprintin 1 backlog](https://github.com/Ohjelmistotuotanto-DoD/vinkr/projects/1)
 
+[Sprintin 2 backlog](https://github.com/Ohjelmistotuotanto-DoD/vinkr/projects/3)
+
 ### Definition of done
 
 [Projektin definition of done](https://github.com/Ohjelmistotuotanto-DoD/vinkr/blob/master/definitionOfDone.md)
 
-### Burndown-käyrä
+### Burndown-käyrät & edistyminen
 
-[Taskien edistyminen ja burndown-käyrä](https://docs.google.com/spreadsheets/d/1IaOlbvyjOnPDexS8vWC0Q_28GK2p_VH0qf8ubIVeSeo/edit?usp=sharing)
+[Taskien edistyminen ja burndown-käyrät (sprintit eri välilehtinä)](https://docs.google.com/spreadsheets/d/1IaOlbvyjOnPDexS8vWC0Q_28GK2p_VH0qf8ubIVeSeo/edit?usp=sharing)
+
+### Storyjen hyväksymisehdot
+
+[Sprinttiin 2 valitut storyt ja niiden hyväksymisehdot](https://github.com/Ohjelmistotuotanto-DoD/vinkr/blob/master/hyvaksymiskriteerit.md)
