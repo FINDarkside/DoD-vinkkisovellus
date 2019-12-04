@@ -260,8 +260,6 @@ public class TextUI {
             if (validoija.validoiLinkki(vinkki) == true) {
                 try {
                     app.getVinkit().get(Integer.parseInt(vinkki) - 1).avaaLinkki();
-                } catch (URISyntaxException e) {
-                    output.println("Virhe: URL-osoite ei ole kelvollinen");
                 } catch (IOException e) {
                     output.println("Virhe: Linkin avaaminen ei onnistu");
                 } catch (Exception e) {
