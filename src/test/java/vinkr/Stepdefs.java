@@ -44,9 +44,19 @@ public class Stepdefs {
         input += kustantaja + "\n";
         input += julkaisuvuosi + "\n";
     }
-    
+    /*
+    @Given("uusi artikkelivinkki, urlilla {string}, otsikolla {string}, kirjoittajalla {string}, julkaisulla {string} ja julkaisupaivalla {string} annetaan")
+    public void lisataanJarjestelmaanTiettyArtikkelivinkki(String tyyppi, String url, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
+        input += tyyppi + "\n";
+        input += url + "\n";
+        input += otsikko + "\n";
+        input += kirjoittaja + "\n";
+        input += julkaisu + "\n";
+        input += julkaisupaiva + "\n";
+        input += "lopeta" + "\n";
+    }
         //WHENIT
-    
+    */
     @When("listataan kaikki lukuvinkit")
     public void listataanLukuvinkit() {
         input += "listaa" + "\n";
@@ -59,7 +69,16 @@ public class Stepdefs {
         input += "lopeta\n";
         luoUIjaStreamit();
     }
-    
+    /*
+    @When("kayttaja valitsee vinkin numero {string}")
+    public void valitaanVinkki(String numero) {
+        input += numero + "\n";
+        input += "1" + "\n";
+        
+        input += "lopeta" + "\n";
+        luoUIjaStreamit();
+    }
+    */
     @When("tyyppi {string}, otsikko {string}, kirjoittaja {string}, ISBN {string}, julkaisupaikka {string}, kustantaja {string} ja julkaisuvuosi {string} annetaan")
     public void kirjanKirjoittajaOtsikkojaIsbnjaMuutAnnetaan(String tyyppi, String otsikko, String kirjoittaja, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi) {
         
@@ -93,7 +112,7 @@ public class Stepdefs {
     }
     
     @When("tyyppi {string}, URL {string}, otsikko {string}, kirjoittaja {string}, julkaisu {string} ja julkaisupaiva {string} annetaan")
-    public void artikkelinKirjoittajaOtsikkojaUrljaMuutAnnetaan(String url, String tyyppi, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
+    public void artikkelinKirjoittajaOtsikkojaUrljaMuutAnnetaan(String tyyppi, String url, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
 
         input += tyyppi + "\n";
         input += url + "\n";
@@ -107,7 +126,7 @@ public class Stepdefs {
     }
     
     @When("tyyppi {string}, virheellinen URL {string}, otsikko {string}, kirjoittaja {string}, julkaisu {string} ja julkaisupaiva {string} annetaan")
-    public void artikkelinKirjoittajaOtsikkojaEpakelpoUrljaMuutAnnetaan(String url, String tyyppi, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
+    public void artikkelinKirjoittajaOtsikkojaEpakelpoUrljaMuutAnnetaan(String tyyppi, String url, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
 
         input += tyyppi + "\n";
         input += url + "\n";
@@ -123,36 +142,38 @@ public class Stepdefs {
         luoUIjaStreamit();
     }
     
-    @When("tyyppi {string}, virheellinen otsikko {string}, kirjoittaja {string} ja URL {string} annetaan")
-    public void artikkelinKirjoittajaEpakelpoOtsikkojaUrlAnnetaan(String tyyppi, String otsikko, String kirjoittaja, String url) {
+    @When("tyyppi {string}, URL {string}, virheellinen otsikko {string}, kirjoittaja {string}, julkaisu {string} ja julkaisupaiva {string} annetaan")
+    public void artikkelinKirjoittajaEpakelpoOtsikkojaUrljaMuutAnnetaan(String tyyppi, String url, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
 
         input += tyyppi + "\n";
-        input += otsikko + "\n";
-        
-        //jotta ohjelma sulkeutuu, asetettava inputtiin myös validi syöte
-        input += validiOtsikko + "\n";
-        
-        input += kirjoittaja + "\n";
         input += url + "\n";
+        input += otsikko + "\n";
+        input += validiOtsikko + "\n";
+        input += kirjoittaja + "\n";
+        input += julkaisu + "\n";
+        input += julkaisupaiva + "\n";
+        
         input += "lopeta" + "\n";
         
+        System.out.println(input);
         luoUIjaStreamit();
     }
     
-    @When("tyyppi {string}, URL {string}, otsikko {string} ja kanava {string} annetaan")
-    public void videonUrlOtsikkoJaKanavaAnnetaan(String tyyppi, String url, String otsikko, String kanava) {
+    @When("tyyppi {string}, URL {string}, otsikko {string}, kanava {string} ja julkaisupaivamaara {string} annetaan")
+    public void videonUrlOtsikkoJaKanavaAnnetaanJaMuut(String tyyppi, String url, String otsikko, String kanava, String julkaisupaivamaara) {
 
         input += tyyppi + "\n";
         input += url + "\n";
         input += otsikko + "\n";
         input += kanava + "\n";
+        input += julkaisupaivamaara + "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
     }
     
-    @When("tyyppi {string}, virheellinen URL {string}, otsikko {string} ja kanava {string} annetaan")
-    public void videonEpakelpoUrlOtsikkoJaKanavaAnnetaan(String tyyppi, String url, String otsikko, String kanava) {
+    @When("tyyppi {string}, virheellinen URL {string}, otsikko {string}, kanava {string} ja julkaisupaivamaara {string} annetaan")
+    public void videonEpakelpoUrlOtsikkoJaKanavaAnnetaan(String tyyppi, String url, String otsikko, String kanava, String julkaisupaivamaara) {
 
         input += tyyppi + "\n";
         input += url + "\n";
@@ -160,13 +181,14 @@ public class Stepdefs {
         input += validiUrl + "\n";
         input += otsikko + "\n";
         input += kanava + "\n";
+        input += julkaisupaivamaara + "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
     }
     
-    @When("tyyppi {string}, URL {string}, virheellinen otsikko {string} ja kanava {string} annetaan")
-    public void videonUrlEpakelpoOtsikkoJaKanavaAnnetaan(String tyyppi, String url, String otsikko, String kanava) {
+    @When("tyyppi {string}, URL {string}, virheellinen otsikko {string}, kanava {string} ja julkaisupaivamaara {string} annetaan")
+    public void videonUrlEpakelpoOtsikkoJaKanavaAnnetaan(String tyyppi, String url, String otsikko, String kanava, String julkaisupaivamaara) {
 
         input += tyyppi + "\n";
         input += url + "\n";
@@ -174,6 +196,7 @@ public class Stepdefs {
         //jotta ohjelma sulkeutuu, asetettava inputtiin myös validi syöte
         input += validiOtsikko + "\n";
         input += kanava + "\n";
+        input += julkaisupaivamaara + "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
