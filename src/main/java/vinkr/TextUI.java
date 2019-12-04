@@ -5,13 +5,18 @@ import vinkr.vinkit.*;
 
 import java.io.*;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
 
 public class TextUI {
 
+    public static final String NL = System.getProperty("line.separator");
     private final Vinkr app;
     private final Scanner input;
     private final PrintStream output;
@@ -23,7 +28,7 @@ public class TextUI {
         this.app = app;
         this.input = new Scanner(inputStream);
         this.output = new PrintStream(outputStream);
-        this.validoija = new Validoija();
+        this.validoija = new Validoija(app);
         this.logo = new Logo();
         this.tallennus = tallennus;
     }
@@ -44,11 +49,12 @@ public class TextUI {
 
     private void listaaKomennot() {
         output.println("Kaikki käytettävissä olevat komennot:");
-        output.println("  apua: Tulostaa tämän listan uudestaan");
+        output.println("  apua: Tulosta tämä lista uudestaan");
         output.println("  lisaa: Lisää uusi lukuvinkki");
         output.println("  listaa: Listaa kaikki lukuvinkit");
-        output.println("  tallenna: tallentaa vinkit");
-        output.println("  lopeta: Sulkee sovelluksen");
+        output.println("  avaa: Avaa annetun vinkin sisältämä linkki");
+        output.println("  tallenna: Tallenna vinkit");
+        output.println("  lopeta: Sulje sovellus");
     }
 
     private void kasitteleKomento(String komento) {
@@ -59,6 +65,8 @@ public class TextUI {
             case "listaa":
                 listaaVinkit();
                 break;
+            case "avaa":
+                avaaLinkki();
             case "apua":
                 listaaKomennot();
                 break;
@@ -73,23 +81,6 @@ public class TextUI {
     private void tulostaVinkkiApukomennosta() {
         output.println();
         output.println("Jos tahdot nähdä kaikki komennot, kirjoita 'apua'");
-    }
-
-    private URL kysyUrl() {
-        while (true) {
-            String osoite = getInput("URL-osoite");
-
-            try {
-                URL url = new URL(osoite);
-                if (true) { //validoija.validoiUrl
-                    return url;
-                } else {
-                    output.println("Virhe: Anna kelvollinen URL-osoite");
-                }
-            } catch (MalformedURLException e) {
-                output.println("Virhe: Anna kelvollinen URL-osoite");
-            }
-        }
     }
 
     private void lisaaVinkki() {
@@ -118,15 +109,18 @@ public class TextUI {
         String otsikko = kysyOtsikko();
         String kanava = kysyKanava();
         YoutubeVinkki youtubeVinkki = new YoutubeVinkki(url, otsikko, kanava);
+        youtubeVinkki.setJulkaisupvm(kysyPvm());
         app.lisaaVinkki(youtubeVinkki);
         output.println("Video lisätty");
     }
 
     private void lisaaArtikkeli() {
+        URL url = kysyUrl();
         String otsikko = kysyOtsikko();
         String kirjoittaja = kysyKirjoittaja();
-        URL url = kysyUrl();
         ArtikkeliVinkki artikkeliVinkki = new ArtikkeliVinkki(url, otsikko, kirjoittaja);
+        artikkeliVinkki.setJulkaisu(kysyJulkaisu());
+        artikkeliVinkki.setJulkaisupvm(kysyPvm());
         app.lisaaVinkki(artikkeliVinkki);
         output.println("Artikkeli lisätty");
     }
@@ -136,6 +130,9 @@ public class TextUI {
         String kirjoittaja = kysyKirjoittaja();
         String isbn = kysyIsbn();
         KirjaVinkki kirjaVinkki = new KirjaVinkki(otsikko, kirjoittaja, isbn);
+        kirjaVinkki.setJulkaisupaikka(kysyJulkaisupaikka());
+        kirjaVinkki.setKustantaja(kysyKustantaja());
+        kirjaVinkki.setJulkaisuvuosi(kysyJulkaisuvuosi());
         app.lisaaVinkki(kirjaVinkki);
         output.println("Kirja lisätty");
     }
@@ -154,11 +151,14 @@ public class TextUI {
     private String kysyKanava() {
         while (true) {
             String kanava = getInput("Youtube-kanava");
-            if (true) { //validoija.validoiKanava
-                return kanava;
-            } else {
-                output.println("Virhe: Anna kelvollinen Youtube-kanava");
-            }
+            return kanava;
+        }
+    }
+    
+    private String kysyJulkaisu() {
+        while (true) {
+            String julkaisu = getInput("Julkaisu tai sivusto");
+            return julkaisu;
         }
     }
 
@@ -172,7 +172,53 @@ public class TextUI {
             }
         }
     }
-
+  
+    private String kysyJulkaisupaikka() {
+        while (true) {
+            String julkaisupaikka = getInput("Julkaisupaikka");
+            return julkaisupaikka;
+        }
+    }
+    
+    private String kysyKustantaja() {
+        while (true) {
+            String kustantaja = getInput("Kustantaja");
+            return kustantaja;
+        }
+    }
+    
+    private int kysyJulkaisuvuosi() {
+        while (true) {
+            String vuosi = getInput("Julkaisuvuosi");
+            if (vuosi.equals("")) {
+                return 0;
+            } else {
+                if (validoija.validoiVuosi(vuosi) == true) {
+                    return Integer.parseInt(vuosi);
+                } else {
+                    output.println("Virhe: Anna kelvollinen vuosiluku tai jätä kenttä tyhjäksi");
+                }
+            }
+        }
+    }
+    
+    private Date kysyPvm() {
+        SimpleDateFormat pvmMuoto = new SimpleDateFormat("dd.MM.yyyy");
+        Date pvmObjekti = null;
+        while (true) {
+            String pvm = getInput("Julkaisupäivämäärä");
+            if (pvm.equals("")) {
+                return pvmObjekti;
+            } 
+            try {
+                pvmObjekti = pvmMuoto.parse(pvm);
+                return pvmObjekti;
+            } catch (ParseException e) {
+                output.println("Virhe: Syötä päivämäärä muodossa 'pp.kk.vvvv'");
+            }
+        }
+    }
+    
     private String kysyIsbn() {
         while (true) {
             String isbn = getInput("ISBN");
@@ -183,12 +229,50 @@ public class TextUI {
             }
         }
     }
-
+    
+    private URL kysyUrl() {
+        URL url = null;
+        while (true) {
+            String osoite = getInput("URL-osoite");
+            try {
+                url = new URL(osoite);
+                return url;
+            } catch (MalformedURLException e) {
+                output.println("Virhe: Anna kelvollinen URL-osoite");
+            }
+        }
+    }
+    
     private void listaaVinkit() {
         output.println();
-        for (Vinkki vinkki : app.getVinkit()) {
-            output.println(vinkki.getTyyppi().substring(0, 1).toUpperCase() + vinkki.getTyyppi().substring(1));
+        for (int i = 0; i < app.getVinkit().size(); i++) {
+            Vinkki vinkki = app.getVinkit().get(i);
+            int numero = i + 1;
+            output.println("#" + numero);
             output.println(vinkki.tulosta());
+        }
+    }
+
+    private void avaaLinkki() {
+        while (true) {
+            String vinkki = getInput("Vinkin numero");
+            vinkki = vinkki.replace("#", "");
+            if (validoija.validoiLinkki(vinkki) == true) {
+                try {
+                    app.getVinkit().get(Integer.parseInt(vinkki) - 1).avaaLinkki();
+                } catch (URISyntaxException e) {
+                    output.println("Virhe: URL-osoite ei ole kelvollinen");
+                } catch (IOException e) {
+                    output.println("Virhe: Linkin avaaminen ei onnistu");
+                } catch (Exception e) {
+                    output.println("Virhe: Vinkki ei sisällä linkkiä");
+                }
+                String viesti = input.nextLine();
+                output.println(viesti + NL);
+                break;
+            } else {
+                output.println("Virhe: Anna kelvollinen vinkin numero");
+            }
         }
     }
 
@@ -197,7 +281,7 @@ public class TextUI {
         try {
             tallennus.tallenna(json);
         } catch (IOException ex) {
-            output.println("Tallennus epäonnistui");
+            output.println("Virhe: Tallennus epäonnistui");
             System.out.println(ex);
         }
     }

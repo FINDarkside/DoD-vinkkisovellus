@@ -1,5 +1,7 @@
 package vinkr.vinkit;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,7 +16,7 @@ public class ArtikkeliVinkki implements Vinkki {
     private String tekija = ""; // Tekijän nimi tallennetaan muodossa "Sukunimi, Etunimi"
     private String julkaisu = "";
     private Date julkaisupvm = null;
-    private URL url; 
+    private URL url;
 
     public ArtikkeliVinkki(URL url, String otsikko, String tekija) {
         this.id = luoID();
@@ -112,6 +114,11 @@ public class ArtikkeliVinkki implements Vinkki {
         return string;
     }
     
+    // Linkin avaaminen
+    @Override
+    public void avaaLinkki() throws IOException, URISyntaxException {
+        java.awt.Desktop.getDesktop().browse(this.getUrl().toURI());
+    }
     
  // Apumetodit
     private String luoID() {

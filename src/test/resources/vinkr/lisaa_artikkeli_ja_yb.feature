@@ -2,7 +2,7 @@ Feature: Käyttäjä voi lisätä artikkeli- tai Youtube-videomuotoisen vinkkity
 
     Scenario: Artikkeli lisätään, kun kaikki pyydetyt tiedot annetaan
         Given komento "lisaa" annetaan ohjelmalle
-        When  tyyppi "artikkeli", otsikko "Random Scrum article", kirjoittaja "Doe, John" ja URL "https://medium.com/thiscouldbeanarticle" annetaan
+        When  tyyppi "artikkeli", URL "https://medium.com/thiscouldbeanarticle", otsikko "Random Scrum article", kirjoittaja "Doe, John", julkaisu "medium" ja julkaisupaiva "29.3.2019" annetaan
         Then  ohjelmaan tulostuu "Artikkeli lisätty"
 
     Scenario: Youtube-vinkki lisätään, kun kaikki pyydetyt tiedot annetaan
@@ -12,7 +12,7 @@ Feature: Käyttäjä voi lisätä artikkeli- tai Youtube-videomuotoisen vinkkity
 
     Scenario: Artikkelin lisääminen ei onnistu, ellei käyttäjän syöttämä url-osoite ole asianmukainen
         Given komento "lisaa" annetaan ohjelmalle
-        When  tyyppi "artikkeli", otsikko "Random agile article", kirjoittaja "Doe, John" ja virheellinen URL "tama.ei.nayta.url.osoitteelta" annetaan
+        When  tyyppi "artikkeli", virheellinen URL "jokuLinkkiVaan", otsikko "kissafaktoja", kirjoittaja "Alatalo, Mikko", julkaisu "" ja julkaisupaiva "19.5.1905" annetaan"
         Then  ohjelmaan tulostuu "Virhe: Anna kelvollinen URL-osoite"
 
     Scenario: Youtube-linkin lisääminen ei onnistu, ellei käyttäjän syöttämä url-osoite ole asianmukainen

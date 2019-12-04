@@ -143,6 +143,12 @@ public class KirjaVinkki implements Vinkki {
         return string;
     }
 
+ // Linkin avaaminen
+    @Override
+    public void avaaLinkki() throws Exception {
+        throw new Exception();
+    }
+    
     // Apumetodit
     private String luoID() {
         Date nykyhetki = new Date();

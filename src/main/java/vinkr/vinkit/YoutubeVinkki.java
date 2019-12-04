@@ -1,5 +1,7 @@
 package vinkr.vinkit;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -89,6 +91,12 @@ public class YoutubeVinkki implements Vinkki {
         }
         string += " [" + this.getUrl().toString() + "]";
         return string;
+    }
+    
+    // Linkin avaaminen
+    @Override
+    public void avaaLinkki() throws IOException, URISyntaxException {
+        java.awt.Desktop.getDesktop().browse(this.getUrl().toURI());
     }
     
     // Apumetodit

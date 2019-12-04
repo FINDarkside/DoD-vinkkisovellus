@@ -1,8 +1,12 @@
 package vinkr;
 
-public class Validoija {
+import java.time.Year;
 
-    public Validoija() {
+public class Validoija {
+    Vinkr app;
+
+    public Validoija(Vinkr app) {
+        this.app = app;
     }
     
     
@@ -15,7 +19,8 @@ public class Validoija {
     }
     
     public boolean validoiTekija(String tekija) {
-        if (tekija.equals("") || tekija.matches("[\\p{L}.]+\\p{Z}?[\\p{L}.]*\\p{Z}?[\\p{L}.]*, [\\p{L}.]+\\p{Z}?[\\p{L}.]*\\p{Z}?[\\p{L}.]*") || tekija.matches("[\\p{L}]+\\p{Z}[IVX]+") || tekija.matches("[\\p{L}]+")) {
+        if (tekija.equals("") || tekija.matches(
+                "[\\p{L}\\p{M}.-]+\\p{Z}?[\\p{L}\\p{M}.-]*\\p{Z}?[\\p{L}\\p{M}.-]*, [\\p{L}\\p{M}.-]+\\p{Z}?[\\p{L}\\p{M}.-]*\\p{Z}?[\\p{L}\\p{M}.-]*") || tekija.matches("[\\p{L}]+\\p{Z}[IVX]+") || tekija.matches("[\\p{L}]+")) {
             return true;
         } else {
             return false;
@@ -67,4 +72,26 @@ public class Validoija {
         }
         return tarkistussumma;
     }
+    
+    public boolean validoiVuosi(String vuosi) {
+        if (vuosi.matches("[0-9]{1,4}") && Integer.parseInt(vuosi) >= 0 && Integer.parseInt(vuosi) <=  Year.now().getValue()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean validoiLinkki(String linkki) {
+        if (linkki.matches("[0-9]+")) {
+            if (Integer.parseInt(linkki) > 0 && Integer.parseInt(linkki) <= app.getVinkit().size()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
+    
 }
