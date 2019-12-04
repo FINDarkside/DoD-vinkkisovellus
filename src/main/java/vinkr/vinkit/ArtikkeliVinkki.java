@@ -3,6 +3,9 @@ package vinkr.vinkit;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import edu.stanford.ejalbert.BrowserLauncher;
+import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
+import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 
 public class ArtikkeliVinkki implements Vinkki {
 
@@ -14,7 +17,7 @@ public class ArtikkeliVinkki implements Vinkki {
     private String tekija = ""; // Tekijän nimi tallennetaan muodossa "Sukunimi, Etunimi"
     private String julkaisu = "";
     private Date julkaisupvm = null;
-    private URL url; 
+    private URL url;
 
     public ArtikkeliVinkki(URL url, String otsikko, String tekija) {
         this.id = luoID();
@@ -112,6 +115,12 @@ public class ArtikkeliVinkki implements Vinkki {
         return string;
     }
     
+ // Linkin avaaminen
+    @Override
+    public void avaaLinkki() throws BrowserLaunchingInitializingException, UnsupportedOperatingSystemException {
+        BrowserLauncher avaaja = new BrowserLauncher();
+        avaaja.openURLinBrowser(this.getUrl().toString());
+    }
     
  // Apumetodit
     private String luoID() {

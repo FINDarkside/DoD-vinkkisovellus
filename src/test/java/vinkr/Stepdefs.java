@@ -43,6 +43,9 @@ public class Stepdefs {
         input += otsikko + "\n";
         input += kirjoittaja + "\n";
         input += isbn + "\n";
+        input += "" + "\n";
+        input += "" + "\n";
+        input += "" + "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();

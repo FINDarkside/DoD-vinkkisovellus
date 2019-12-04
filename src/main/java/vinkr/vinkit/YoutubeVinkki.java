@@ -3,6 +3,9 @@ package vinkr.vinkit;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import edu.stanford.ejalbert.BrowserLauncher;
+import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
+import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 
 public class YoutubeVinkki implements Vinkki {
     public static final String NL = System.getProperty("line.separator");
@@ -89,6 +92,13 @@ public class YoutubeVinkki implements Vinkki {
         }
         string += " [" + this.getUrl().toString() + "]";
         return string;
+    }
+    
+    // Linkin avaaminen
+    @Override
+    public void avaaLinkki() throws BrowserLaunchingInitializingException, UnsupportedOperatingSystemException {
+        BrowserLauncher avaaja = new BrowserLauncher();
+        avaaja.openURLinBrowser(this.getUrl().toString());
     }
     
     // Apumetodit

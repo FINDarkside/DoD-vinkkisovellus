@@ -7,4 +7,5 @@ public interface Vinkki {
     public void setOtsikko(String otsikko);
     public String tulosta();
     public String toString();
+    public void avaaLinkki() throws Exception;
 }
