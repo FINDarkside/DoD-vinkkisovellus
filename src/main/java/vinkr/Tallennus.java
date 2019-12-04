@@ -17,10 +17,10 @@ public class Tallennus {
     }
 
     public String lataa() throws IOException {
-        return Files.readString(this.path);
+        return new String(Files.readAllBytes(this.path));
     }
 
     public void tallenna(String data) throws IOException {
-        Files.writeString(path, data);
+        Files.write(path, data.getBytes());
     }
 }
