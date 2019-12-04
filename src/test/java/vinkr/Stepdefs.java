@@ -33,13 +33,16 @@ public class Stepdefs {
         input += komento + "\n";
     }
     
-    @Given("uusi kirjavinkki, otsikolla {string}, kirjoittajalla {string} ja jonka ISBN on {string} lisataan")
-    public void lisataanJarjestelmaanTiettyKirjavinkki(String otsikko, String kirjoittaja, String isbn) {
+    @Given("uusi kirjavinkki, otsikolla {string}, kirjoittajalla {string}, jonka ISBN on {string}, julkaisupaikalla {string}, kustantajalla {string} ja julkaisuvuodella {string} lisataan")
+    public void lisataanJarjestelmaanTiettyKirjavinkki(String otsikko, String kirjoittaja, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi) {
         input += "lisaa" + "\n";
         input += "kirja" + "\n";
         input += otsikko + "\n";
         input += kirjoittaja + "\n";
         input += isbn + "\n";
+        input += julkaisupaikka + "\n";
+        input += kustantaja + "\n";
+        input += julkaisuvuosi + "\n";
     }
     
         //WHENIT
@@ -57,20 +60,23 @@ public class Stepdefs {
         luoUIjaStreamit();
     }
     
-    @When("tyyppi {string}, otsikko {string}, kirjoittaja {string} ja ISBN {string} annetaan")
-    public void kirjanKirjoittajaOtsikkojaIsbnAnnetaan(String tyyppi, String otsikko, String kirjoittaja, String isbn) {
+    @When("tyyppi {string}, otsikko {string}, kirjoittaja {string}, ISBN {string}, julkaisupaikka {string}, kustantaja {string} ja julkaisuvuosi {string} annetaan")
+    public void kirjanKirjoittajaOtsikkojaIsbnjaMuutAnnetaan(String tyyppi, String otsikko, String kirjoittaja, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi) {
         
         input += tyyppi + "\n";
         input += otsikko + "\n";
         input += kirjoittaja + "\n";
         input += isbn + "\n";
+        input += julkaisupaikka + "\n";
+        input += kustantaja + "\n";
+        input += julkaisuvuosi + "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
     }
     
-    @When("tyyppi {string}, virheellinen otsikko {string}, kirjoittaja {string} ja ISBN {string} annetaan")
-    public void kirjanKirjoittajaVirheellinenOtsikkojaIsbnAnnetaan(String tyyppi, String otsikko, String kirjoittaja, String isbn) {
+    @When("tyyppi {string}, virheellinen otsikko {string}, kirjoittaja {string}, ISBN {string}, julkaisupaikka {string}, kustantaja {string} ja julkaisuvuosi {string} annetaan")
+    public void kirjanKirjoittajaVirheellinenOtsikkojaIsbnjaMuutAnnetaan(String tyyppi, String otsikko, String kirjoittaja, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi) {
 
         input += tyyppi + "\n";
         input += otsikko + "\n";
@@ -78,36 +84,40 @@ public class Stepdefs {
         input += validiOtsikko + "\n";
         input += kirjoittaja + "\n";
         input += isbn + "\n";
-        input += "" + "\n";
-        input += "" + "\n";
-        input += "" + "\n";
+        input += julkaisupaikka + "\n";
+        input += kustantaja + "\n";
+        input += julkaisuvuosi + "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
     }
     
-    @When("tyyppi {string}, otsikko {string}, kirjoittaja {string} ja URL {string} annetaan")
-    public void artikkelinKirjoittajaOtsikkojaUrlAnnetaan(String tyyppi, String otsikko, String kirjoittaja, String url) {
+    @When("tyyppi {string}, URL {string}, otsikko {string}, kirjoittaja {string}, julkaisu {string} ja julkaisupaiva {string} annetaan")
+    public void artikkelinKirjoittajaOtsikkojaUrljaMuutAnnetaan(String url, String tyyppi, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
 
         input += tyyppi + "\n";
+        input += url + "\n";
         input += otsikko + "\n";
         input += kirjoittaja + "\n";
-        input += url + "\n";
+        input += julkaisu + "\n";
+        input += julkaisupaiva + "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
     }
     
-    @When("tyyppi {string}, otsikko {string}, kirjoittaja {string} ja virheellinen URL {string} annetaan")
-    public void artikkelinKirjoittajaOtsikkojaEpakelpoUrlAnnetaan(String tyyppi, String otsikko, String kirjoittaja, String url) {
+    @When("tyyppi {string}, virheellinen URL {string}, otsikko {string}, kirjoittaja {string}, julkaisu {string} ja julkaisupaiva {string} annetaan")
+    public void artikkelinKirjoittajaOtsikkojaEpakelpoUrljaMuutAnnetaan(String url, String tyyppi, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
 
         input += tyyppi + "\n";
-        input += otsikko + "\n";
-        input += kirjoittaja + "\n";
         input += url + "\n";
-        
         //jotta ohjelma sulkeutuu, asetettava inputtiin myös validi syöte
         input += validiUrl + "\n";
+        input += otsikko + "\n";
+        input += kirjoittaja + "\n";
+        input += julkaisu + "\n";
+        input += julkaisupaiva + "\n";
+        
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
@@ -173,7 +183,7 @@ public class Stepdefs {
     
     @Then("ohjelmaan tulostuu {string}")
     public void ohjelmaVastaaHalutullaTulosteella(String odotettuTuloste) throws UnsupportedEncodingException {
- 
+        System.out.println(uiOutput.toString("UTF-8"));
         assertTrue(uiOutput.toString("UTF-8").contains(odotettuTuloste));
     }
     
