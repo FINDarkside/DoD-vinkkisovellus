@@ -41,6 +41,10 @@ Huomaa että buildattaessa jar ei sijaitse projektin juuressa.
 
 Kun projekti käynnistyy, tekstikäyttöliittymä toivottaa sinut tervetulleeksi näyttävällä taideteoksella sekä listaamalla kaikki käytettävissä olevat komennot ja niiden toiminnallisuuden. Ohjelmaa käytetään näillä komennoilla, ja komennot sekä toiminnallisuudet saat uudestaan näkyviin 'apua'-komennolla.
 
+### Releaset
+
+[Sprintin 2 release](https://github.com/Ohjelmistotuotanto-DoD/vinkr/releases/tag/v0.2-sprint2)
+
 ### Backlogit
 
 [Projektin backlog](https://github.com/Ohjelmistotuotanto-DoD/vinkr/projects/2)
