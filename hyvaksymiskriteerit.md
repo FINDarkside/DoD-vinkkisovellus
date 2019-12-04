@@ -19,7 +19,7 @@ Sprinttiin 2 valitut storyt ja niiden hyväksymiskriteerit
 
 * Aiemmalla käyttökerralla syötetty lukuvinkki säilyy järjestelmässä käyttökertojen välillä
 
-[Cucumber-featuret](https://github.com/Ohjelmistotuotanto-DoD/vinkr/blob/master/src/test/resources/vinkr/help_komento.feature)
+[Cucumber-featuret](https://github.com/Ohjelmistotuotanto-DoD/vinkr/blob/master/src/test/resources/vinkr/tallenna_vinkit.feature)
 
 #### Help-komento
 
