@@ -194,7 +194,7 @@ public class TextUI {
     private void tallenna() {
         String json = app.serialisoi();
         try {
-            Files.write(tallennusTiedosto, json.getBytes());
+            Files.writeString(tallennusTiedosto, json);
         } catch (IOException ex) {
             output.println("Tallennus epäonnistui");
             System.out.println(ex);
