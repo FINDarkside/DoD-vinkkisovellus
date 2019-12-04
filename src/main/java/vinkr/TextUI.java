@@ -1,20 +1,17 @@
 package vinkr;
 
-import vinkr.vinkit.ArtikkeliVinkki;
-import vinkr.vinkit.KirjaVinkki;
-import vinkr.vinkit.Vinkki;
-import vinkr.vinkit.YoutubeVinkki;
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
+import vinkr.vinkit.*;
+
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class TextUI {
@@ -24,15 +21,20 @@ public class TextUI {
     private final Scanner input;
     private final PrintStream output;
     private final Validoija validoija;
+    private final Logo logo;
+    private final Tallennus tallennus;
 
-    public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream) {
+    public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Tallennus tallennus) {
         this.app = app;
         this.input = new Scanner(inputStream);
         this.output = new PrintStream(outputStream);
         this.validoija = new Validoija(app);
+        this.logo = new Logo();
+        this.tallennus = tallennus;
     }
 
     public void run() {
+        output.println(logo.logoStringiksi());
         listaaKomennot();
 
         while (true) {
@@ -51,6 +53,7 @@ public class TextUI {
         output.println("  lisaa: Lisää uusi lukuvinkki");
         output.println("  listaa: Listaa kaikki lukuvinkit");
         output.println("  avaa: Avaa annetun vinkin sisältämä linkki");
+        output.println("  tallenna: Tallenna vinkit");
         output.println("  lopeta: Sulje sovellus");
     }
 
@@ -66,6 +69,9 @@ public class TextUI {
                 avaaLinkki();
             case "apua":
                 listaaKomennot();
+                break;
+            case "tallenna":
+                tallenna();
                 break;
             default:
                 output.println("Komentoa ei tunnistettu");
@@ -155,7 +161,7 @@ public class TextUI {
             return julkaisu;
         }
     }
-    
+
     private String kysyKirjoittaja() {
         while (true) {
             String kirjoittaja = getInput("Kirjoittaja");
@@ -166,7 +172,7 @@ public class TextUI {
             }
         }
     }
-    
+  
     private String kysyJulkaisupaikka() {
         while (true) {
             String julkaisupaikka = getInput("Julkaisupaikka");
@@ -269,8 +275,17 @@ public class TextUI {
             }
         }
     }
-    
-    
+
+    private void tallenna() {
+        String json = app.serialisoi();
+        try {
+            tallennus.tallenna(json);
+        } catch (IOException ex) {
+            output.println("Virhe: Tallennus epäonnistui");
+            System.out.println(ex);
+        }
+    }
+
     private String getInput(String name) {
         output.print(name + ": ");
         return input.nextLine();
