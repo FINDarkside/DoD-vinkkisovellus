@@ -21,7 +21,7 @@ public class Logo {
         
         for (int i = 0; i < sisalto.length; i++) {
             logoStringina += sisalto[i];
-            if (i != sisalto.length-1) {
+            if (i != sisalto.length - 1) {
                 logoStringina += "\n";
             }
         }
