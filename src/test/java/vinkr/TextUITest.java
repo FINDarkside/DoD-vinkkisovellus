@@ -16,6 +16,7 @@ public class TextUITest {
     PrintStream uiInput;
     ByteArrayOutputStream uiOutput;
     ArrayList<Vinkki> vinkit;
+    Tallennus tallennus;
 
     @Before
     public void setUp() throws IOException {
@@ -34,7 +35,10 @@ public class TextUITest {
         when(validoija.validoiOtsikko(anyString())).thenReturn(true);
         when(validoija.validoiTekija(anyString())).thenReturn(true);
         when(validoija.validoiIsbn(anyString())).thenReturn(true);
-        ui = new TextUI(vinkr, input, uiOutput, null);
+
+        tallennus = mock(Tallennus.class);
+        when(vinkr.serialisoi()).thenReturn("{}");
+        ui = new TextUI(vinkr, input, uiOutput, tallennus);
     }
 
     @Test
@@ -72,6 +76,15 @@ public class TextUITest {
         assertTrue(output.contains("lisaa"));
         assertTrue(output.contains("listaa"));
         assertTrue(output.contains("lopeta"));
+    }
+
+    @Test
+    public void tallennaKomentoTallentaaJson() throws IOException {
+        uiInput.println("tallenna");
+        uiInput.println("lopeta");
+        ui.run();
+        verify(vinkr).serialisoi();
+        verify(tallennus).tallenna(anyString());
     }
 
     private String getOutput() {
