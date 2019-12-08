@@ -5,13 +5,11 @@ import vinkr.vinkit.*;
 
 import java.io.*;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.List;
 import java.util.Scanner;
 
 public class TextUI {
@@ -84,7 +82,8 @@ public class TextUI {
     }
 
     private void lisaaVinkki() {
-        output.println("Tuetut vinkkityypit ovat 'kirja', 'youtube' ja 'artikkeli'" + "\n" + "Takaisin pääset kirjoittamalla 'takaisin'");
+        output.println("Tuetut vinkkityypit ovat 'kirja', 'youtube' ja 'artikkeli'");
+        output.println("Takaisin pääset kirjoittamalla 'takaisin'");
         String tyyppi = getInput("Vinkin tyyppi");
         switch (tyyppi) {
             case "kirja":
@@ -245,11 +244,15 @@ public class TextUI {
     
     private void listaaVinkit() {
         output.println();
-        for (int i = 0; i < app.getVinkit().size(); i++) {
-            Vinkki vinkki = app.getVinkit().get(i);
-            int numero = i + 1;
-            output.println("#" + numero);
-            output.println(vinkki.tulosta());
+        
+        List<Vinkki> vinkit = app.getVinkit();
+        if (vinkit.isEmpty()) {
+            output.println("Ei vinkkejä");
+        }
+        
+        for (int i = 0; i < vinkit.size(); i++) {
+            output.println("#" + i+1);
+            output.println(vinkit.get(i).tulosta());
         }
     }
 
