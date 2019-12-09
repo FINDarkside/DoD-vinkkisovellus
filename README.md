@@ -3,9 +3,11 @@
 [![CircleCI](https://circleci.com/gh/Ohjelmistotuotanto-DoD/vinkr.svg?style=svg)](https://circleci.com/gh/Ohjelmistotuotanto-DoD/vinkr)
 [![codecov](https://codecov.io/gh/Ohjelmistotuotanto-DoD/vinkr/branch/master/graph/badge.svg)](https://codecov.io/gh/Ohjelmistotuotanto-DoD/vinkr)
 
-**vinkr** on syksyn 2019 Ohjelmistotuotanto-kurssin miniprojekti, jossa tehtävänä on tarkoitus luoda lukuvinkkejä hallinnoiva sovellus. Sovellusta käytetään tekstikäyttöliittymällä komentorivin kautta.
+**vinkr** on syksyn 2019 Ohjelmistotuotanto-kurssin miniprojekti, jossa tehtävänä on luoda lukuvinkkejä hallinnoiva sovellus. Sovellusta käytetään tekstikäyttöliittymällä komentorivin kautta.
 
 ### Asennus- ja käyttöohje
+
+
 
 #### Lataaminen
 
@@ -66,4 +68,3 @@ Kun projekti käynnistyy, tekstikäyttöliittymä toivottaa sinut tervetulleeksi
 ### Storyjen hyväksymisehdot
 
 [Sprinttiin 2 valitut storyt ja niiden hyväksymisehdot](https://github.com/Ohjelmistotuotanto-DoD/vinkr/blob/master/hyvaksymiskriteerit.md)
-
