@@ -2,9 +2,14 @@ package vinkr.vinkit;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.hamcrest.core.*;
 
 import vinkr.vinkit.KirjaVinkki;
 import vinkr.vinkit.Vinkki;
@@ -16,7 +21,7 @@ public class KirjaVinkkiTest {
 
     @Before
     public void setUp() throws Exception {
-        vinkki = new KirjaVinkki("Vinkattavan kirjan nimi", "", "");
+        vinkki = new KirjaVinkki("Vinkattavan kirjan nimi", new ArrayList<String>(), "");
     }
 
     @Test
@@ -42,22 +47,61 @@ public class KirjaVinkkiTest {
 
     @Test
     public void kirjanTekijanLisaysJaNoutoOnnistuu() {
-        vinkki.setTekija("Sukunimi, Etunimi");
-        assertEquals("Sukunimi, Etunimi", vinkki.getTekija());
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
+        assertEquals("Sukunimi, Etunimi", vinkki.getTekija(1));
     }
 
     @Test
     public void kirjanTekijanEtunimenNoutoOnnistuu() {
-        vinkki.setTekija("Sukunimi, Etunimi");
-        assertEquals("Etunimi", vinkki.getTekijanEtunimi());
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
+        assertEquals("Etunimi", vinkki.getTekijanEtunimi(1));
     }
 
     @Test
     public void kirjanTekijanSukunimenNoutoOnnistuu() {
-        vinkki.setTekija("Sukunimi, Etunimi");
-        assertEquals("Sukunimi", vinkki.getTekijanSukunimi());
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
+        vinkki.lisaaTekija("Tekijä, Toinen");
+        assertEquals("Tekijä", vinkki.getTekijanSukunimi(2));
     }
 
+    @Test
+    public void kirjanTekijanPoistaminenOnnistuu() {
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
+        vinkki.lisaaTekija("Tekijä, Toinen");
+        vinkki.poistaTekija(1);
+        assertEquals("Tekijä, Toinen", vinkki.getTekija(1));
+    }
+    
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+    
+    @Test
+    public void kirjanLiianMonennenTekijanPoistaminenAiheuttaaPoikkeuksen() {
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
+        vinkki.lisaaTekija("Tekijä, Toinen");
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage(IsEqual.equalTo("Teoksella on vain 2 tekijä(ä)."));
+        vinkki.poistaTekija(3);
+    }
+    
+    @Test
+    public void kirjanTekijanKorvaaminenOnnistuu() {
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
+        vinkki.lisaaTekija("Tekijä, Toinen");
+        vinkki.lisaaTekija("Tekijä, Kolmas");
+        vinkki.korvaaTekija(2, "Tekijä, Neljäs");
+        assertEquals("Tekijä, Neljäs", vinkki.getTekija(2));
+    }
+    
+    @Test
+    public void kirjanLiianMonennenTekijanKorvaaminenAiheuttaaPoikkeuksen() {
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
+        vinkki.lisaaTekija("Tekijä, Toinen");
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage(IsEqual.equalTo("Teoksella on vain 2 tekijä(ä)."));
+        vinkki.korvaaTekija(3, "Tekijä, Neljäs");
+    }
+    
     @Test
     public void isbnNumeronLisaysJaNoutoOnnistuu() {
         vinkki.setISBN("1-4346-636-43633");
@@ -117,11 +161,26 @@ public class KirjaVinkkiTest {
     }
 
     @Test
-    public void tekijanJaOtsikonMerkkijonoesitysToimii() {
-        vinkki.setTekija("Sukunimi, Etunimi");
+    public void yhdenTekijanJaOtsikonMerkkijonoesitysToimii() {
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
         assertEquals("Sukunimi: Vinkattavan kirjan nimi", vinkki.toString());
     }
 
+    @Test
+    public void kahdenTekijanJaOtsikonMerkkijonoesitysToimii() {
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
+        vinkki.lisaaTekija("Tekijä, Toinen");
+        assertEquals("Sukunimi ja Tekijä: Vinkattavan kirjan nimi", vinkki.toString());
+    }
+    
+    @Test
+    public void kolmenTekijanJaOtsikonMerkkijonoesitysToimii() {
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
+        vinkki.lisaaTekija("Tekijä, Toinen");
+        vinkki.lisaaTekija("Kirjailija, Esimerkki");
+        assertEquals("Sukunimi, Tekijä ja Kirjailija: Vinkattavan kirjan nimi", vinkki.toString());
+    }
+    
     @Test
     public void otsikonJaVuodenMerkkijonoesitysToimii() {
         vinkki.setJulkaisuvuosi(2019);
@@ -130,31 +189,50 @@ public class KirjaVinkkiTest {
 
     @Test
     public void taydellinenMerkkijonoesitysToimii() {
-        vinkki.setTekija("Sukunimi, Etunimi");
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
         vinkki.setJulkaisuvuosi(2019);
         assertEquals("Sukunimi: Vinkattavan kirjan nimi (2019)", vinkki.toString());
     }
 
+    @Test
+    public void taydellinenMerkkijonoesitysUseallaNimellaToimii() {
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
+        vinkki.lisaaTekija("Tekijä, Toinen");
+        vinkki.lisaaTekija("Kirjailija, Esimerkki");
+        vinkki.setJulkaisuvuosi(2019);
+        assertEquals("Sukunimi, Tekijä ja Kirjailija: Vinkattavan kirjan nimi (2019)", vinkki.toString());
+    }
+    
     @Test
     public void otsikonTulostusToimii() {
         assertEquals("Tyyppi: Kirja" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL, vinkki.tulosta());
     }
 
     @Test
-    public void tekijanOtsikonJaISBNnTulostusToimii() {
-        vinkki.setTekija("Sukunimi, Etunimi");
+    public void yhdenTekijanOtsikonJaISBNnTulostusToimii() {
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
         vinkki.setISBN("1-4346-636-43633");
         assertEquals("Tyyppi: Kirja" + NL + "Tekijä: Sukunimi, Etunimi" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "ISBN: 1-4346-636-43633" + NL, vinkki.tulosta());
     }
 
     @Test
+    public void kahdenTekijanOtsikonJaISBNnTulostusToimii() {
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
+        vinkki.lisaaTekija("Tekijä, Toinen");
+        vinkki.setISBN("1-4346-636-43633");
+        assertEquals("Tyyppi: Kirja" + NL + "Tekijät: Sukunimi, Etunimi ja Toinen Tekijä" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "ISBN: 1-4346-636-43633" + NL, vinkki.tulosta());
+    }
+    
+    @Test
     public void taydellistenTietojenTulostusToimii() {
-        vinkki.setTekija("Sukunimi, Etunimi");
+        vinkki.lisaaTekija("Sukunimi, Etunimi");
+        vinkki.lisaaTekija("Tekijä, Toinen");
+        vinkki.lisaaTekija("Tekijä, Kolmas");
         vinkki.setISBN("1-4346-636-43633");
         vinkki.setJulkaisupaikka("Paikka");
         vinkki.setKustantaja("Kustannusyhtiö Oy");
         vinkki.setJulkaisuvuosi(2019);
-        assertEquals("Tyyppi: Kirja" + NL + "Tekijä: Sukunimi, Etunimi" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "Julkaisutiedot: Paikka: Kustannusyhtiö Oy, 2019" + NL + "ISBN: 1-4346-636-43633" + NL, vinkki.tulosta());
+        assertEquals("Tyyppi: Kirja" + NL + "Tekijät: Sukunimi, Etunimi; Toinen Tekijä ja Kolmas Tekijä" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "Julkaisutiedot: Paikka: Kustannusyhtiö Oy, 2019" + NL + "ISBN: 1-4346-636-43633" + NL, vinkki.tulosta());
     }
-
+    
 }

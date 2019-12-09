@@ -20,7 +20,7 @@ public class Validoija {
     
     public boolean validoiTekija(String tekija) {
         if (tekija.equals("") || tekija.matches(
-                "[\\p{L}\\p{M}.-]+\\p{Z}?[\\p{L}\\p{M}.-]*\\p{Z}?[\\p{L}\\p{M}.-]*, [\\p{L}\\p{M}.-]+\\p{Z}?[\\p{L}\\p{M}.-]*\\p{Z}?[\\p{L}\\p{M}.-]*") || tekija.matches("[\\p{L}]+\\p{Z}[IVX]+") || tekija.matches("[\\p{L}]+")) {
+                "[\\p{L}\\p{M}'.-]+\\p{Z}?[\\p{L}\\p{M}'.-]*\\p{Z}?[\\p{L}\\p{M}'.-]*, [\\p{L}\\p{M}'.-]+\\p{Z}?[\\p{L}\\p{M}'.-]*\\p{Z}?[\\p{L}\\p{M}'.-]*") || tekija.matches("[\\p{L}]+\\p{Z}[IVX]+") || tekija.matches("[\\p{L}]+")) {
             return true;
         } else {
             return false;

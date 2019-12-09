@@ -1,6 +1,7 @@
 package vinkr.vinkit;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class KirjaVinkki implements Vinkki {
@@ -9,17 +10,17 @@ public class KirjaVinkki implements Vinkki {
     private String id;
     private String nimeke;
     private String tyyppi = "kirja";
-    private String tekija = ""; // Tekijän nimi tallennetaan muodossa "Sukunimi, Etunimi"
+    private ArrayList<String> tekijat; // Tekijöiden nimet tallennetaan taulukkolistaan muodossa "Sukunimi, Etunimi"
     private String isbn = "";
     private int julkaisuvuosi = 0;
     private String julkaisupaikka = "";
     private String kustantaja = "";
 
 
-    public KirjaVinkki(String otsikko, String tekija, String isbn) {
+    public KirjaVinkki(String otsikko, ArrayList<String> kirjoittajat, String isbn) {
+        this.tekijat = kirjoittajat;
         this.id = luoID();
         this.nimeke = otsikko;
-        this.tekija = tekija;
         this.isbn = isbn;
     }
 
@@ -39,16 +40,32 @@ public class KirjaVinkki implements Vinkki {
         return this.tyyppi;
     }
 
-    public String getTekija() {
-        return this.tekija;
+    public int getTekijoidenMaara() {
+        return this.tekijat.size();
+    }
+    
+    public String getTekija(int numero) {
+        if (numero > 0 && numero <= this.tekijat.size()) {
+            return this.tekijat.get(numero - 1);
+        } else {
+            throw new IllegalArgumentException("Teoksella on vain " + this.tekijat.size() + " tekijä(ä).");
+        }
+    }
+    
+    public String getTekijanSukunimi(int numero) {
+        if (numero > 0 && numero <= this.tekijat.size()) {
+            return this.tekijat.get(numero - 1).substring(0, this.tekijat.get(numero - 1).indexOf(","));
+        } else {
+            throw new IllegalArgumentException("Teoksella on vain " + this.tekijat.size() + " tekijä(ä).");
+        }
     }
 
-    public String getTekijanSukunimi() {
-        return this.tekija.substring(0, this.tekija.indexOf(","));
-    }
-
-    public String getTekijanEtunimi() {
-        return this.tekija.substring(this.tekija.indexOf(",") + 2);
+    public String getTekijanEtunimi(int numero) {
+        if (numero > 0 && numero <= this.tekijat.size()) {
+            return this.tekijat.get(numero - 1).substring(this.tekijat.get(numero - 1).indexOf(",") + 2);
+        } else {
+            throw new IllegalArgumentException("Teoksella on vain " + this.tekijat.size() + " tekijä(ä).");
+        }
     }
 
     public String getISBN() {
@@ -93,10 +110,26 @@ public class KirjaVinkki implements Vinkki {
         this.nimeke = otsikko;
     }
 
-    public void setTekija(String tekija) {
-        this.tekija = tekija;
+    public void lisaaTekija(String tekija) {
+        this.tekijat.add(tekija);
     }
-
+    
+    public void poistaTekija(int numero) {
+        if (numero > 0 && numero <= this.tekijat.size()) {
+            this.tekijat.remove(numero - 1);
+        } else {
+            throw new IllegalArgumentException("Teoksella on vain " + this.tekijat.size() + " tekijä(ä).");
+        }
+    }
+    
+    public void korvaaTekija(int numero, String tekija) {
+        if (numero > 0 && numero <= this.tekijat.size()) {
+            this.tekijat.set(numero - 1, tekija);
+        } else {
+            throw new IllegalArgumentException("Teoksella on vain " + this.tekijat.size() + " tekijä(ä).");
+        }
+    }
+    
     public void setISBN(String isbn) {
         this.isbn = isbn;
     }
@@ -117,8 +150,10 @@ public class KirjaVinkki implements Vinkki {
     @Override
     public String tulosta() {
         String tuloste = "Tyyppi: Kirja" + NL;
-        if (!this.tekija.equals("")) {
-            tuloste += "Tekijä: " + this.tekija + NL;
+        if (this.getTekijoidenMaara() == 1) {
+            tuloste += "Tekijä: " + this.getTekija(1) + NL;
+        } else if (this.getTekijoidenMaara() > 1) {
+            tuloste += "Tekijät: " + tulostaTekijaluettelo() + NL;
         }
         tuloste += "Nimeke: " + this.nimeke + NL;
         if (!this.julkaisupaikka.equals("") || !this.kustantaja.equals("") || this.julkaisuvuosi != 0) {
@@ -129,12 +164,19 @@ public class KirjaVinkki implements Vinkki {
         }
         return tuloste;
     }
-
+    
     @Override
     public String toString() {
         String string = "";
-        if (!this.tekija.equals("")) {
-            string += this.getTekijanSukunimi() + ": ";
+        if (this.getTekijoidenMaara() > 0) {
+            string += this.getTekijanSukunimi(1);
+            if (this.getTekijoidenMaara() > 1) {
+                for (int i = 2; i < this.getTekijoidenMaara(); i++) {
+                    string += ", " + this.getTekijanSukunimi(i); 
+                }
+                string += " ja " + this.getTekijanSukunimi(this.getTekijoidenMaara());
+            }
+            string += ": ";
         }
         string += this.nimeke;
         if (this.julkaisuvuosi != 0) {
@@ -156,5 +198,15 @@ public class KirjaVinkki implements Vinkki {
         String id = ft.format(nykyhetki);
         return id;
     }
+    
+    private String tulostaTekijaluettelo() {
+        String luettelo = this.getTekija(1);
+        for (int i = 2; i < this.getTekijoidenMaara(); i++) {
+            luettelo += "; " + this.getTekijanEtunimi(i) + " " + this.getTekijanSukunimi(i); 
+        }
+        luettelo += " ja " + this.getTekijanEtunimi(this.getTekijoidenMaara()) + " " + this.getTekijanSukunimi(this.getTekijoidenMaara());
+        return luettelo;
+    }
+    
 
 }

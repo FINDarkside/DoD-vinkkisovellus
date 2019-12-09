@@ -37,9 +37,10 @@ public class Stepdefs {
     public void lisataanJarjestelmaanTiettyKirjavinkki(String otsikko, String kirjoittaja, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi) {
         input += "lisaa" + "\n";
         input += "kirja" + "\n";
+        input += isbn + "\n";
         input += otsikko + "\n";
         input += kirjoittaja + "\n";
-        input += isbn + "\n";
+        input += "\n";
         input += julkaisupaikka + "\n";
         input += kustantaja + "\n";
         input += julkaisuvuosi + "\n";
@@ -83,9 +84,25 @@ public class Stepdefs {
     public void kirjanKirjoittajaOtsikkojaIsbnjaMuutAnnetaan(String tyyppi, String otsikko, String kirjoittaja, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi) {
         
         input += tyyppi + "\n";
+        input += isbn + "\n";
         input += otsikko + "\n";
         input += kirjoittaja + "\n";
+        input += "\n"; // Koska kirjoittajien syöttäminen lopetetaan antamalla tyhjä rivi, tarvitaan yksi ylimääräinen rivi
+        input += julkaisupaikka + "\n";
+        input += kustantaja + "\n";
+        input += julkaisuvuosi + "\n";
+        input += "lopeta" + "\n";
+        
+        luoUIjaStreamit();
+    }
+    
+    @When("tyyppi {string}, otsikko {string}, tyhjä kirjoittaja, ISBN {string}, julkaisupaikka {string}, kustantaja {string} ja julkaisuvuosi {string} annetaan")
+    public void kirjanKirjoittajaOtsikkojaIsbnjaMuutAnnetaan(String tyyppi, String otsikko, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi) {
+        
+        input += tyyppi + "\n";
         input += isbn + "\n";
+        input += otsikko + "\n";
+        input += "\n"; // Koska kirjoittajien syöttäminen lopetetaan antamalla tyhjä rivi, tarvitaan yksi ylimääräinen rivi
         input += julkaisupaikka + "\n";
         input += kustantaja + "\n";
         input += julkaisuvuosi + "\n";
@@ -98,11 +115,12 @@ public class Stepdefs {
     public void kirjanKirjoittajaVirheellinenOtsikkojaIsbnjaMuutAnnetaan(String tyyppi, String otsikko, String kirjoittaja, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi) {
 
         input += tyyppi + "\n";
+        input += isbn + "\n";
         input += otsikko + "\n";
         //jotta ohjelma sulkeutuu, asetettava inputtiin myös validi syöte
         input += validiOtsikko + "\n";
         input += kirjoittaja + "\n";
-        input += isbn + "\n";
+        input += "\n"; // Koska kirjoittajien syöttäminen lopetetaan antamalla tyhjä rivi, tarvitaan yksi ylimääräinen rivi
         input += julkaisupaikka + "\n";
         input += kustantaja + "\n";
         input += julkaisuvuosi + "\n";
