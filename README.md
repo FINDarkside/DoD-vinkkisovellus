@@ -7,6 +7,8 @@
 
 ### Asennus- ja käyttöohje
 
+
+
 #### Lataaminen
 
 Hanki sovellus kloonaamalla tämä Git-repositorio:
