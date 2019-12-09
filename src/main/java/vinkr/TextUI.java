@@ -260,13 +260,11 @@ public class TextUI {
             if (validoija.validoiLinkki(vinkki) == true) {
                 try {
                     app.getVinkit().get(Integer.parseInt(vinkki) - 1).avaaLinkki();
-                } catch (IOException e) {
+                } catch (IOException | URISyntaxException e) {
                     output.println("Virhe: Linkin avaaminen ei onnistu");
                 } catch (Exception e) {
                     output.println("Virhe: Vinkki ei sisällä linkkiä");
                 }
-                String viesti = input.nextLine();
-                output.println(viesti + NL);
                 break;
             } else {
                 output.println("Virhe: Anna kelvollinen vinkin numero");
@@ -278,6 +276,7 @@ public class TextUI {
         String json = app.serialisoi();
         try {
             tallennus.tallenna(json);
+            output.println("Tietojen tallennus onnistui.")
         } catch (IOException ex) {
             output.println("Virhe: Tallennus epäonnistui");
             System.out.println(ex);
