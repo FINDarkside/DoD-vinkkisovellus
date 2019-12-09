@@ -295,7 +295,7 @@ public class TextUI {
         String json = app.serialisoi();
         try {
             tallennus.tallenna(json);
-            output.println("Tietojen tallennus onnistui.")
+            output.println("Tietojen tallennus onnistui.");
         } catch (IOException ex) {
             output.println("Virhe: Tallennus epäonnistui");
             System.out.println(ex);
