@@ -1,5 +1,7 @@
 package vinkr.vinkit;
 
+import vinkr.Varit;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,6 +9,7 @@ import java.util.Date;
 public class KirjaVinkki implements Vinkki {
 
     public static final String NL = System.getProperty("line.separator");
+    private static final String VARI = Varit.SININEN;
     private String id;
     private String nimeke;
     private String tyyppi = "kirja";
@@ -82,6 +85,10 @@ public class KirjaVinkki implements Vinkki {
 
     public String getKustantaja() {
         return this.kustantaja;
+    }
+
+    public String getVari() {
+        return this.VARI;
     }
 
     public String getJulkaisutiedot() {

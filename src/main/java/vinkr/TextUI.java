@@ -261,14 +261,14 @@ public class TextUI {
             }
         }
     }
-    
+
     private void listaaVinkit() {
         output.println();
         for (int i = 0; i < app.getVinkit().size(); i++) {
             Vinkki vinkki = app.getVinkit().get(i);
             int numero = i + 1;
             output.println("#" + numero);
-            output.println(vinkki.tulosta());
+            output.println(Varit.varjaa(vinkki.getVari(), vinkki.tulosta()));
         }
     }
 
@@ -306,5 +306,4 @@ public class TextUI {
         output.print(name + ": ");
         return input.nextLine();
     }
-
 }
