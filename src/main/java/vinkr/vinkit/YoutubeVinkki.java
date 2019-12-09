@@ -54,7 +54,9 @@ public class YoutubeVinkki implements Vinkki {
         return this.url;
     }
 
-    public String getVari() { return this.VARI; }
+    public String getVari() {
+        return this.VARI;
+    }
     
  // Setterit
     @Override

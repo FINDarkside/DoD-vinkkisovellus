@@ -70,7 +70,9 @@ public class KirjaVinkki implements Vinkki {
         return this.kustantaja;
     }
 
-    public String getVari() { return this.VARI; }
+    public String getVari() {
+        return this.VARI;
+    }
 
     public String getJulkaisutiedot() {
         String julkaisutiedot = "";
