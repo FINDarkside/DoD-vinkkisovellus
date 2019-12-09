@@ -53,6 +53,8 @@ Kun projekti käynnistyy, tekstikäyttöliittymä toivottaa sinut tervetulleeksi
 
 [Sprintin 2 backlog](https://github.com/Ohjelmistotuotanto-DoD/vinkr/projects/3)
 
+[Sprntin 3 backlog](https://github.com/Ohjelmistotuotanto-DoD/vinkr/projects/4)
+
 ### Definition of done
 
 [Projektin definition of done](https://github.com/Ohjelmistotuotanto-DoD/vinkr/blob/master/definitionOfDone.md)
