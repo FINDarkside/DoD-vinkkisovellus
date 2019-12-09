@@ -66,3 +66,6 @@ Kun projekti käynnistyy, tekstikäyttöliittymä toivottaa sinut tervetulleeksi
 [Sprinttiin 2 valitut storyt ja niiden hyväksymisehdot](https://github.com/Ohjelmistotuotanto-DoD/vinkr/blob/master/hyvaksymiskriteerit.md)
 
 
+
+
+
