@@ -28,33 +28,38 @@ public class TextUITest {
         PipedOutputStream uiInputPiped = new PipedOutputStream();
         uiInput = new PrintStream(uiInputPiped, true);
         PipedInputStream input = new PipedInputStream(uiInputPiped);
-
         uiOutput = new ByteArrayOutputStream();
-
         vinkit = new ArrayList<>();
-        vinkit.add(new KirjaVinkki("Formal Development of Programs and Proofs", "Dijkstra, Edsger", "978-0201172379"));
-        vinkit.add(new KirjaVinkki("Refactoring", "Fowler, Martin", "0201485672"));
-        vinkit.add(new ArtikkeliVinkki(new URL("https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram"), "Internet celebrity cat Lil Bub has died", ""));
-        vinkit.add(new YoutubeVinkki(new URL("https://www.youtube.com/watch?v=9TycLR0TqFA"), "Introduction to Scrum - 7 Minutes", ""));
+        lisaaVinkit();
         vinkr = mock(Vinkr.class);
         when(vinkr.getVinkit()).thenReturn(vinkit);
         validoija = mock(Validoija.class);
         when(validoija.validoiOtsikko(anyString())).thenReturn(true);
         when(validoija.validoiTekija(anyString())).thenReturn(true);
         when(validoija.validoiIsbn(anyString())).thenReturn(true);
-
         tallennus = mock(Tallennus.class);
         when(vinkr.serialisoi()).thenReturn("{}");
         ui = new TextUI(vinkr, input, uiOutput, tallennus);
     }
 
+    private void lisaaVinkit() throws IOException {
+        ArrayList<String> kirjoittajat = new ArrayList<>();
+        kirjoittajat.add("Dijkstra, Edsger");
+        vinkit.add(new KirjaVinkki("Formal Development of Programs and Proofs", kirjoittajat , "978-0201172379"));
+        kirjoittajat.set(0, "Fowler, Martin");
+        vinkit.add(new KirjaVinkki("Refactoring", kirjoittajat, "0201485672"));
+        vinkit.add(new ArtikkeliVinkki(new URL("https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram"), "Internet celebrity cat Lil Bub has died", ""));
+        vinkit.add(new YoutubeVinkki(new URL("https://www.youtube.com/watch?v=9TycLR0TqFA"), "Introduction to Scrum - 7 Minutes", ""));
+    }
+    
     @Test
     public void lisaaKomentoLisaaKirjanIlmanKustannustietoja() {
         uiInput.println("lisaa");
         uiInput.println("kirja");
+        uiInput.println("013215871X");
         uiInput.println("A Discipline of Programming");
         uiInput.println("Dijkstra, Edsger");
-        uiInput.println("013215871X");
+        uiInput.println("");
         uiInput.println("");
         uiInput.println("");
         uiInput.println("");
@@ -67,9 +72,10 @@ public class TextUITest {
     public void lisaaKomentoLisaaKirjanKustannustiedoilla() {
         uiInput.println("lisaa");
         uiInput.println("kirja");
+        uiInput.println("013215871X");
         uiInput.println("A Discipline of Programming");
         uiInput.println("Dijkstra, Edsger");
-        uiInput.println("013215871X");
+        uiInput.println("");
         uiInput.println("Upper Saddle River");
         uiInput.println("Prentice Hall");
         uiInput.println("1997");
@@ -110,7 +116,6 @@ public class TextUITest {
         uiInput.println("listaa");
         uiInput.println("lopeta");
         ui.run();
-
         String output = getOutput();
         for (Vinkki vinkki : vinkit) {
             assertTrue(output.contains(vinkki.tulosta()));
@@ -128,6 +133,8 @@ public class TextUITest {
         assertTrue(output.contains("lisaa"));
         assertTrue(output.contains("listaa"));
         assertTrue(output.contains("lopeta"));
+        assertTrue(output.contains("avaa"));
+        assertTrue(output.contains("tallenna"));
     }
 
     /*

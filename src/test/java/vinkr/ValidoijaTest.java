@@ -25,8 +25,11 @@ public class ValidoijaTest {
         app = mock(Vinkr.class);
         vinkit = new ArrayList<>();
         when(app.getVinkit()).thenReturn(vinkit);
-        vinkit.add(new KirjaVinkki("Formal Development of Programs and Proofs", "Dijkstra, Edsger", "978-0201172379"));
-        vinkit.add(new KirjaVinkki("Refactoring", "Fowler, Martin", "0201485672"));
+        ArrayList<String> kirjoittajat = new ArrayList<>();
+        kirjoittajat.add("Dijkstra, Edsger");
+        vinkit.add(new KirjaVinkki("Formal Development of Programs and Proofs", kirjoittajat , "978-0201172379"));
+        kirjoittajat.set(0, "Fowler, Martin");
+        vinkit.add(new KirjaVinkki("Refactoring", kirjoittajat, "0201485672"));
         vinkit.add(new ArtikkeliVinkki(new URL("https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram"), "Internet celebrity cat Lil Bub has died", ""));
         vinkit.add(new YoutubeVinkki(new URL("https://www.youtube.com/watch?v=9TycLR0TqFA"), "Introduction to Scrum - 7 Minutes", ""));
         validoija = new Validoija(app);
@@ -65,6 +68,11 @@ public class ValidoijaTest {
     @Test
     public void tavallinenKaanteinenNimiKirjaimillaKelpaa() {
         assertEquals(true, validoija.validoiTekija("Edwards, A. S. G."));
+    }
+    
+    @Test
+    public void kaanteinenNimiHeittomerkillaKelpaa() {
+        assertEquals(true, validoija.validoiTekija("O'Brien, Patrick"));
     }
     
     @Test

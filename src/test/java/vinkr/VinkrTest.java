@@ -2,6 +2,7 @@ package vinkr;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -18,14 +19,18 @@ public class VinkrTest {
 
     @Test
     public void vinkinLisaysOnnistuu() {
-        vinkr.lisaaVinkki(new KirjaVinkki("Refactoring", "Fowler, Martin", "0201485672"));
+        ArrayList<String> kirjoittajat = new ArrayList<>();
+        kirjoittajat.add("Fowler, Martin");
+        vinkr.lisaaVinkki(new KirjaVinkki("Refactoring", kirjoittajat, "0201485672"));
         assertEquals(vinkr.getVinkit().size(), 1);
     }
 
     @Test
     public void serialisointiJaDeserializointiToimii() throws MalformedURLException {
         vinkr.lisaaVinkki(new ArtikkeliVinkki(new URL("https://stackoverflow.com/"), "StackOverflow", "Joku"));
-        vinkr.lisaaVinkki(new KirjaVinkki("Refactoring", "Fowler, Martin", "0201485672"));
+        ArrayList<String> kirjoittajat = new ArrayList<>();
+        kirjoittajat.add("Fowler, Martin");
+        vinkr.lisaaVinkki(new KirjaVinkki("Refactoring", kirjoittajat, "0201485672"));
         vinkr.lisaaVinkki(new YoutubeVinkki(new URL("https://www.youtube.com/watch?v=P_nj6wW6Gsc"), "Kerbal Space Program 2 Cinematic Announce Trailer", "Kerbal Space Program"));
         String json = vinkr.serialisoi();
         Vinkr vinkr2 = Vinkr.deserialisoi(json);

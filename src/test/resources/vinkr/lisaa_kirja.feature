@@ -7,7 +7,7 @@ Feature: Käyttäjä voi lisätä järjestelmään kirjamuotoisen lukuvinkin, jo
 
     Scenario: Kirja lisätään, kun ainoastaan otsikko annetaan
         Given komento "lisaa" annetaan ohjelmalle
-        When  tyyppi "kirja", otsikko "Clean Code: A Handbook of Agile Software Craftsmanship", kirjoittaja "", ISBN "", julkaisupaikka "", kustantaja "" ja julkaisuvuosi "" annetaan
+        When  tyyppi "kirja", otsikko "Clean Code: A Handbook of Agile Software Craftsmanship", tyhjä kirjoittaja, ISBN "", julkaisupaikka "", kustantaja "" ja julkaisuvuosi "" annetaan
         Then  ohjelmaan tulostuu "Kirja lisätty"
 
     Scenario: Kirjan lisääminen ei onnistu, jos käyttäjä jättää sen otsikon tyhjäksi
