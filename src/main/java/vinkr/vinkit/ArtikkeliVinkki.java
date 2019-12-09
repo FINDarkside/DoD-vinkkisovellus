@@ -1,5 +1,7 @@
 package vinkr.vinkit;
 
+import vinkr.Varit;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -10,6 +12,7 @@ public class ArtikkeliVinkki implements Vinkki {
 
     public static final String NL = System.getProperty("line.separator");
     public static final SimpleDateFormat PVMMUOTO = new SimpleDateFormat("dd.MM.yyy");
+    private static final String VARI = Varit.SINIVIHREA;
     private String id;
     private String otsikko;
     private String tyyppi = "artikkeli";
@@ -64,6 +67,8 @@ public class ArtikkeliVinkki implements Vinkki {
     public URL getUrl() {
         return this.url;
     }
+
+    public String getVari() { return this.VARI; }
 
     // Setterit
     @Override
