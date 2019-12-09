@@ -12,7 +12,7 @@ public class ArtikkeliVinkki implements Vinkki {
 
     public static final String NL = System.getProperty("line.separator");
     public static final SimpleDateFormat PVMMUOTO = new SimpleDateFormat("dd.MM.yyy");
-    private static final String VARI = Varit.VIOLETTI;
+    private static final String VARI = Varit.SINIVIHREA;
     private String id;
     private String otsikko;
     private String tyyppi = "artikkeli";
