@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -126,10 +127,10 @@ public class TextUI {
     }
 
     private void lisaaKirja() {
-        String otsikko = kysyOtsikko();
-        String kirjoittaja = kysyKirjoittaja();
         String isbn = kysyIsbn();
-        KirjaVinkki kirjaVinkki = new KirjaVinkki(otsikko, kirjoittaja, isbn);
+        String otsikko = kysyOtsikko();
+        ArrayList<String> kirjoittajat = kysyKirjoittajat();
+        KirjaVinkki kirjaVinkki = new KirjaVinkki(otsikko, kirjoittajat, isbn); 
         kirjaVinkki.setJulkaisupaikka(kysyJulkaisupaikka());
         kirjaVinkki.setKustantaja(kysyKustantaja());
         kirjaVinkki.setJulkaisuvuosi(kysyJulkaisuvuosi());
@@ -167,6 +168,24 @@ public class TextUI {
             String kirjoittaja = getInput("Kirjoittaja");
             if (validoija.validoiTekija(kirjoittaja) == true) {
                 return kirjoittaja;
+            } else {
+                output.println("Virhe: Syötä kirjoittajan nimi muodossa 'Sukunimi, Etunimi'");
+            }
+        }
+    }
+    
+    private ArrayList<String> kysyKirjoittajat() {
+        ArrayList<String> kirjoittajat = new ArrayList<>();
+        output.println("Syötä kirjoittajat yksi kerrallaan muodossa 'Sukunimi, Etunimi' ja lopuksi tyhjä.");
+        while (true) {
+            int i = 1;
+            String kirjoittaja = getInput(i + ". kirjoittaja");
+            if (kirjoittaja.equals("")) {
+                return kirjoittajat;
+            }
+            if (validoija.validoiTekija(kirjoittaja) == true) {
+                kirjoittajat.add(kirjoittaja);
+                i++;
             } else {
                 output.println("Virhe: Syötä kirjoittajan nimi muodossa 'Sukunimi, Etunimi'");
             }
