@@ -235,4 +235,9 @@ public class KirjaVinkkiTest {
         assertEquals("Tyyppi: Kirja" + NL + "Tekijät: Sukunimi, Etunimi; Toinen Tekijä ja Kolmas Tekijä" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "Julkaisutiedot: Paikka: Kustannusyhtiö Oy, 2019" + NL + "ISBN: 1-4346-636-43633" + NL, vinkki.tulosta());
     }
     
-}
+        @Test
+        public void getTekijoidenMaaraToimiiKunTekijoitaEiLuotu() {
+            KirjaVinkki testiVinkki = new KirjaVinkki("testikirja", null, "");
+            assertEquals(0, testiVinkki.getTekijoidenMaara());
+        }
+    }
