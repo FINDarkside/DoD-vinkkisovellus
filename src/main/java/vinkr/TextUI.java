@@ -177,8 +177,9 @@ public class TextUI {
     private ArrayList<String> kysyKirjoittajat() {
         ArrayList<String> kirjoittajat = new ArrayList<>();
         output.println("Syötä kirjoittajat yksi kerrallaan muodossa 'Sukunimi, Etunimi' ja lopuksi tyhjä.");
+        int i = 1;
         while (true) {
-            int i = 1;
+            
             String kirjoittaja = getInput(i + ". kirjoittaja");
             if (kirjoittaja.equals("")) {
                 return kirjoittajat;
