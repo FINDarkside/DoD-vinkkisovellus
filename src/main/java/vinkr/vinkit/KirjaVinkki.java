@@ -44,6 +44,9 @@ public class KirjaVinkki implements Vinkki {
     }
 
     public int getTekijoidenMaara() {
+        if (this.tekijat == null) {
+            return 0;
+        }
         return this.tekijat.size();
     }
     
