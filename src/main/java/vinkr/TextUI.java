@@ -290,11 +290,6 @@ public class TextUI {
                 } catch (Exception e) {
                     output.println("Virhe: Vinkki ei sisällä linkkiä");
                 }
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    
-                }
                 break;
             } else {
                 output.println("Virhe: Anna kelvollinen vinkin numero");
