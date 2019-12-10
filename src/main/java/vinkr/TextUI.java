@@ -14,6 +14,7 @@ import java.util.Date;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class TextUI {
 
@@ -264,11 +265,16 @@ public class TextUI {
 
     private void listaaVinkit() {
         output.println();
-        for (int i = 0; i < app.getVinkit().size(); i++) {
-            Vinkki vinkki = app.getVinkit().get(i);
-            int numero = i + 1;
-            output.println("#" + numero);
-            output.println(Varit.varjaa(vinkki.getVari(), vinkki.tulosta()));
+        if (app.getVinkit().isEmpty()) {
+            output.print("Ei vinkkejä.");
+            output.println("");
+        } else {
+            for (int i = 0; i < app.getVinkit().size(); i++) {
+                Vinkki vinkki = app.getVinkit().get(i);
+                int numero = i + 1;
+                output.println("#" + numero);
+                output.println(Varit.varjaa(vinkki.getVari(), vinkki.tulosta()));
+            }
         }
     }
 
@@ -283,6 +289,11 @@ public class TextUI {
                     output.println("Virhe: Linkin avaaminen ei onnistu");
                 } catch (Exception e) {
                     output.println("Virhe: Vinkki ei sisällä linkkiä");
+                }
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    
                 }
                 break;
             } else {
