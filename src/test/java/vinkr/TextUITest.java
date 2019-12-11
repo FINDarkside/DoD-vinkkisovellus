@@ -139,6 +139,7 @@ public class TextUITest {
         assertTrue(output.contains("listaa"));
         assertTrue(output.contains("lopeta"));
         assertTrue(output.contains("avaa"));
+        assertTrue(output.contains("lue"));
         assertTrue(output.contains("tallenna"));
     }
 
@@ -181,7 +182,35 @@ public class TextUITest {
         String output = getOutput();
         assertTrue(output.contains(Varit.PUNAINEN));
     }
-    
+
+    @Test
+    public void prosentinPaivitysOnnistuu() {
+        uiInput.println("lue");
+        uiInput.println("1");
+        uiInput.println("99");
+        uiInput.println("listaa");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains("99%"));
+    }
+
+    @Test
+    public void prosentinPaivitysValittaaVirheista() {
+        uiInput.println("lue");
+        uiInput.println("99");
+        uiInput.println("1");
+        uiInput.println("111");
+        uiInput.println("2");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains("Anna kelvollinen vinkin numero"));
+        assertTrue(output.contains("Anna kelvollinen lukuprosentti"));
+    }
+
     private String getOutput() {
         return new String(uiOutput.toByteArray());
     }
