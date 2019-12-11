@@ -28,7 +28,7 @@ public class App {
         } else {
             System.out.println(savePath + " doesn't exist");
         }
-        TextUI ui = new TextUI(app, System.in, System.out, tallennus);
+        TextUI ui = new TextUI(app, System.in, System.out, tallennus, true);
         ui.run();
     }
 }

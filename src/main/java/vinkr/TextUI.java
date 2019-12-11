@@ -32,9 +32,13 @@ public class TextUI {
     private final Tallennus tallennus;
 
     public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Tallennus tallennus) throws IOException {
+        this(app, inputStream, outputStream, tallennus, false);
+    }
+
+    public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Tallennus tallennus, boolean system) throws IOException {
         this.terminal = TerminalBuilder.builder()
-                .system(true)
                 .streams(inputStream, outputStream)
+                .system(system)
                 .build();
         this.lineReader = LineReaderBuilder.builder()
                 .terminal(terminal)
@@ -144,7 +148,7 @@ public class TextUI {
         String isbn = kysyIsbn();
         String otsikko = kysyOtsikko();
         ArrayList<String> kirjoittajat = kysyKirjoittajat();
-        KirjaVinkki kirjaVinkki = new KirjaVinkki(otsikko, kirjoittajat, isbn); 
+        KirjaVinkki kirjaVinkki = new KirjaVinkki(otsikko, kirjoittajat, isbn);
         kirjaVinkki.setJulkaisupaikka(kysyJulkaisupaikka());
         kirjaVinkki.setKustantaja(kysyKustantaja());
         kirjaVinkki.setJulkaisuvuosi(kysyJulkaisuvuosi());
@@ -169,7 +173,7 @@ public class TextUI {
             return kanava;
         }
     }
-    
+
     private String kysyJulkaisu() {
         while (true) {
             String julkaisu = getInput("Julkaisu tai sivusto");
@@ -187,7 +191,7 @@ public class TextUI {
             }
         }
     }
-    
+
     private ArrayList<String> kysyKirjoittajat() {
         ArrayList<String> kirjoittajat = new ArrayList<>();
         output.println("Syötä kirjoittajat yksi kerrallaan muodossa 'Sukunimi, Etunimi' ja lopuksi tyhjä.");
@@ -205,21 +209,21 @@ public class TextUI {
             }
         }
     }
-  
+
     private String kysyJulkaisupaikka() {
         while (true) {
             String julkaisupaikka = getInput("Julkaisupaikka");
             return julkaisupaikka;
         }
     }
-    
+
     private String kysyKustantaja() {
         while (true) {
             String kustantaja = getInput("Kustantaja");
             return kustantaja;
         }
     }
-    
+
     private int kysyJulkaisuvuosi() {
         while (true) {
             String vuosi = getInput("Julkaisuvuosi");
@@ -234,7 +238,7 @@ public class TextUI {
             }
         }
     }
-    
+
     private Date kysyPvm() {
         SimpleDateFormat pvmMuoto = new SimpleDateFormat("dd.MM.yyyy");
         Date pvmObjekti = null;
@@ -242,7 +246,7 @@ public class TextUI {
             String pvm = getInput("Julkaisupäivämäärä");
             if (pvm.equals("")) {
                 return pvmObjekti;
-            } 
+            }
             try {
                 pvmObjekti = pvmMuoto.parse(pvm);
                 return pvmObjekti;
@@ -251,7 +255,7 @@ public class TextUI {
             }
         }
     }
-    
+
     private String kysyIsbn() {
         while (true) {
             String isbn = getInput("ISBN");
@@ -262,7 +266,7 @@ public class TextUI {
             }
         }
     }
-    
+
     private URL kysyUrl() {
         URL url = null;
         while (true) {
