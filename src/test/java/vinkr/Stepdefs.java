@@ -248,6 +248,10 @@ public class Stepdefs {
     }
 
     private void luoUIjaStreamit() {
+        System.out.println("-----------------------------------------");
+        System.out.println(input);
+        input = input.replaceAll("\n", System.lineSeparator());
+        System.out.println(input);
         uiInput = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
         uiOutput = new ByteArrayOutputStream();
 
