@@ -286,7 +286,7 @@ public class TextUI {
         int prosentti = -1;
         while (true) {
             try {
-                prosentti = Integer.parseInt("0" + getInput("Lukuprosentti (tyhjällä 0)"));
+                prosentti = Integer.parseInt("0" + getInput("Lukuprosentti"));
             } catch (NumberFormatException e) {
             }
             if (validoija.validoiLukuprosentti(prosentti)) {
