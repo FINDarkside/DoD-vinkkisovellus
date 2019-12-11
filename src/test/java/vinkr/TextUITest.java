@@ -64,6 +64,7 @@ public class TextUITest {
         uiInput.println("");
         uiInput.println("");
         uiInput.println("lopeta");
+        uiInput.println("\n");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
     }
@@ -80,6 +81,7 @@ public class TextUITest {
         uiInput.println("Prentice Hall");
         uiInput.println("1997");
         uiInput.println("lopeta");
+        uiInput.println("\n");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
     }
@@ -94,6 +96,7 @@ public class TextUITest {
         uiInput.println("The Verge");
         uiInput.println("02.12.2019");
         uiInput.println("lopeta");
+        uiInput.println("\n");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
     }
@@ -107,6 +110,7 @@ public class TextUITest {
         uiInput.println("Uzility");
         uiInput.println("26.07.2014");
         uiInput.println("lopeta");
+        uiInput.println("\n");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
     }
@@ -115,6 +119,7 @@ public class TextUITest {
     public void listaaKomentoTulostaaVinkit() {
         uiInput.println("listaa");
         uiInput.println("lopeta");
+        uiInput.println("\n");
         ui.run();
         String output = getOutput();
         for (Vinkki vinkki : vinkit) {
@@ -126,6 +131,7 @@ public class TextUITest {
     public void apuaKomentoListaaKomennot() {
         uiInput.println("apua");
         uiInput.println("lopeta");
+        uiInput.println("\n");
         ui.run();
 
         String output = getOutput();
@@ -155,6 +161,7 @@ public class TextUITest {
     public void tallennaKomentoTallentaaJson() throws IOException {
         uiInput.println("tallenna");
         uiInput.println("lopeta");
+        uiInput.println("\n");
         ui.run();
         verify(vinkr).serialisoi();
         verify(tallennus).tallenna(anyString());
