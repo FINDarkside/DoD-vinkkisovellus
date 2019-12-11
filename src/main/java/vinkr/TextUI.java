@@ -58,12 +58,9 @@ public class TextUI {
         listaaKomennot();
 
         while (true) {
-            String komento;
-            try {
-                komento = getInput("Komento");
-            } catch (EndOfFileException ex) {
-                break;
-            }
+            String komento = getInput("Komento");
+            System.out.println("Luettu komento " + komento);
+
             if (komento.equals("lopeta")) {
                 break;
             }
