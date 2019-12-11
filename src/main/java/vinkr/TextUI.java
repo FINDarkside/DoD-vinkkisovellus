@@ -36,6 +36,8 @@ public class TextUI {
                 .streams(inputStream, outputStream)
                 .system(false)
                 .dumb(true)
+                .jna(false)
+                .jansi(false)
                 .build();
         this.lineReader = LineReaderBuilder.builder()
                 .terminal(terminal)
