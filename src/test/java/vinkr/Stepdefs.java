@@ -245,6 +245,7 @@ public class Stepdefs {
     }
     
     private void luoUIjaStreamit() {
+        input += "\n asd \n asd \n";
         uiInput = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
         uiOutput = new ByteArrayOutputStream();
        
