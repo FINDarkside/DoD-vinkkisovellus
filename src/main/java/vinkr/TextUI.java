@@ -35,7 +35,8 @@ public class TextUI {
     public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Tallennus tallennus, boolean system) throws IOException {
         this.terminal = TerminalBuilder.builder()
                 .streams(inputStream, outputStream)
-                .system(system)
+                .system(false)
+                .dumb(true)
                 .build();
         this.lineReader = LineReaderBuilder.builder()
                 .terminal(terminal)
