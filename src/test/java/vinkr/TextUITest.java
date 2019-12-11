@@ -63,6 +63,7 @@ public class TextUITest {
         uiInput.println("");
         uiInput.println("");
         uiInput.println("");
+        uiInput.println("");
         uiInput.println("lopeta");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
@@ -79,6 +80,7 @@ public class TextUITest {
         uiInput.println("Upper Saddle River");
         uiInput.println("Prentice Hall");
         uiInput.println("1997");
+        uiInput.println("");
         uiInput.println("lopeta");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
@@ -93,6 +95,7 @@ public class TextUITest {
         uiInput.println("Lee, Dami");
         uiInput.println("The Verge");
         uiInput.println("02.12.2019");
+        uiInput.println("");
         uiInput.println("lopeta");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
@@ -106,6 +109,7 @@ public class TextUITest {
         uiInput.println("Introduction to Scrum - 7 Minutes");
         uiInput.println("Uzility");
         uiInput.println("26.07.2014");
+        uiInput.println("");
         uiInput.println("lopeta");
         ui.run();
         verify(vinkr).lisaaVinkki(any());

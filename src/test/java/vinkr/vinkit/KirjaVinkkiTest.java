@@ -205,14 +205,14 @@ public class KirjaVinkkiTest {
     
     @Test
     public void otsikonTulostusToimii() {
-        assertEquals("Tyyppi: Kirja" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL, vinkki.tulosta());
+        assertEquals("Tyyppi: Kirja" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "Luettu: " + vinkki.tulostaLukuprosentti() + NL, vinkki.tulosta());
     }
 
     @Test
     public void yhdenTekijanOtsikonJaISBNnTulostusToimii() {
         vinkki.lisaaTekija("Sukunimi, Etunimi");
         vinkki.setISBN("1-4346-636-43633");
-        assertEquals("Tyyppi: Kirja" + NL + "Tekijä: Sukunimi, Etunimi" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "ISBN: 1-4346-636-43633" + NL, vinkki.tulosta());
+        assertEquals("Tyyppi: Kirja" + NL + "Tekijä: Sukunimi, Etunimi" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "ISBN: 1-4346-636-43633" + NL + "Luettu: " + vinkki.tulostaLukuprosentti() + NL, vinkki.tulosta());
     }
 
     @Test
@@ -220,7 +220,7 @@ public class KirjaVinkkiTest {
         vinkki.lisaaTekija("Sukunimi, Etunimi");
         vinkki.lisaaTekija("Tekijä, Toinen");
         vinkki.setISBN("1-4346-636-43633");
-        assertEquals("Tyyppi: Kirja" + NL + "Tekijät: Sukunimi, Etunimi ja Toinen Tekijä" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "ISBN: 1-4346-636-43633" + NL, vinkki.tulosta());
+        assertEquals("Tyyppi: Kirja" + NL + "Tekijät: Sukunimi, Etunimi ja Toinen Tekijä" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "ISBN: 1-4346-636-43633" + NL + "Luettu: " + vinkki.tulostaLukuprosentti() + NL, vinkki.tulosta());
     }
     
     @Test
@@ -232,7 +232,7 @@ public class KirjaVinkkiTest {
         vinkki.setJulkaisupaikka("Paikka");
         vinkki.setKustantaja("Kustannusyhtiö Oy");
         vinkki.setJulkaisuvuosi(2019);
-        assertEquals("Tyyppi: Kirja" + NL + "Tekijät: Sukunimi, Etunimi; Toinen Tekijä ja Kolmas Tekijä" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "Julkaisutiedot: Paikka: Kustannusyhtiö Oy, 2019" + NL + "ISBN: 1-4346-636-43633" + NL, vinkki.tulosta());
+        assertEquals("Tyyppi: Kirja" + NL + "Tekijät: Sukunimi, Etunimi; Toinen Tekijä ja Kolmas Tekijä" + NL + "Nimeke: Vinkattavan kirjan nimi" + NL + "Julkaisutiedot: Paikka: Kustannusyhtiö Oy, 2019" + NL + "ISBN: 1-4346-636-43633" + NL + "Luettu: " + vinkki.tulostaLukuprosentti() + NL, vinkki.tulosta());
     }
     
     @Test

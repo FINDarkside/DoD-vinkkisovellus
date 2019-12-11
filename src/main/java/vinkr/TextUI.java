@@ -112,6 +112,7 @@ public class TextUI {
         String kanava = kysyKanava();
         YoutubeVinkki youtubeVinkki = new YoutubeVinkki(url, otsikko, kanava);
         youtubeVinkki.setJulkaisupvm(kysyPvm());
+        youtubeVinkki.setLukuprosentti(kysyLukuprosentti());
         app.lisaaVinkki(youtubeVinkki);
         output.println("Video lisätty");
     }
@@ -123,6 +124,7 @@ public class TextUI {
         ArtikkeliVinkki artikkeliVinkki = new ArtikkeliVinkki(url, otsikko, kirjoittaja);
         artikkeliVinkki.setJulkaisu(kysyJulkaisu());
         artikkeliVinkki.setJulkaisupvm(kysyPvm());
+        artikkeliVinkki.setLukuprosentti(kysyLukuprosentti());
         app.lisaaVinkki(artikkeliVinkki);
         output.println("Artikkeli lisätty");
     }
@@ -135,6 +137,7 @@ public class TextUI {
         kirjaVinkki.setJulkaisupaikka(kysyJulkaisupaikka());
         kirjaVinkki.setKustantaja(kysyKustantaja());
         kirjaVinkki.setJulkaisuvuosi(kysyJulkaisuvuosi());
+        kirjaVinkki.setLukuprosentti(kysyLukuprosentti());
         app.lisaaVinkki(kirjaVinkki);
         output.println("Kirja lisätty");
     }
@@ -259,6 +262,17 @@ public class TextUI {
                 return url;
             } catch (MalformedURLException e) {
                 output.println("Virhe: Anna kelvollinen URL-osoite");
+            }
+        }
+    }
+
+    private int kysyLukuprosentti() {
+        while (true) {
+            int prosentti = Integer.parseInt("0" + getInput("Lukuprosentti (tyhjällä 0)"));
+            if (validoija.validoiLukuprosentti(prosentti)) {
+                return prosentti;
+            } else {
+                output.println("Virhe: Anna kelvollinen lukuprosentti (0-100)");
             }
         }
     }
