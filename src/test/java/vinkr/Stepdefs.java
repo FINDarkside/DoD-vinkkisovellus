@@ -1,5 +1,5 @@
-
 package vinkr;
+
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -13,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import static org.junit.Assert.*;
 
 public class Stepdefs {
+
     Vinkr app;
     String input;
     ByteArrayOutputStream uiOutput;
@@ -20,20 +21,21 @@ public class Stepdefs {
     InputStream uiInput;
     String validiUrl;
     String validiOtsikko;
-    
+
     @Before
     public void setup() {
         input = "";
         validiUrl = "http://github.com/";
         validiOtsikko = "TestiOtsikko";
     }
-        //GIVENIT
+    //GIVENIT
+
     @Given("komento {string} annetaan ohjelmalle")
     public void komentoValittu(String komento) throws Throwable {
-        
+
         input += komento + "\n";
     }
-    
+
     @Given("uusi kirjavinkki, otsikolla {string}, kirjoittajalla {string}, jonka ISBN on {string}, julkaisupaikalla {string}, kustantajalla {string} ja julkaisuvuodella {string} lisataan")
     public void lisataanJarjestelmaanTiettyKirjavinkki(String otsikko, String kirjoittaja, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi) {
         input += "lisaa" + "\n";
@@ -46,6 +48,7 @@ public class Stepdefs {
         input += kustantaja + "\n";
         input += julkaisuvuosi + "\n";
     }
+
     /*
     @Given("uusi artikkelivinkki, urlilla {string}, otsikolla {string}, kirjoittajalla {string}, julkaisulla {string} ja julkaisupaivalla {string} annetaan")
     public void lisataanJarjestelmaanTiettyArtikkelivinkki(String tyyppi, String url, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
@@ -58,19 +61,20 @@ public class Stepdefs {
         input += "lopeta" + "\n";
     }
         //WHENIT
-    */
+     */
     @When("listataan kaikki lukuvinkit")
     public void listataanLukuvinkit() {
         input += "listaa" + "\n";
         input += "lopeta" + "\n";
         luoUIjaStreamit();
     }
-    
+
     @When("komento suoritetaan")
     public void komentoSuoritetaan() throws Throwable {
         input += "lopeta\n";
         luoUIjaStreamit();
     }
+
     /*
     @When("kayttaja valitsee vinkin numero {string}")
     public void valitaanVinkki(String numero) {
@@ -80,10 +84,10 @@ public class Stepdefs {
         input += "lopeta" + "\n";
         luoUIjaStreamit();
     }
-    */
+     */
     @When("tyyppi {string}, otsikko {string}, kirjoittaja {string}, ISBN {string}, julkaisupaikka {string}, kustantaja {string} ja julkaisuvuosi {string} annetaan")
     public void kirjanKirjoittajaOtsikkojaIsbnjaMuutAnnetaan(String tyyppi, String otsikko, String kirjoittaja, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi) {
-        
+
         input += tyyppi + "\n";
         input += isbn + "\n";
         input += otsikko + "\n";
@@ -93,13 +97,13 @@ public class Stepdefs {
         input += kustantaja + "\n";
         input += julkaisuvuosi + "\n";
         input += "lopeta" + "\n";
-        
+
         luoUIjaStreamit();
     }
-    
+
     @When("tyyppi {string}, otsikko {string}, tyhjä kirjoittaja, ISBN {string}, julkaisupaikka {string}, kustantaja {string} ja julkaisuvuosi {string} annetaan")
     public void kirjanKirjoittajaOtsikkojaIsbnjaMuutAnnetaan(String tyyppi, String otsikko, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi) {
-        
+
         input += tyyppi + "\n";
         input += isbn + "\n";
         input += otsikko + "\n";
@@ -108,10 +112,10 @@ public class Stepdefs {
         input += kustantaja + "\n";
         input += julkaisuvuosi + "\n";
         input += "lopeta" + "\n";
-        
+
         luoUIjaStreamit();
     }
-    
+
     @When("tyyppi {string}, virheellinen otsikko {string}, kirjoittaja {string}, ISBN {string}, julkaisupaikka {string}, kustantaja {string} ja julkaisuvuosi {string} annetaan")
     public void kirjanKirjoittajaVirheellinenOtsikkojaIsbnjaMuutAnnetaan(String tyyppi, String otsikko, String kirjoittaja, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi) {
 
@@ -126,10 +130,10 @@ public class Stepdefs {
         input += kustantaja + "\n";
         input += julkaisuvuosi + "\n";
         input += "lopeta" + "\n";
-        
+
         luoUIjaStreamit();
     }
-    
+
     @When("tyyppi {string}, URL {string}, otsikko {string}, kirjoittaja {string}, julkaisu {string} ja julkaisupaiva {string} annetaan")
     public void artikkelinKirjoittajaOtsikkojaUrljaMuutAnnetaan(String tyyppi, String url, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
 
@@ -140,10 +144,10 @@ public class Stepdefs {
         input += julkaisu + "\n";
         input += julkaisupaiva + "\n";
         input += "lopeta" + "\n";
-        
+
         luoUIjaStreamit();
     }
-    
+
     @When("tyyppi {string}, virheellinen URL {string}, otsikko {string}, kirjoittaja {string}, julkaisu {string} ja julkaisupaiva {string} annetaan")
     public void artikkelinKirjoittajaOtsikkojaEpakelpoUrljaMuutAnnetaan(String tyyppi, String url, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
 
@@ -155,12 +159,12 @@ public class Stepdefs {
         input += kirjoittaja + "\n";
         input += julkaisu + "\n";
         input += julkaisupaiva + "\n";
-        
+
         input += "lopeta" + "\n";
-        
+
         luoUIjaStreamit();
     }
-    
+
     @When("tyyppi {string}, URL {string}, virheellinen otsikko {string}, kirjoittaja {string}, julkaisu {string} ja julkaisupaiva {string} annetaan")
     public void artikkelinKirjoittajaEpakelpoOtsikkojaUrljaMuutAnnetaan(String tyyppi, String url, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
 
@@ -171,13 +175,13 @@ public class Stepdefs {
         input += kirjoittaja + "\n";
         input += julkaisu + "\n";
         input += julkaisupaiva + "\n";
-        
+
         input += "lopeta" + "\n";
-        
+
         System.out.println(input);
         luoUIjaStreamit();
     }
-    
+
     @When("tyyppi {string}, URL {string}, otsikko {string}, kanava {string} ja julkaisupaivamaara {string} annetaan")
     public void videonUrlOtsikkoJaKanavaAnnetaanJaMuut(String tyyppi, String url, String otsikko, String kanava, String julkaisupaivamaara) {
 
@@ -187,10 +191,10 @@ public class Stepdefs {
         input += kanava + "\n";
         input += julkaisupaivamaara + "\n";
         input += "lopeta" + "\n";
-        
+
         luoUIjaStreamit();
     }
-    
+
     @When("tyyppi {string}, virheellinen URL {string}, otsikko {string}, kanava {string} ja julkaisupaivamaara {string} annetaan")
     public void videonEpakelpoUrlOtsikkoJaKanavaAnnetaan(String tyyppi, String url, String otsikko, String kanava, String julkaisupaivamaara) {
 
@@ -202,10 +206,10 @@ public class Stepdefs {
         input += kanava + "\n";
         input += julkaisupaivamaara + "\n";
         input += "lopeta" + "\n";
-        
+
         luoUIjaStreamit();
     }
-    
+
     @When("tyyppi {string}, URL {string}, virheellinen otsikko {string}, kanava {string} ja julkaisupaivamaara {string} annetaan")
     public void videonUrlEpakelpoOtsikkoJaKanavaAnnetaan(String tyyppi, String url, String otsikko, String kanava, String julkaisupaivamaara) {
 
@@ -217,38 +221,36 @@ public class Stepdefs {
         input += kanava + "\n";
         input += julkaisupaivamaara + "\n";
         input += "lopeta" + "\n";
-        
+
         luoUIjaStreamit();
     }
-    
-        //THENIT
-    
+
+    //THENIT
     @Then("ohjelmaan tulostuu {string}")
     public void ohjelmaVastaaHalutullaTulosteella(String odotettuTuloste) throws UnsupportedEncodingException {
         System.out.println(uiOutput.toString("UTF-8"));
         assertTrue(uiOutput.toString("UTF-8").contains(odotettuTuloste));
     }
-    
+
     @Then("ohjelma vastaa tulosteella, jossa kohdat {string}, {string}, {string} ja {string}")
     public void ohjelmaVastaaHalutullaTulosteellaJossaTietytNeljaKohtaa(String kohta1, String kohta2, String kohta3, String kohta4) throws UnsupportedEncodingException {
-        
+
         assertTrue(uiOutput.toString("UTF-8").contains(kohta1));
         assertTrue(uiOutput.toString("UTF-8").contains(kohta2));
         assertTrue(uiOutput.toString("UTF-8").contains(kohta3));
         assertTrue(uiOutput.toString("UTF-8").contains(kohta4));
     }
-    
+
     // ei vielä käytössä
     @Then("ohjelma reagoi tulosteella {string}")
     public void ohjelmanViimeisinTulostettuRivi(String odotettuTuloste) throws UnsupportedEncodingException {
         String[] tulostetutRivit = uiOutput.toString("UTF-8").split("\n");
     }
-    
+
     private void luoUIjaStreamit() {
-        input += "\n asd \n asd \n";
         uiInput = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
         uiOutput = new ByteArrayOutputStream();
-       
+
         app = new Vinkr();
         try {
             ui = new TextUI(app, uiInput, uiOutput, null);
