@@ -8,40 +8,23 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class YoutubeVinkki implements Vinkki {
-    public static final String NL = System.getProperty("line.separator");
+public class YoutubeVinkki extends Vinkki {
+
     public static final SimpleDateFormat PVMMUOTO = new SimpleDateFormat("dd.MM.yyy");
     private static final String VARI = Varit.VIOLETTI;
-    private String id;
-    private String otsikko;
-    private String tyyppi = "youtube";
+    private static final String TYYPPI = "youtube";
+
     private String kanava;
     private Date julkaisupvm = null;
-    private URL url; 
+    private URL url;
     
     public YoutubeVinkki(URL url, String otsikko, String kanava) {
-        this.id = luoID();
-        this.otsikko = otsikko;
+        super(TYYPPI, VARI, otsikko);
         this.kanava = kanava;
         this.url = url;
     }
     
  // Getterit
-    @Override
-    public String getID() {
-        return this.id;
-    }
-
-    @Override
-    public String getOtsikko() {
-        return this.otsikko;
-    }
-
-    @Override
-    public String getTyyppi() {
-        return this.tyyppi;
-    }
-
     public String getKanava() {
         return this.kanava;
     }
@@ -53,17 +36,8 @@ public class YoutubeVinkki implements Vinkki {
     public URL getUrl() {
         return this.url;
     }
-
-    public String getVari() {
-        return this.VARI;
-    }
     
  // Setterit
-    @Override
-    public void setOtsikko(String otsikko) {
-        this.otsikko = otsikko;
-    }
-
     public void setKanava(String kanava) {
         this.kanava = kanava;
     }
@@ -74,6 +48,11 @@ public class YoutubeVinkki implements Vinkki {
     
     public void setUrl(URL url) {
         this.url = url;
+    }
+
+    @Override
+    public void setLukuprosentti(int prosentti) {
+        this.lukuprosentti = prosentti;
     }
 
     // Tulostus
@@ -87,6 +66,8 @@ public class YoutubeVinkki implements Vinkki {
             tuloste += "Julkaistu: " + PVMMUOTO.format(this.getJulkaisupvm()) + NL;
         }
         tuloste += "URL: " + this.getUrl().toString() + NL;
+        tuloste += "Katsottu: " + super.tulostaLukuprosentti() + NL;
+
         return tuloste;
     }
 
@@ -105,13 +86,4 @@ public class YoutubeVinkki implements Vinkki {
     public void avaaLinkki() throws IOException, URISyntaxException {
         java.awt.Desktop.getDesktop().browse(this.getUrl().toURI());
     }
-    
-    // Apumetodit
-    private String luoID() {
-        Date nykyhetki = new Date();
-        SimpleDateFormat ft = new SimpleDateFormat("yyMMddhhmmssMs");
-        String id = ft.format(nykyhetki);
-        return id;
-    }
-    
 }

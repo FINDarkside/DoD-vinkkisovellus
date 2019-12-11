@@ -6,43 +6,24 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class KirjaVinkki implements Vinkki {
+public class KirjaVinkki extends Vinkki {
 
-    public static final String NL = System.getProperty("line.separator");
     private static final String VARI = Varit.SININEN;
-    private String id;
-    private String nimeke;
-    private String tyyppi = "kirja";
+    private static final String TYYPPI = "kirja";
+
     private ArrayList<String> tekijat; // Tekijöiden nimet tallennetaan taulukkolistaan muodossa "Sukunimi, Etunimi"
     private String isbn = "";
     private int julkaisuvuosi = 0;
     private String julkaisupaikka = "";
     private String kustantaja = "";
 
-
     public KirjaVinkki(String otsikko, ArrayList<String> kirjoittajat, String isbn) {
+        super(TYYPPI, VARI, otsikko);
         this.tekijat = kirjoittajat;
-        this.id = luoID();
-        this.nimeke = otsikko;
         this.isbn = isbn;
     }
 
     // Getterit
-    @Override
-    public String getID() {
-        return this.id;
-    }
-
-    @Override
-    public String getOtsikko() {
-        return this.nimeke;
-    }
-
-    @Override
-    public String getTyyppi() {
-        return this.tyyppi;
-    }
-
     public int getTekijoidenMaara() {
         if (this.tekijat == null) {
             return 0;
@@ -90,10 +71,6 @@ public class KirjaVinkki implements Vinkki {
         return this.kustantaja;
     }
 
-    public String getVari() {
-        return this.VARI;
-    }
-
     public String getJulkaisutiedot() {
         String julkaisutiedot = "";
         if (!this.julkaisupaikka.equals("")) {
@@ -115,11 +92,6 @@ public class KirjaVinkki implements Vinkki {
     }
 
     // Setterit
-    @Override
-    public void setOtsikko(String otsikko) {
-        this.nimeke = otsikko;
-    }
-
     public void lisaaTekija(String tekija) {
         this.tekijat.add(tekija);
     }
@@ -165,14 +137,25 @@ public class KirjaVinkki implements Vinkki {
         } else if (this.getTekijoidenMaara() > 1) {
             tuloste += "Tekijät: " + tulostaTekijaluettelo() + NL;
         }
-        tuloste += "Nimeke: " + this.nimeke + NL;
+        tuloste += "Nimeke: " + super.getOtsikko() + NL;
         if (!this.julkaisupaikka.equals("") || !this.kustantaja.equals("") || this.julkaisuvuosi != 0) {
             tuloste += "Julkaisutiedot: " + getJulkaisutiedot() + NL;
         }
         if (!this.isbn.equals("")) {
             tuloste += "ISBN: " + this.isbn + NL;
         }
+        tuloste += "Luettu: " + super.tulostaLukuprosentti() + NL;
+
         return tuloste;
+    }
+
+    private String tulostaTekijaluettelo() {
+        String luettelo = this.getTekija(1);
+        for (int i = 2; i < this.getTekijoidenMaara(); i++) {
+            luettelo += "; " + this.getTekijanEtunimi(i) + " " + this.getTekijanSukunimi(i);
+        }
+        luettelo += " ja " + this.getTekijanEtunimi(this.getTekijoidenMaara()) + " " + this.getTekijanSukunimi(this.getTekijoidenMaara());
+        return luettelo;
     }
     
     @Override
@@ -188,35 +171,16 @@ public class KirjaVinkki implements Vinkki {
             }
             string += ": ";
         }
-        string += this.nimeke;
+        string += super.getOtsikko();
         if (this.julkaisuvuosi != 0) {
             string += " (" + this.getJulkaisuvuosi() + ")";
         }
         return string;
     }
 
- // Linkin avaaminen
+    // Linkin avaaminen
     @Override
     public void avaaLinkki() throws Exception {
         throw new Exception();
     }
-    
-    // Apumetodit
-    private String luoID() {
-        Date nykyhetki = new Date();
-        SimpleDateFormat ft = new SimpleDateFormat("yyMMddhhmmssMs");
-        String id = ft.format(nykyhetki);
-        return id;
-    }
-    
-    private String tulostaTekijaluettelo() {
-        String luettelo = this.getTekija(1);
-        for (int i = 2; i < this.getTekijoidenMaara(); i++) {
-            luettelo += "; " + this.getTekijanEtunimi(i) + " " + this.getTekijanSukunimi(i); 
-        }
-        luettelo += " ja " + this.getTekijanEtunimi(this.getTekijoidenMaara()) + " " + this.getTekijanSukunimi(this.getTekijoidenMaara());
-        return luettelo;
-    }
-    
-
 }

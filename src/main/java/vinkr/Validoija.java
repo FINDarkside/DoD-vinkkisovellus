@@ -92,6 +92,13 @@ public class Validoija {
             return false;
         }
     }
-    
-    
+
+
+    public boolean validoiLukuprosentti(int prosentti) {
+        if (prosentti >= 0 && prosentti <= 100) {
+            return true;
+        }
+
+        return false;
+    }
 }
