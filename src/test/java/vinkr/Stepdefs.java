@@ -260,7 +260,7 @@ public class Stepdefs {
 
         app = new Vinkr();
         try {
-            ui = new TextUI(app, uiInput, uiOutput, null);
+            ui = new TextUI(app, uiInput, uiOutput, null, false);
         } catch (IOException ex) {
             throw new RuntimeException(ex.toString());
         }

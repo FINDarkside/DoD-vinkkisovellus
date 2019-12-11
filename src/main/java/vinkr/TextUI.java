@@ -32,10 +32,6 @@ public class TextUI {
     private final Logo logo;
     private final Tallennus tallennus;
 
-    public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Tallennus tallennus) throws IOException {
-        this(app, inputStream, outputStream, tallennus, false);
-    }
-
     public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Tallennus tallennus, boolean system) throws IOException {
         this.terminal = TerminalBuilder.builder()
                 .streams(inputStream, outputStream)

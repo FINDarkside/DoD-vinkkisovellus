@@ -13,7 +13,7 @@ import vinkr.vinkit.Vinkki;
 import vinkr.vinkit.YoutubeVinkki;
 
 public class TextUITest {
-    
+
     public static final String NL = System.getProperty("line.separator");
     Vinkr vinkr;
     Validoija validoija;
@@ -39,19 +39,19 @@ public class TextUITest {
         when(validoija.validoiIsbn(anyString())).thenReturn(true);
         tallennus = mock(Tallennus.class);
         when(vinkr.serialisoi()).thenReturn("{}");
-        ui = new TextUI(vinkr, input, uiOutput, tallennus);
+        ui = new TextUI(vinkr, input, uiOutput, tallennus, false);
     }
 
     private void lisaaVinkit() throws IOException {
         ArrayList<String> kirjoittajat = new ArrayList<>();
         kirjoittajat.add("Dijkstra, Edsger");
-        vinkit.add(new KirjaVinkki("Formal Development of Programs and Proofs", kirjoittajat , "978-0201172379"));
+        vinkit.add(new KirjaVinkki("Formal Development of Programs and Proofs", kirjoittajat, "978-0201172379"));
         kirjoittajat.set(0, "Fowler, Martin");
         vinkit.add(new KirjaVinkki("Refactoring", kirjoittajat, "0201485672"));
         vinkit.add(new ArtikkeliVinkki(new URL("https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram"), "Internet celebrity cat Lil Bub has died", ""));
         vinkit.add(new YoutubeVinkki(new URL("https://www.youtube.com/watch?v=9TycLR0TqFA"), "Introduction to Scrum - 7 Minutes", ""));
     }
-    
+
     @Test
     public void lisaaKomentoLisaaKirjanIlmanKustannustietoja() {
         uiInput.println("lisaa");
@@ -68,7 +68,7 @@ public class TextUITest {
         ui.run();
         verify(vinkr).lisaaVinkki(any());
     }
-    
+
     @Test
     public void lisaaKomentoLisaaKirjanKustannustiedoilla() {
         uiInput.println("lisaa");
@@ -85,7 +85,7 @@ public class TextUITest {
         ui.run();
         verify(vinkr).lisaaVinkki(any());
     }
-    
+
     @Test
     public void lisaaKomentoLisaaArtikkelin() {
         uiInput.println("lisaa");
@@ -100,7 +100,7 @@ public class TextUITest {
         ui.run();
         verify(vinkr).lisaaVinkki(any());
     }
-    
+
     @Test
     public void lisaaKomentoLisaaYoutubeVideon() {
         uiInput.println("lisaa");
@@ -155,8 +155,7 @@ public class TextUITest {
         String output = getOutput();
         assertTrue(output.contains("Opening in existing browser session."));
     }
-    */
-
+     */
     @Test
     public void tallennaKomentoTallentaaJson() throws IOException {
         uiInput.println("tallenna");
