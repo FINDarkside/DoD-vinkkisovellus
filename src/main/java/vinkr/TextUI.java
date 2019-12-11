@@ -23,8 +23,7 @@ public class TextUI {
     public static final String NL = System.getProperty("line.separator");
 
     private Terminal terminal;
-    private final LineReader autocompleteReader;
-    private final Scanner scanner;
+    private final LineReader lineReader;
     private final Vinkr app;
     private final Scanner input;
     private final PrintStream output;
@@ -42,11 +41,10 @@ public class TextUI {
                 .system(system)
                 .jansi(system)
                 .build();
-        this.autocompleteReader = LineReaderBuilder.builder()
+        this.lineReader = LineReaderBuilder.builder()
                 .terminal(terminal)
                 .completer(new StringsCompleter("lisaa", "listaa", "apua", "tallenna"))
                 .build();
-        this.scanner = new Scanner(inputStream);
         this.app = app;
         this.input = new Scanner(inputStream);
         this.output = new PrintStream(outputStream);
@@ -60,7 +58,9 @@ public class TextUI {
         listaaKomennot();
 
         while (true) {
-            String komento = this.autocompleteReader.readLine("Komento: ");
+            this.lineReader.setVariable(LineReader.DISABLE_COMPLETION, false);
+            String komento = this.lineReader.readLine("Komento: ").trim();
+            this.lineReader.setVariable(LineReader.DISABLE_COMPLETION, true);
             if (komento.equals("lopeta")) {
                 break;
             }
@@ -329,7 +329,6 @@ public class TextUI {
     }
 
     private String getInput(String name) {
-        System.out.print(name + ": ");
-        return scanner.nextLine();
+        return this.lineReader.readLine(name + ": ");
     }
 }
