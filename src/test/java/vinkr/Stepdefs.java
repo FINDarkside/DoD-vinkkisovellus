@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static org.junit.Assert.*;
 
 public class Stepdefs {
@@ -234,7 +236,6 @@ public class Stepdefs {
 
     @Then("ohjelma vastaa tulosteella, jossa kohdat {string}, {string}, {string} ja {string}")
     public void ohjelmaVastaaHalutullaTulosteellaJossaTietytNeljaKohtaa(String kohta1, String kohta2, String kohta3, String kohta4) throws UnsupportedEncodingException {
-        System.out.println(uiOutput.toString("UTF-8"));
         assertTrue(uiOutput.toString("UTF-8").contains(kohta1));
         assertTrue(uiOutput.toString("UTF-8").contains(kohta2));
         assertTrue(uiOutput.toString("UTF-8").contains(kohta3));
@@ -252,6 +253,12 @@ public class Stepdefs {
         System.out.println(input);
         input = input.replaceAll("\n", System.lineSeparator());
         System.out.println(input);
+        System.out.println("-----------------------------------------");
+        try {
+            System.out.println(uiOutput.toString("UTF-8"));
+        } catch (UnsupportedEncodingException ex) {
+            System.out.println("AAAARGH");
+        }
         uiInput = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
         uiOutput = new ByteArrayOutputStream();
 
