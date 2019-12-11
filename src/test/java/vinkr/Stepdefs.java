@@ -251,14 +251,9 @@ public class Stepdefs {
     private void luoUIjaStreamit() {
         System.out.println("-----------------------------------------");
         System.out.println(input);
-        input = input.replaceAll("\n", System.lineSeparator());
         System.out.println(input);
         System.out.println("-----------------------------------------");
-        try {
-            System.out.println(uiOutput.toString("UTF-8"));
-        } catch (UnsupportedEncodingException ex) {
-            System.out.println("AAAARGH");
-        }
+
         uiInput = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
         uiOutput = new ByteArrayOutputStream();
 
@@ -269,5 +264,12 @@ public class Stepdefs {
             throw new RuntimeException(ex.toString());
         }
         ui.run();
+        try {
+            System.out.println(uiOutput.toString("UTF-8"));
+        } catch (UnsupportedEncodingException ex) {
+            System.out.println("AAAARGH");
+        }
+        System.out.println("-----------------------------------------");
+
     }
 }
