@@ -85,7 +85,7 @@ public class TextUI {
             if (validoija.validoiLinkki(vinkki) == true) {
                 int prosentti = -1;
                 while (!validoija.validoiLukuprosentti(prosentti)) {
-                        prosentti = kysyLukuprosentti();
+                    prosentti = kysyLukuprosentti();
                 }
                 output.println("Lukuprosentti päivitetty." + NL);
                 app.getVinkit().get(Integer.parseInt(vinkki) - 1).setLukuprosentti(prosentti);
