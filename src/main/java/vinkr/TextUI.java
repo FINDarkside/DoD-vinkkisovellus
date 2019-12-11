@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import org.jline.reader.EndOfFileException;
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
 import org.jline.reader.impl.completer.StringsCompleter;
@@ -57,7 +58,12 @@ public class TextUI {
         listaaKomennot();
 
         while (true) {
-            String komento = getInput("Komento");
+            String komento;
+            try {
+                komento = getInput("Komento");
+            } catch (EndOfFileException ex) {
+                break;
+            }
             if (komento.equals("lopeta")) {
                 break;
             }
