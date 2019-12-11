@@ -1,0 +1,1 @@
+Feature: Käyttäjä voi tunnistaa eri vinkkityypit värien perusteella ja nähdä niiden lukuasteen (aloittamatta/kesken/valmis) lukuprosentin väristä

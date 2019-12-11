@@ -1,0 +1,1 @@
+Feature: Käyttäjä voi merkitä lukuvinkkiin kuinka monta prosenttia siitä on lukenut, nähdä vinkkien lukuprosentit listauksessa ja päivittää niitä
