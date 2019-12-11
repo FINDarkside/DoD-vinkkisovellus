@@ -10,7 +10,8 @@ import java.nio.file.Paths;
 
 public class App {
 
-    public static void main(String[] args) throws URISyntaxException {
+    public static void main(String[] args) throws URISyntaxException, IOException {
+
         String currentFolder = new File(TextUI.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
         Path savePath = Paths.get(currentFolder, "vinkit.json");
         Tallennus tallennus = new Tallennus(savePath);

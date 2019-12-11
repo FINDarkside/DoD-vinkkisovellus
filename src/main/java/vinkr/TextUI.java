@@ -11,14 +11,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
+import org.jline.reader.impl.completer.StringsCompleter;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
 
 public class TextUI {
 
     public static final String NL = System.getProperty("line.separator");
+
+    private Terminal terminal;
+    private final LineReader lineReader;
     private final Vinkr app;
     private final Scanner input;
     private final PrintStream output;
@@ -26,7 +31,15 @@ public class TextUI {
     private final Logo logo;
     private final Tallennus tallennus;
 
-    public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Tallennus tallennus) {
+    public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Tallennus tallennus) throws IOException {
+        this.terminal = TerminalBuilder.builder()
+                .system(true)
+                .streams(inputStream, outputStream)
+                .build();
+        this.lineReader = LineReaderBuilder.builder()
+                .terminal(terminal)
+                .completer(new StringsCompleter("lisaa", "listaa", "apua", "tallenna"))
+                .build();
         this.app = app;
         this.input = new Scanner(inputStream);
         this.output = new PrintStream(outputStream);
@@ -309,7 +322,6 @@ public class TextUI {
     }
 
     private String getInput(String name) {
-        output.print(name + ": ");
-        return input.nextLine();
+        return lineReader.readLine(name + ": ");
     }
 }
