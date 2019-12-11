@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -248,7 +249,11 @@ public class Stepdefs {
         uiOutput = new ByteArrayOutputStream();
        
         app = new Vinkr();
-        ui = new TextUI(app, uiInput, uiOutput, null);
+        try {
+            ui = new TextUI(app, uiInput, uiOutput, null);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex.toString());
+        }
         ui.run();
     }
 }
