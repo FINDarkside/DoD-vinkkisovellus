@@ -17,7 +17,7 @@ public class KirjaVinkki implements Vinkki {
     private int julkaisuvuosi = 0;
     private String julkaisupaikka = "";
     private String kustantaja = "";
-
+    private int lukuprosentti = 0;
 
     public KirjaVinkki(String otsikko, String tekija, String isbn) {
         this.id = luoID();
@@ -72,6 +72,16 @@ public class KirjaVinkki implements Vinkki {
 
     public String getVari() {
         return this.VARI;
+    }
+
+    @Override
+    public int getLukuprosentti() {
+        return this.lukuprosentti;
+    }
+
+    @Override
+    public void setLukuprosentti(int prosentti) {
+        this.lukuprosentti = prosentti;
     }
 
     public String getJulkaisutiedot() {

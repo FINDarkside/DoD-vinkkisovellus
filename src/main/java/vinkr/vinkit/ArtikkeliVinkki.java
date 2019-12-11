@@ -20,6 +20,7 @@ public class ArtikkeliVinkki implements Vinkki {
     private String julkaisu = "";
     private Date julkaisupvm = null;
     private URL url;
+    private int lukuprosentti = 0;
 
     public ArtikkeliVinkki(URL url, String otsikko, String tekija) {
         this.id = luoID();
@@ -70,6 +71,16 @@ public class ArtikkeliVinkki implements Vinkki {
 
     public String getVari() {
         return this.VARI;
+    }
+
+    @Override
+    public int getLukuprosentti() {
+        return this.lukuprosentti;
+    }
+
+    @Override
+    public void setLukuprosentti(int prosentti) {
+        this.lukuprosentti = prosentti;
     }
 
     // Setterit

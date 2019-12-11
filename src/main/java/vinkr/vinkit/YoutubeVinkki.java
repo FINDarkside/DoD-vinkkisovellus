@@ -17,7 +17,8 @@ public class YoutubeVinkki implements Vinkki {
     private String tyyppi = "youtube";
     private String kanava;
     private Date julkaisupvm = null;
-    private URL url; 
+    private URL url;
+    private int lukuprosentti = 0;
     
     public YoutubeVinkki(URL url, String otsikko, String kanava) {
         this.id = luoID();
@@ -57,8 +58,18 @@ public class YoutubeVinkki implements Vinkki {
     public String getVari() {
         return this.VARI;
     }
-    
- // Setterit
+
+    @Override
+    public int getLukuprosentti() {
+        return this.lukuprosentti;
+    }
+
+    @Override
+    public void setLukuprosentti(int prosentti) {
+        this.lukuprosentti = prosentti;
+    }
+
+    // Setterit
     @Override
     public void setOtsikko(String otsikko) {
         this.otsikko = otsikko;

@@ -5,6 +5,8 @@ public interface Vinkki {
     public String getOtsikko();
     public String getTyyppi();
     public String getVari();
+    public int getLukuprosentti();
+    public void setLukuprosentti(int prosentti);
     public void setOtsikko(String otsikko);
     public String tulosta();
     public String toString();
