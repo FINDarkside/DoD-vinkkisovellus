@@ -264,12 +264,13 @@ public class Stepdefs {
             throw new RuntimeException(ex.toString());
         }
         ui.run();
+        System.out.println("--------------OUTPUT---------------------------");
         try {
             System.out.println(uiOutput.toString("UTF-8"));
         } catch (UnsupportedEncodingException ex) {
             System.out.println("AAAARGH");
         }
-        System.out.println("-----------------------------------------");
+        System.out.println("--------------END OUTPUT------------------------");
 
     }
 }
