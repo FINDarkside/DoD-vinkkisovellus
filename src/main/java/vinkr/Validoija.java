@@ -3,12 +3,12 @@ package vinkr;
 import java.time.Year;
 
 public class Validoija {
+
     Vinkr app;
 
     public Validoija(Vinkr app) {
         this.app = app;
     }
-    
     
     public boolean validoiOtsikko(String otsikko) {
         if (otsikko.equals("")) {
@@ -92,7 +92,6 @@ public class Validoija {
             return false;
         }
     }
-
 
     public boolean validoiLukuprosentti(int prosentti) {
         if (prosentti >= 0 && prosentti <= 100) {

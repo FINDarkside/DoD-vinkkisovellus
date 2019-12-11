@@ -66,6 +66,12 @@ public class ArtikkeliVinkkiTest {
     }
 
     @Test
+    public void artikkelinLukuprosentinAsetusOnnistuu() {
+        vinkki.setLukuprosentti(96);
+        assertEquals(96, vinkki.getLukuprosentti());
+    }
+
+    @Test
     public void julkaisunAsetusJaMuotoiluOnnistuu() {
         vinkki.setJulkaisu("The Verge");
         assertEquals("The Verge", vinkki.getJulkaisu());
@@ -81,7 +87,7 @@ public class ArtikkeliVinkkiTest {
     public void julkaisunURLnAsetusJaMuotoiluOnnistuu() throws Exception {
         vinkki.setUrl(new URL("https://www.theverge.com/circuitbreaker/2019/12/2/20992125/apple-mini-led-ipad-macbook-pro-2020-oled-rumor-kuo"));
         assertEquals("https://www.theverge.com/circuitbreaker/2019/12/2/20992125/apple-mini-led-ipad-macbook-pro-2020-oled-rumor-kuo", vinkki.getUrl().toString());
-    }    
+    }
     
     @Test
     public void otsikonJaUrlinMerkkijonoesitysToimii() {

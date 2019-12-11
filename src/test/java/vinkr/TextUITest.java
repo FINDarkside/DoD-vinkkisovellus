@@ -37,6 +37,7 @@ public class TextUITest {
         when(validoija.validoiOtsikko(anyString())).thenReturn(true);
         when(validoija.validoiTekija(anyString())).thenReturn(true);
         when(validoija.validoiIsbn(anyString())).thenReturn(true);
+        when(validoija.validoiLukuprosentti(anyInt())).thenReturn(true);
         tallennus = mock(Tallennus.class);
         when(vinkr.serialisoi()).thenReturn("{}");
         ui = new TextUI(vinkr, input, uiOutput, tallennus);
@@ -164,6 +165,23 @@ public class TextUITest {
         verify(tallennus).tallenna(anyString());
     }
 
+    @Test
+    public void lukuprosenttiTulostuuNollassaPunaisella() {
+        uiInput.println("lisaa");
+        uiInput.println("youtube");
+        uiInput.println("https://www.youtube.com/watch?v=9TycLR0TqFA");
+        uiInput.println("Introduction to Scrum - 7 Minutes");
+        uiInput.println("Uzility");
+        uiInput.println("26.07.2014");
+        uiInput.println("");
+        uiInput.println("listaa");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains(Varit.PUNAINEN));
+    }
+    
     private String getOutput() {
         return new String(uiOutput.toByteArray());
     }

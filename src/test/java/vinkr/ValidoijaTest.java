@@ -174,5 +174,19 @@ public class ValidoijaTest {
     public void listaanLuuluvaVinkinNumeroKelpaa() {
         assertEquals(true, validoija.validoiLinkki("3"));
     }
-    
+
+    @Test
+    public void sopivaLukuprosenttiKelpaa() {
+        assertEquals(true, validoija.validoiLukuprosentti(33));
+    }
+
+    @Test
+    public void negatiivinenLukuprosenttiEiKelpaa() {
+        assertEquals(false, validoija.validoiLukuprosentti(-13));
+    }
+
+    @Test
+    public void ylisuuriLukuprosenttiEiKelpaa() {
+        assertEquals(false, validoija.validoiLukuprosentti(113));
+    }
 }
