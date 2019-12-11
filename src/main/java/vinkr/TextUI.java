@@ -26,7 +26,6 @@ public class TextUI {
     private Terminal terminal;
     private final LineReader lineReader;
     private final Vinkr app;
-    private final Scanner input;
     private final PrintStream output;
     private final Validoija validoija;
     private final Logo logo;
@@ -43,7 +42,6 @@ public class TextUI {
                 .completer(new StringsCompleter("lisaa", "listaa", "apua", "tallenna"))
                 .build();
         this.app = app;
-        this.input = new Scanner(inputStream);
         this.output = new PrintStream(outputStream);
         this.validoija = new Validoija(app);
         this.logo = new Logo();
