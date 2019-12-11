@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import org.junit.*;
 import static org.junit.Assert.*;
+import org.junit.rules.Timeout;
 import static org.mockito.Mockito.*;
 
 import vinkr.vinkit.ArtikkeliVinkki;
@@ -13,6 +14,9 @@ import vinkr.vinkit.Vinkki;
 import vinkr.vinkit.YoutubeVinkki;
 
 public class TextUITest {
+    
+    @Rule
+    public Timeout globalTimeout = Timeout.seconds(1); 
     
     public static final String NL = System.getProperty("line.separator");
     Vinkr vinkr;
