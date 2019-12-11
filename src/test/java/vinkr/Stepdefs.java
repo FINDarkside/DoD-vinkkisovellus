@@ -19,12 +19,14 @@ public class Stepdefs {
     InputStream uiInput;
     String validiUrl;
     String validiOtsikko;
+    boolean debug;
     
     @Before
     public void setup() {
         input = "";
         validiUrl = "http://github.com/";
         validiOtsikko = "TestiOtsikko";
+        debug = false;
     }
         //GIVENIT
     @Given("komento {string} annetaan ohjelmalle")
@@ -74,12 +76,17 @@ public class Stepdefs {
     @When("kayttaja valitsee vinkin numero {string}")
     public void valitaanVinkki(String numero) {
         input += numero + "\n";
-        input += "1" + "\n";
+        input += "3" + "\n";
+        input += "\n";
         
         input += "lopeta" + "\n";
+        
+        this.tulostaKonsoliinTanhetkinenInput();
+        debug = true;
         luoUIjaStreamit();
     }
     */
+    
     @When("tyyppi {string}, otsikko {string}, kirjoittaja {string}, ISBN {string}, julkaisupaikka {string}, kustantaja {string} ja julkaisuvuosi {string} annetaan")
     public void kirjanKirjoittajaOtsikkojaIsbnjaMuutAnnetaan(String tyyppi, String otsikko, String kirjoittaja, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi) {
         
@@ -173,7 +180,6 @@ public class Stepdefs {
         
         input += "lopeta" + "\n";
         
-        System.out.println(input);
         luoUIjaStreamit();
     }
     
@@ -224,7 +230,9 @@ public class Stepdefs {
     
     @Then("ohjelmaan tulostuu {string}")
     public void ohjelmaVastaaHalutullaTulosteella(String odotettuTuloste) throws UnsupportedEncodingException {
-        System.out.println(uiOutput.toString("UTF-8"));
+        if (debug) {
+            System.out.println(uiOutput.toString("UTF-8"));
+        }
         assertTrue(uiOutput.toString("UTF-8").contains(odotettuTuloste));
     }
     
@@ -241,6 +249,7 @@ public class Stepdefs {
     @Then("ohjelma reagoi tulosteella {string}")
     public void ohjelmanViimeisinTulostettuRivi(String odotettuTuloste) throws UnsupportedEncodingException {
         String[] tulostetutRivit = uiOutput.toString("UTF-8").split("\n");
+        //lisää koodia viimeisen rivin poimimiseen
     }
     
     private void luoUIjaStreamit() {
@@ -250,5 +259,11 @@ public class Stepdefs {
         app = new Vinkr();
         ui = new TextUI(app, uiInput, uiOutput, null);
         ui.run();
+    }
+    
+    private void tulostaKonsoliinTanhetkinenInput() {
+        System.out.println("*******");
+        System.out.println(input);
+        System.out.println("*******");
     }
 }
