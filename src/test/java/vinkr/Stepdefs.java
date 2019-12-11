@@ -252,9 +252,6 @@ public class Stepdefs {
         System.out.println("-----------------------------------------");
         System.out.println(input);
         System.out.println("-----------------------------------------");
-        System.out.println("-----------------------------------------");
-        System.out.println(input.replaceAll("\r", ""));
-        System.out.println("-----------------------------------------");
         uiInput = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
         uiOutput = new ByteArrayOutputStream();
 
