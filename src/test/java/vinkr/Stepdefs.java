@@ -231,7 +231,6 @@ public class Stepdefs {
     
     @Then("ohjelma vastaa tulosteella, jossa kohdat {string}, {string}, {string} ja {string}")
     public void ohjelmaVastaaHalutullaTulosteellaJossaTietytNeljaKohtaa(String kohta1, String kohta2, String kohta3, String kohta4) throws UnsupportedEncodingException {
-        
         assertTrue(uiOutput.toString("UTF-8").contains(kohta1));
         assertTrue(uiOutput.toString("UTF-8").contains(kohta2));
         assertTrue(uiOutput.toString("UTF-8").contains(kohta3));
