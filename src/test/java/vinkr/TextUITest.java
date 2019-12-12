@@ -52,6 +52,11 @@ public class TextUITest {
         vinkit.add(new ArtikkeliVinkki(new URL("https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram"), "Internet celebrity cat Lil Bub has died", ""));
         vinkit.add(new YoutubeVinkki(new URL("https://www.youtube.com/watch?v=9TycLR0TqFA"), "Introduction to Scrum - 7 Minutes", ""));
     }
+
+    private void lisaaMockArtikkeli() {
+        ArtikkeliVinkki mockArtikkeli = mock(ArtikkeliVinkki.class);
+        vinkit.add(mockArtikkeli);
+    }
     
     @Test
     public void lisaaKomentoLisaaKirjanIlmanKustannustietoja() {
@@ -143,19 +148,29 @@ public class TextUITest {
         assertTrue(output.contains("tallenna"));
     }
 
-    /*
     @Test
-    public void linkinAvaaminenToimii() {
+    public void linkinAvaaminenToimii() throws Exception {
+        lisaaMockArtikkeli();
+
         uiInput.println("avaa");
-        uiInput.println("3");
-        uiInput.println(NL);
+        uiInput.println("5");
         uiInput.println("lopeta");
         ui.run();
 
         String output = getOutput();
-        assertTrue(output.contains("Opening in existing browser session."));
+        verify(vinkit.get(4)).avaaLinkki();
     }
-    */
+
+    @Test
+    public void kirjanLinkinAvaaminenValittaaOikein() throws Exception {
+        uiInput.println("avaa");
+        uiInput.println("1");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains("Virhe: Vinkki ei sisällä linkkiä"));
+    }
 
     @Test
     public void tallennaKomentoTallentaaJson() throws IOException {
@@ -168,19 +183,36 @@ public class TextUITest {
 
     @Test
     public void lukuprosenttiTulostuuNollassaPunaisella() {
-        uiInput.println("lisaa");
-        uiInput.println("youtube");
-        uiInput.println("https://www.youtube.com/watch?v=9TycLR0TqFA");
-        uiInput.println("Introduction to Scrum - 7 Minutes");
-        uiInput.println("Uzility");
-        uiInput.println("26.07.2014");
-        uiInput.println("");
         uiInput.println("listaa");
         uiInput.println("lopeta");
         ui.run();
 
         String output = getOutput();
         assertTrue(output.contains(Varit.PUNAINEN));
+    }
+
+    @Test
+    public void lukuprosenttiKeskenKeltaisella() {
+        vinkit.get(0).setLukuprosentti(68);
+
+        uiInput.println("listaa");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains(Varit.KELTAINEN));
+    }
+
+    @Test
+    public void lukuprosenttiTulostuuSadassaVihrealla() {
+        vinkit.get(0).setLukuprosentti(100);
+
+        uiInput.println("listaa");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains(Varit.VIHREA));
     }
 
     @Test
@@ -209,6 +241,18 @@ public class TextUITest {
         String output = getOutput();
         assertTrue(output.contains("Anna kelvollinen vinkin numero"));
         assertTrue(output.contains("Anna kelvollinen lukuprosentti"));
+    }
+
+    @Test
+    public void vinkinLisaysKasitteleeVirheetOikein() {
+        uiInput.println("lisaa");
+        uiInput.println("enpäs");
+        uiInput.println("takaisin");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains("Vinkin tyyppiä ei tunnistettu"));
     }
 
     private String getOutput() {
