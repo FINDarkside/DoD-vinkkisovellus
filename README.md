@@ -52,7 +52,7 @@ Kaikki käytettävissä olevat komennot:
   tallenna: Tallenna vinkit
   lopeta: Sulje sovellus
 </pre>
-Ohjelmaa käytetään syöttämällä komentoja komentotulkkiin.
+Ohjelmaa käytetään syöttämällä komentoja komentotulkkiin. Komennoilla on autotäydennys Tab-näppäimellä kun projektia ajaa jar-tiedostosta.
 
 ### Releaset
 
