@@ -10,3 +10,8 @@ Scenario: Listattu artikkelivinkki tulostuu halutulla värillä
         When  listataan kaikki lukuvinkit
         Then  ohjelma vastaa tulosteella, jossa artikkelin vari "sinivihrea"
 
+Scenario: Listattu youtubevinkki tulostuu halutulla värillä
+        Given uusi youtubevinkki, urlilla "https://www.youtube.com/watch?v=dQw4w9WgXcQ", otsikolla "RickRolling", kanavalla "Official Rick Astley" ja julkaisupaivalla "24.10.2009" annetaan
+        When  listataan kaikki lukuvinkit
+        Then  ohjelma vastaa tulosteella, jossa youtubevideon vari "violetti"
+

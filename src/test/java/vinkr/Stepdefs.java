@@ -72,6 +72,18 @@ public class Stepdefs {
         
         nykyOtsikko = otsikko;
     }
+    
+    @Given("uusi youtubevinkki, urlilla {string}, otsikolla {string}, kanavalla {string} ja julkaisupaivalla {string} annetaan")
+    public void lisataanJarjestelmaanTiettyYoutubevinkki(String url, String otsikko, String kanava, String julkaisupaiva) {
+        input += "lisaa" + "\n";
+        input += "youtube" + "\n";
+        input += url + "\n";
+        input += otsikko + "\n";
+        input += kanava + "\n";
+        input += julkaisupaiva + "\n";
+        
+        nykyOtsikko = otsikko;
+    }
         //WHENIT
     
     @When("listataan kaikki lukuvinkit")
@@ -285,6 +297,18 @@ public class Stepdefs {
         assertTrue(outputTaulukkona[otsikonIndeksi - 1].contains(vari));
     }
     
+    @Then("ohjelma vastaa tulosteella, jossa youtubevideon vari {string}")
+    public void tulosteessaVideossaHaluttuVari(String vari) throws UnsupportedEncodingException {
+        vari = muunnaAnsiKoodiksi(vari);
+        
+        String[] outputTaulukkona = muunnaOutputTaulukoksi();
+        int otsikonIndeksi = etsiTaulukostaKohta(outputTaulukkona, nykyOtsikko);
+        
+        assertTrue(vari != null);
+        //kts. huomiot kirjavinkin värin etsivässä testissä - nyt otsikko kuitenkin heti tyypin jälkeen
+        assertTrue(outputTaulukkona[otsikonIndeksi - 1].contains(vari));
+    }
+    
     // ei vielä käytössä
     @Then("ohjelma reagoi tulosteella {string}")
     public void ohjelmanViimeisinTulostettuRivi(String odotettuTuloste) throws UnsupportedEncodingException {
@@ -341,6 +365,10 @@ public class Stepdefs {
         
         if (vari.equals("sinivihrea")) {
             return Varit.SINIVIHREA;
+        }
+        
+        if (vari.equals("violetti")) {
+            return Varit.VIOLETTI;
         }
         
         return null;
