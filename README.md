@@ -41,7 +41,18 @@ Huomaa että buildattaessa jar ei sijaitse projektin juuressa.
 
 #### Käyttäminen
 
-Kun projekti käynnistyy, tekstikäyttöliittymä toivottaa sinut tervetulleeksi näyttävällä taideteoksella sekä listaamalla kaikki käytettävissä olevat komennot ja niiden toiminnallisuuden. Ohjelmaa käytetään näillä komennoilla, ja komennot sekä toiminnallisuudet saat uudestaan näkyviin 'apua'-komennolla.
+Kun projekti käynnistyy, tekstikäyttöliittymä toivottaa sinut tervetulleeksi näyttävällä taideteoksella sekä listaamalla kaikki käytettävissä olevat komennot ja niiden toiminnallisuuden:
+<pre>
+Kaikki käytettävissä olevat komennot:
+  apua: Tulosta tämä lista uudestaan
+  lisaa: Lisää uusi lukuvinkki
+  listaa: Listaa kaikki lukuvinkit
+  avaa: Avaa annetun vinkin sisältämä linkki
+  lue: Päivitä olemassa olevan vinkin lukuprosenttia
+  tallenna: Tallenna vinkit
+  lopeta: Sulje sovellus
+</pre>
+Ohjelmaa käytetään syöttämällä komentoja komentotulkkiin.
 
 ### Releaset
 
