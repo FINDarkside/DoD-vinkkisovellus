@@ -56,7 +56,7 @@ public class TextUITest {
     public void lisaaKomentoLisaaKirjanIlmanKustannustietoja() {
         uiInput.println("lisaa");
         uiInput.println("kirja");
-        uiInput.println("013215871X");
+        uiInput.println("");
         uiInput.println("A Discipline of Programming");
         uiInput.println("Dijkstra, Edsger");
         uiInput.println("");
@@ -72,7 +72,7 @@ public class TextUITest {
     public void lisaaKomentoLisaaKirjanKustannustiedoilla() {
         uiInput.println("lisaa");
         uiInput.println("kirja");
-        uiInput.println("013215871X");
+        uiInput.println("");
         uiInput.println("A Discipline of Programming");
         uiInput.println("Dijkstra, Edsger");
         uiInput.println("");
@@ -142,7 +142,6 @@ public class TextUITest {
     public void linkinAvaaminenToimii() {
         uiInput.println("avaa");
         uiInput.println("3");
-        uiInput.println(NL);
         uiInput.println("lopeta");
         ui.run();
 
