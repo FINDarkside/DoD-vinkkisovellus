@@ -98,7 +98,7 @@ public class ISBNTuonti {
         if (validoija.validoiVuosi(pvm) == true) {
             return (int) Integer.parseInt(pvm);
         } else if (testaaja.find()) {
-            String vuosi = testaaja.group(1);
+            String vuosi = testaaja.group(0);
             if (validoija.validoiVuosi(vuosi) == true) {
                 return (int) Integer.parseInt(vuosi);
             } else {
