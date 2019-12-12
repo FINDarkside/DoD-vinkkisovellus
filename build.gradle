@@ -62,3 +62,7 @@ jar {
         )
     }
 }
+
+checkstyle {
+    sourceSets = [project.sourceSets.main]
+}
