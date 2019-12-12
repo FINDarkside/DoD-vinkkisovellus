@@ -5,5 +5,5 @@ Feature: Syötetyt lukuvinkit säilyvät käyttökerrasta toiseen
 	When  komento "tallenna" annetaan ohjelmalle
 	And   ohjelma kaynnistetaan uudestaan
         And   listataan kaikki lukuvinkit
-        Then  ohjelma vastaa tulosteella, jossa kohdat "Tyyppi: Kirja", "Tekijä: Knuth, Donald", "Nimeke: The Art of Computer Programming" ja "ISBN: 0-201-03801-3"
+        Then  ohjelma vastaa tulosteella, jossa kohdat "Tyyppi: Kirja", "Tekijä: Martin, Robert", "Nimeke: Clean Code: A Handbook of Agile Software Craftsmanship" ja "ISBN: 978-0132350884"
 

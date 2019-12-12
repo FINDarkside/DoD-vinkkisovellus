@@ -327,6 +327,7 @@ public class TextUI {
                 break;
             } else {
                 output.println("Virhe: Anna kelvollinen vinkin numero");
+                break;
             }
         }
     }
