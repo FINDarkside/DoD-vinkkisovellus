@@ -58,6 +58,8 @@ Ohjelmaa käytetään syöttämällä komentoja komentotulkkiin. Komennoilla on 
 
 [Sprintin 2 release](https://github.com/Ohjelmistotuotanto-DoD/vinkr/releases/tag/v0.2-sprint2)
 
+[Final release](https://github.com/Ohjelmistotuotanto-DoD/vinkr/releases/tag/final)
+
 ### Backlogit
 
 [Projektin backlog](https://github.com/Ohjelmistotuotanto-DoD/vinkr/projects/2)
