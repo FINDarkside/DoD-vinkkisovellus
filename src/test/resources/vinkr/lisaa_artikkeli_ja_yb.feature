@@ -32,5 +32,5 @@ Feature: Käyttäjä voi lisätä artikkeli- tai Youtube-videomuotoisen vinkkity
 
     Scenario: Linkin avaaminen ei onnistu, jos annettu numero ei vastaa mitään vinkkiä
         Given komento "avaa" annetaan ohjelmalle
-        When  kayttaja valitsee vinkin numero "0"
+        When  kayttaja valitsee vinkin numero "777"
 	Then  ohjelmaan tulostuu "Virhe: Anna kelvollinen vinkin numero"

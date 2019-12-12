@@ -66,6 +66,12 @@ public class ArtikkeliVinkkiTest {
     }
 
     @Test
+    public void artikkelinLukuprosentinAsetusOnnistuu() {
+        vinkki.setLukuprosentti(96);
+        assertEquals(96, vinkki.getLukuprosentti());
+    }
+
+    @Test
     public void julkaisunAsetusJaMuotoiluOnnistuu() {
         vinkki.setJulkaisu("The Verge");
         assertEquals("The Verge", vinkki.getJulkaisu());
@@ -81,7 +87,7 @@ public class ArtikkeliVinkkiTest {
     public void julkaisunURLnAsetusJaMuotoiluOnnistuu() throws Exception {
         vinkki.setUrl(new URL("https://www.theverge.com/circuitbreaker/2019/12/2/20992125/apple-mini-led-ipad-macbook-pro-2020-oled-rumor-kuo"));
         assertEquals("https://www.theverge.com/circuitbreaker/2019/12/2/20992125/apple-mini-led-ipad-macbook-pro-2020-oled-rumor-kuo", vinkki.getUrl().toString());
-    }    
+    }
     
     @Test
     public void otsikonJaUrlinMerkkijonoesitysToimii() {
@@ -96,20 +102,20 @@ public class ArtikkeliVinkkiTest {
     
     @Test
     public void otsikonJaUrlinTulostusToimii() {
-        assertEquals("Tyyppi: Artikkeli" + NL + "Otsikko: Internet celebrity cat Lil Bub has died" + NL + "URL: https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram" + NL, vinkki.tulosta());
+        assertEquals("Tyyppi: Artikkeli" + NL + "Otsikko: Internet celebrity cat Lil Bub has died" + NL + "URL: https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram" + NL + "Luettu: " + vinkki.tulostaLukuprosentti() + NL, vinkki.tulosta());
     }
 
     @Test
     public void otsikonUrlinJaTekijanTulostusToimii() {
         vinkki.setTekija("Lee, Dami");
-        assertEquals("Tyyppi: Artikkeli" + NL + "Otsikko: Internet celebrity cat Lil Bub has died" + NL + "Kirjoittaja: Lee, Dami" + NL + "URL: https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram" + NL, vinkki.tulosta());
+        assertEquals("Tyyppi: Artikkeli" + NL + "Otsikko: Internet celebrity cat Lil Bub has died" + NL + "Kirjoittaja: Lee, Dami" + NL + "URL: https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram" + NL + "Luettu: " + vinkki.tulostaLukuprosentti() + NL, vinkki.tulosta());
     }
 
     @Test
     public void otsikonUrlinJulkaisunJaTekijanTulostusToimii() {
         vinkki.setTekija("Lee, Dami");
         vinkki.setJulkaisu("The Verge");
-        assertEquals("Tyyppi: Artikkeli" + NL + "Otsikko: Internet celebrity cat Lil Bub has died" + NL + "Kirjoittaja: Lee, Dami" + NL + "Lähde: The Verge" + NL + "URL: https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram" + NL, vinkki.tulosta());
+        assertEquals("Tyyppi: Artikkeli" + NL + "Otsikko: Internet celebrity cat Lil Bub has died" + NL + "Kirjoittaja: Lee, Dami" + NL + "Lähde: The Verge" + NL + "URL: https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram" + NL + "Luettu: " + vinkki.tulostaLukuprosentti() + NL, vinkki.tulosta());
     }
 
     @Test
@@ -117,7 +123,7 @@ public class ArtikkeliVinkkiTest {
         vinkki.setTekija("Lee, Dami");
         vinkki.setJulkaisu("The Verge");
         vinkki.setJulkaisupvm(muoto.parse("02.12.2019"));
-        assertEquals("Tyyppi: Artikkeli" + NL + "Otsikko: Internet celebrity cat Lil Bub has died" + NL + "Kirjoittaja: Lee, Dami" + NL + "Lähde: The Verge" + NL + "Julkaistu: 02.12.2019" + NL + "URL: https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram" + NL, vinkki.tulosta());
+        assertEquals("Tyyppi: Artikkeli" + NL + "Otsikko: Internet celebrity cat Lil Bub has died" + NL + "Kirjoittaja: Lee, Dami" + NL + "Lähde: The Verge" + NL + "Julkaistu: 02.12.2019" + NL + "URL: https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram" + NL + "Luettu: " + vinkki.tulostaLukuprosentti() + NL, vinkki.tulosta());
     }
 
 }

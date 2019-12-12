@@ -10,6 +10,7 @@ public final class Varit {
     public static final String SININEN = "\u001B[34m";
     public static final String SINIVIHREA = "\u001B[36m";
     public static final String VIOLETTI = "\u001B[95m";
+    public static final String VAALEANSININEN = "\u001B[94m";
 
     public static String varjaa(String vari, String tuloste) {
         return vari + tuloste + Varit.NOLLAA;
