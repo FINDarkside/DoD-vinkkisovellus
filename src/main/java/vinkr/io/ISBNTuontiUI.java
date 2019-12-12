@@ -4,30 +4,29 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import vinkr.App;
+import vinkr.TextUI;
 import vinkr.Validoija;
 import vinkr.Varit;
 
 public class ISBNTuontiUI {
+
     private ISBNTuonti tuonti;
-    private Scanner input;
+    private TextUI textUi;
     private PrintStream output;
     private Validoija validoija;
-    
-    
-    public ISBNTuontiUI(ISBNTuonti tuonti, Validoija validoija) {
+
+    public ISBNTuontiUI(ISBNTuonti tuonti, Validoija validoija, TextUI textUi) {
         this.tuonti = tuonti;
-        this.input = new Scanner(App.INPUT); 
-        this.output = new PrintStream(App.OUTPUT);
         this.validoija = validoija;
+        this.textUi = textUi;
     }
 
-    
     public String korjaaKirjoittaja(String kirjoittaja) {
         while (true) {
-            output.print("Korjaa nimi '");
-            output.print(Varit.varjaa(Varit.SININEN, kirjoittaja));
-            output.print("'  muotoon 'Sukunimi, Etunimi': ");
-            String korjattu = input.nextLine();
+            String s = "Korjaa nimi '";
+            s += Varit.varjaa(Varit.SININEN, kirjoittaja);
+            s += "'  muotoon 'Sukunimi, Etunimi'";
+            String korjattu = textUi.getInput(s);
             if (validoija.validoiTekija(korjattu) == true) {
                 return korjattu;
             } else {
@@ -35,6 +34,5 @@ public class ISBNTuontiUI {
             }
         }
     }
-    
-    
+
 }

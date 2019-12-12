@@ -14,20 +14,39 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
+import org.jline.reader.impl.completer.StringsCompleter;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
 
 public class TextUI {
 
     public static final String NL = System.getProperty("line.separator");
+
+    private Terminal terminal;
+    private final LineReader lineReader;
     private final Vinkr app;
-    private final Scanner input;
     private final PrintStream output;
     private final Validoija validoija;
     private final Logo logo;
     private final Tallennus tallennus;
 
-    public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Tallennus tallennus) {
+    public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Tallennus tallennus) throws IOException {
+        this(app, inputStream, outputStream, tallennus, false);
+    }
+
+    public TextUI(Vinkr app, InputStream inputStream, OutputStream outputStream, Tallennus tallennus, boolean system) throws IOException {
+        this.terminal = TerminalBuilder.builder()
+                .streams(inputStream, outputStream)
+                .system(system)
+                .jansi(system)
+                .build();
+        this.lineReader = LineReaderBuilder.builder()
+                .terminal(terminal)
+                .completer(new StringsCompleter("lisaa", "listaa", "apua", "tallenna"))
+                .build();
         this.app = app;
-        this.input = new Scanner(inputStream);
         this.output = new PrintStream(outputStream);
         this.validoija = new Validoija(app);
         this.logo = new Logo();
@@ -39,7 +58,9 @@ public class TextUI {
         listaaKomennot();
 
         while (true) {
-            String komento = getInput("Komento");
+            this.lineReader.setVariable(LineReader.DISABLE_COMPLETION, false);
+            String komento = this.lineReader.readLine("Komento: ").trim();
+            this.lineReader.setVariable(LineReader.DISABLE_COMPLETION, true);
             if (komento.equals("lopeta")) {
                 break;
             }
@@ -149,7 +170,7 @@ public class TextUI {
         String isbn = kysyIsbn();
         if (isbn.equals("")) {
             kirjaVinkki = kysyKirjanTiedot(isbn);
-            
+
         } else {
             output.println("Haetaan kirjan tietoja...");
             kirjaVinkki = haeIsbnTiedot(isbn);
@@ -162,17 +183,17 @@ public class TextUI {
     private KirjaVinkki kysyKirjanTiedot(String isbn) {
         String otsikko = kysyOtsikko();
         ArrayList<String> kirjoittajat = kysyKirjoittajat();
-        KirjaVinkki kirjaVinkki = new KirjaVinkki(otsikko, kirjoittajat, isbn); 
+        KirjaVinkki kirjaVinkki = new KirjaVinkki(otsikko, kirjoittajat, isbn);
         kirjaVinkki.setJulkaisupaikka(kysyJulkaisupaikka());
         kirjaVinkki.setKustantaja(kysyKustantaja());
         kirjaVinkki.setJulkaisuvuosi(kysyJulkaisuvuosi());
         return kirjaVinkki;
     }
-    
+
     private KirjaVinkki haeIsbnTiedot(String isbn) {
         ISBNTuonti isbnTuonti;
         try {
-            isbnTuonti = new ISBNTuonti(validoija);
+            isbnTuonti = new ISBNTuonti(validoija, this);
             isbnTuonti.haeKirja(isbn);
             if (isbnTuonti.getOtsikko().equals("")) {
                 output.println("Virhe: ISBN-numerolla ei löytynyt kirjaa; syötä tiedot manuaalisesti.");
@@ -186,7 +207,7 @@ public class TextUI {
             return kysyKirjanTiedot(isbn);
         }
     }
-    
+
     private String kysyOtsikko() {
         while (true) {
             String otsikko = getInput("Otsikko");
@@ -204,7 +225,7 @@ public class TextUI {
             return kanava;
         }
     }
-    
+
     private String kysyJulkaisu() {
         while (true) {
             String julkaisu = getInput("Julkaisu tai sivusto");
@@ -222,7 +243,7 @@ public class TextUI {
             }
         }
     }
-    
+
     private ArrayList<String> kysyKirjoittajat() {
         ArrayList<String> kirjoittajat = new ArrayList<>();
         output.println("Syötä kirjoittajat yksi kerrallaan muodossa 'Sukunimi, Etunimi' ja lopuksi tyhjä.");
@@ -240,21 +261,21 @@ public class TextUI {
             }
         }
     }
-  
+
     private String kysyJulkaisupaikka() {
         while (true) {
             String julkaisupaikka = getInput("Julkaisupaikka");
             return julkaisupaikka;
         }
     }
-    
+
     private String kysyKustantaja() {
         while (true) {
             String kustantaja = getInput("Kustantaja");
             return kustantaja;
         }
     }
-    
+
     private int kysyJulkaisuvuosi() {
         while (true) {
             String vuosi = getInput("Julkaisuvuosi");
@@ -269,7 +290,7 @@ public class TextUI {
             }
         }
     }
-    
+
     private Date kysyPvm() {
         SimpleDateFormat pvmMuoto = new SimpleDateFormat("dd.MM.yyyy");
         Date pvmObjekti = null;
@@ -277,7 +298,7 @@ public class TextUI {
             String pvm = getInput("Julkaisupäivämäärä");
             if (pvm.equals("")) {
                 return pvmObjekti;
-            } 
+            }
             try {
                 pvmObjekti = pvmMuoto.parse(pvm);
                 return pvmObjekti;
@@ -286,7 +307,7 @@ public class TextUI {
             }
         }
     }
-    
+
     private String kysyIsbn() {
         while (true) {
             String isbn = getInput("ISBN");
@@ -297,7 +318,7 @@ public class TextUI {
             }
         }
     }
-    
+
     private URL kysyUrl() {
         URL url = null;
         while (true) {
@@ -372,8 +393,8 @@ public class TextUI {
         }
     }
 
-    private String getInput(String name) {
-        output.print(name + ": ");
-        return input.nextLine();
+    public String getInput(String name) {
+        return this.lineReader.readLine(name + ": ");
     }
+
 }

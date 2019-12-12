@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import org.junit.*;
 import static org.junit.Assert.*;
+import org.junit.rules.Timeout;
 import static org.mockito.Mockito.*;
 
 import vinkr.vinkit.ArtikkeliVinkki;
@@ -13,6 +14,9 @@ import vinkr.vinkit.Vinkki;
 import vinkr.vinkit.YoutubeVinkki;
 
 public class TextUITest {
+    
+    @Rule
+    public Timeout globalTimeout = Timeout.seconds(1); 
     
     public static final String NL = System.getProperty("line.separator");
     Vinkr vinkr;
@@ -60,71 +64,76 @@ public class TextUITest {
     
     @Test
     public void lisaaKomentoLisaaKirjanIlmanKustannustietoja() {
-        uiInput.println("lisaa");
-        uiInput.println("kirja");
-        uiInput.println("");
-        uiInput.println("A Discipline of Programming");
-        uiInput.println("Dijkstra, Edsger");
-        uiInput.println("");
-        uiInput.println("");
-        uiInput.println("");
-        uiInput.println("");
-        uiInput.println("");
-        uiInput.println("lopeta");
+        uiInput.print("lisaa\n");
+        uiInput.print("kirja\n");
+        uiInput.print("\n");
+        uiInput.print("A Discipline of Programming\n");
+        uiInput.print("Dijkstra, Edsger\n");
+        uiInput.print("\n");
+        uiInput.print("\n");
+        uiInput.print("\n");
+        uiInput.print("\n");
+        uiInput.print("\n");
+        uiInput.print("lopeta\n");
+        uiInput.print("\n");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
     }
     
     @Test
     public void lisaaKomentoLisaaKirjanKustannustiedoilla() {
-        uiInput.println("lisaa");
-        uiInput.println("kirja");
-        uiInput.println("");
-        uiInput.println("A Discipline of Programming");
-        uiInput.println("Dijkstra, Edsger");
-        uiInput.println("");
-        uiInput.println("Upper Saddle River");
-        uiInput.println("Prentice Hall");
-        uiInput.println("1997");
-        uiInput.println("");
-        uiInput.println("lopeta");
+        uiInput.print("lisaa\n");
+        uiInput.print("kirja\n");
+        uiInput.print("\n");
+        uiInput.print("A Discipline of Programming\n");
+        uiInput.print("Dijkstra, Edsger\n");
+        uiInput.print("\n");
+        uiInput.print("Upper Saddle River\n");
+        uiInput.print("Prentice Hall\n");
+        uiInput.print("1997\n");
+        uiInput.print("\n");
+        uiInput.print("lopeta\n");
+        uiInput.print("\n");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
     }
     
     @Test
     public void lisaaKomentoLisaaArtikkelin() {
-        uiInput.println("lisaa");
-        uiInput.println("artikkeli");
-        uiInput.println("https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram");
-        uiInput.println("Internet celebrity cat Lil Bub has died");
-        uiInput.println("Lee, Dami");
-        uiInput.println("The Verge");
-        uiInput.println("02.12.2019");
-        uiInput.println("");
-        uiInput.println("lopeta");
+        uiInput.print("lisaa\n");
+        uiInput.print("artikkeli\n");
+        uiInput.print("https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram\n");
+        uiInput.print("Internet celebrity cat Lil Bub has died\n");
+        uiInput.print("Lee, Dami\n");
+        uiInput.print("The Verge\n");
+        uiInput.print("02.12.2019\n");
+        uiInput.print("\n");
+        uiInput.print("lopeta\n");
+        uiInput.print("\n");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
     }
     
     @Test
     public void lisaaKomentoLisaaYoutubeVideon() {
-        uiInput.println("lisaa");
-        uiInput.println("youtube");
-        uiInput.println("https://www.youtube.com/watch?v=9TycLR0TqFA");
-        uiInput.println("Introduction to Scrum - 7 Minutes");
-        uiInput.println("Uzility");
-        uiInput.println("26.07.2014");
-        uiInput.println("");
-        uiInput.println("lopeta");
+        uiInput.print("lisaa\n");
+        uiInput.print("youtube\n");
+        uiInput.print("https://www.youtube.com/watch?v=9TycLR0TqFA\n");
+        uiInput.print("Introduction to Scrum - 7 Minutes\n");
+        uiInput.print("Uzility\n");
+        uiInput.print("26.07.2014\n");
+        uiInput.print("\n");
+        uiInput.print("lopeta\n");
+        uiInput.print("\n");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
     }
 
     @Test
     public void listaaKomentoTulostaaVinkit() {
-        uiInput.println("listaa");
-        uiInput.println("lopeta");
+        uiInput.print("listaa\n");
+        uiInput.print("lopeta\n");
+        uiInput.print("\n");
         ui.run();
         String output = getOutput();
         for (Vinkki vinkki : vinkit) {
@@ -134,8 +143,9 @@ public class TextUITest {
 
     @Test
     public void apuaKomentoListaaKomennot() {
-        uiInput.println("apua");
-        uiInput.println("lopeta");
+        uiInput.print("apua\n");
+        uiInput.print("lopeta\n");
+        uiInput.print("\n");
         ui.run();
 
         String output = getOutput();
@@ -152,30 +162,31 @@ public class TextUITest {
     public void linkinAvaaminenToimii() throws Exception {
         lisaaMockArtikkeli();
 
-        uiInput.println("avaa");
-        uiInput.println("5");
-        uiInput.println("lopeta");
+        uiInput.print("avaa\n");
+        uiInput.print("5\n");
+        uiInput.print("lopeta\n");
         ui.run();
 
         String output = getOutput();
+
         verify(vinkit.get(4)).avaaLinkki();
     }
 
     @Test
     public void kirjanLinkinAvaaminenValittaaOikein() throws Exception {
-        uiInput.println("avaa");
-        uiInput.println("1");
-        uiInput.println("lopeta");
+        uiInput.print("avaa\n");
+        uiInput.print("1\n");
+        uiInput.print("lopeta\n");
         ui.run();
-
         String output = getOutput();
         assertTrue(output.contains("Virhe: Vinkki ei sisällä linkkiä"));
     }
 
     @Test
     public void tallennaKomentoTallentaaJson() throws IOException {
-        uiInput.println("tallenna");
-        uiInput.println("lopeta");
+        uiInput.print("tallenna\n");
+        uiInput.print("lopeta\n");
+        uiInput.print("\n");
         ui.run();
         verify(vinkr).serialisoi();
         verify(tallennus).tallenna(anyString());
@@ -183,8 +194,8 @@ public class TextUITest {
 
     @Test
     public void lukuprosenttiTulostuuNollassaPunaisella() {
-        uiInput.println("listaa");
-        uiInput.println("lopeta");
+        uiInput.print("listaa\n");
+        uiInput.print("lopeta\n");
         ui.run();
 
         String output = getOutput();
@@ -195,8 +206,8 @@ public class TextUITest {
     public void lukuprosenttiKeskenKeltaisella() {
         vinkit.get(0).setLukuprosentti(68);
 
-        uiInput.println("listaa");
-        uiInput.println("lopeta");
+        uiInput.print("listaa\n");
+        uiInput.print("lopeta\n");
         ui.run();
 
         String output = getOutput();
@@ -207,8 +218,8 @@ public class TextUITest {
     public void lukuprosenttiTulostuuSadassaVihrealla() {
         vinkit.get(0).setLukuprosentti(100);
 
-        uiInput.println("listaa");
-        uiInput.println("lopeta");
+        uiInput.print("listaa\n");
+        uiInput.print("lopeta\n");
         ui.run();
 
         String output = getOutput();
@@ -217,11 +228,11 @@ public class TextUITest {
 
     @Test
     public void prosentinPaivitysOnnistuu() {
-        uiInput.println("lue");
-        uiInput.println("1");
-        uiInput.println("99");
-        uiInput.println("listaa");
-        uiInput.println("lopeta");
+        uiInput.print("lue\n");
+        uiInput.print("1\n");
+        uiInput.print("99\n");
+        uiInput.print("listaa\n");
+        uiInput.print("lopeta\n");
         ui.run();
 
         String output = getOutput();
@@ -230,12 +241,12 @@ public class TextUITest {
 
     @Test
     public void prosentinPaivitysValittaaVirheista() {
-        uiInput.println("lue");
-        uiInput.println("99");
-        uiInput.println("1");
-        uiInput.println("111");
-        uiInput.println("2");
-        uiInput.println("lopeta");
+        uiInput.print("lue\n");
+        uiInput.print("99\n");
+        uiInput.print("1\n");
+        uiInput.print("111\n");
+        uiInput.print("2\n");
+        uiInput.print("lopeta\n");
         ui.run();
 
         String output = getOutput();
@@ -245,10 +256,10 @@ public class TextUITest {
 
     @Test
     public void vinkinLisaysKasitteleeVirheetOikein() {
-        uiInput.println("lisaa");
-        uiInput.println("enpäs");
-        uiInput.println("takaisin");
-        uiInput.println("lopeta");
+        uiInput.print("lisaa\n");
+        uiInput.print("enpäs\n");
+        uiInput.print("takaisin\n");
+        uiInput.print("lopeta\n");
         ui.run();
 
         String output = getOutput();

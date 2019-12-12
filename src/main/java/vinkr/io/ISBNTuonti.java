@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import vinkr.App;
+import vinkr.TextUI;
 import vinkr.Validoija;
 import vinkr.vinkit.KirjaVinkki;
 
@@ -28,11 +29,11 @@ public class ISBNTuonti {
     private String isbn;
     private String siivottuIsbn;
     private JSONObject kirjanTiedot;
-    
-    public ISBNTuonti(Validoija validoija) {
+
+    public ISBNTuonti(Validoija validoija, TextUI textUi) {
         this.validoija = validoija;
-        this.tuontiUI = new ISBNTuontiUI(this, validoija);
-        
+        this.tuontiUI = new ISBNTuontiUI(this, validoija, textUi);
+
     }
 
     public void haeKirja(String isbn) throws IOException {
@@ -40,11 +41,11 @@ public class ISBNTuonti {
         this.siivottuIsbn = isbn.replaceAll("[\\-\\s]", "");
         this.kirjanTiedot = haeKirjanTiedot();
     }
-    
+
     public KirjaVinkki luoKirjaVinkki(String isbn) {
         String otsikko = getOtsikko();
         ArrayList<String> kirjoittajat = getKirjoittajat();
-        KirjaVinkki kirjaVinkki = new KirjaVinkki(otsikko, kirjoittajat, this.isbn); 
+        KirjaVinkki kirjaVinkki = new KirjaVinkki(otsikko, kirjoittajat, this.isbn);
         kirjaVinkki.setJulkaisupaikka(getJulkaisupaikka());
         kirjaVinkki.setKustantaja(getKustantaja());
         kirjaVinkki.setJulkaisuvuosi(getJulkaisuvuosi());
@@ -54,7 +55,7 @@ public class ISBNTuonti {
     public String getOtsikko() {
         return this.kirjanTiedot.optString("title");
     }
-    
+
     public ArrayList<String> getKirjoittajat() {
         ArrayList<String> kirjoittajat = new ArrayList<>();
         JSONArray lista = this.kirjanTiedot.getJSONArray("authors");
@@ -75,15 +76,15 @@ public class ISBNTuonti {
         }
         return kirjoittajat;
     }
-    
+
     public String getJulkaisupaikka() {
         return haeListaTekstiksi("publish_places");
     }
-    
+
     public String getKustantaja() {
         return haeListaTekstiksi("publishers");
     }
-    
+
     public int getJulkaisuvuosi() {
         String pvm = kirjanTiedot.optString("publish_date");
         Pattern kaava = Pattern.compile("[0-9]{4}");
@@ -101,7 +102,7 @@ public class ISBNTuonti {
             return 0;
         }
     }
-    
+
     // Apumetodit
     public JSONObject haeKirjanTiedot() throws IOException {
         String url = OLBASEURL + this.siivottuIsbn + OLSUFFIX;
@@ -109,7 +110,7 @@ public class ISBNTuonti {
         HttpGet pyynto = new HttpGet(url);
         pyynto.addHeader("accept", "application/json");
         HttpResponse vastaus = client.execute(pyynto);
-        String json = IOUtils.toString(vastaus.getEntity().getContent(), "UTF-8");        
+        String json = IOUtils.toString(vastaus.getEntity().getContent(), "UTF-8");
         if (json.equals("{}")) {
             return new JSONObject();
         } else {
@@ -117,12 +118,11 @@ public class ISBNTuonti {
             return object;
         }
     }
-    
+
     private String muotoileKirjoittaja(String kirjoittaja) throws IOException {
         String viafID;
         try {
             viafID = haeViafId(kirjoittaja.replace(" ", "+").toLowerCase());
-            PrintStream output = new PrintStream(App.OUTPUT);
         } catch (IOException e) {
             return kirjoittaja;
         }
@@ -133,33 +133,33 @@ public class ISBNTuonti {
             return haeViafNimi(url);
         }
     }
-    
+
     public String haeViafId(String hakutermi) throws IOException {
         String url = "http://www.viaf.org/viaf/AutoSuggest?query=" + hakutermi;
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet pyynto = new HttpGet(url);
         pyynto.addHeader("accept", "application/json");
         HttpResponse vastaus = client.execute(pyynto);
-        String json = IOUtils.toString(vastaus.getEntity().getContent(), "UTF-8");        
+        String json = IOUtils.toString(vastaus.getEntity().getContent(), "UTF-8");
         String viafId = new JSONObject(json).getJSONArray("result").getJSONObject(0).getString("viafid");
         return viafId;
     }
-    
+
     public String haeViafNimi(String url) throws IOException {
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet pyynto = new HttpGet(url);
         pyynto.addHeader("accept", "application/json");
         HttpResponse vastaus = client.execute(pyynto);
-        String json = IOUtils.toString(vastaus.getEntity().getContent(), "UTF-8");        
+        String json = IOUtils.toString(vastaus.getEntity().getContent(), "UTF-8");
         JSONObject object = new JSONObject(json);
         for (int i = 0; i < object.getJSONObject("mainHeadings").getJSONArray("data").length(); i++) {
             if (validoija.validoiTekija(object.getJSONObject("mainHeadings").getJSONArray("data").getJSONObject(i).getString("text")) == true) {
-                return object.getJSONObject("mainHeadings").getJSONArray("data").getJSONObject(i).getString("text"); 
-            } 
+                return object.getJSONObject("mainHeadings").getJSONArray("data").getJSONObject(i).getString("text");
+            }
         }
         return null;
     }
-    
+
     private String haeListaTekstiksi(String avain) {
         JSONArray lista = this.kirjanTiedot.optJSONArray(avain);
         if (lista == null || lista.isEmpty()) {
@@ -175,5 +175,5 @@ public class ISBNTuonti {
             return teksti;
         }
     }
-    
+
 }

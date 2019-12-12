@@ -11,10 +11,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class App {
-    public static final InputStream INPUT = System.in;
-    public static final OutputStream OUTPUT = System.out;
-    
-    public static void main(String[] args) throws URISyntaxException {
+
+    public static void main(String[] args) throws URISyntaxException, IOException {
+
         String currentFolder = new File(TextUI.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
         Path savePath = Paths.get(currentFolder, "vinkit.json");
         Tallennus tallennus = new Tallennus(savePath);
@@ -31,7 +30,7 @@ public class App {
         } else {
             System.out.println(savePath + " doesn't exist");
         }
-        TextUI ui = new TextUI(app, INPUT, OUTPUT, tallennus);
+        TextUI ui = new TextUI(app, System.in, System.out, tallennus, true);
         ui.run();
     }
 }
