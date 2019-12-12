@@ -80,7 +80,7 @@ Ohjelmaa käytetään syöttämällä komentoja komentotulkkiin. Komennoilla on 
 
 [Sprinttiin 2 valitut storyt ja niiden hyväksymisehdot](https://github.com/Ohjelmistotuotanto-DoD/vinkr/blob/master/hyvaksymiskriteerit.md)
 
-Sprintiin 3 valitut storyt on kirjattu [backlogiin](https://github.com/Ohjelmistotuotanto-DoD/vinkr/projects/4), linkit cucumber-featureihin storyissä
+Sprintiin 3 valitut storyt on kirjattu [backlogiin](https://github.com/Ohjelmistotuotanto-DoD/vinkr/projects/2), linkit cucumber-featureihin storyissä
 
 ### Lisenssi
 
