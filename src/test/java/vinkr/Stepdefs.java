@@ -386,7 +386,7 @@ public class Stepdefs {
         String[] outputTaulukkona = muunnaOutputTaulukoksi();
         int otsikonIndeksi = etsiTaulukostaKohta(outputTaulukkona, nykyOtsikko);
          //kts. huomiot kirjavinkin värin etsivässä testissä
-        assertTrue(outputTaulukkona[otsikonIndeksi + 3].contains(vari));
+        assertTrue(outputTaulukkona[otsikonIndeksi + 2].contains(vari));
     }
     
     @Then("juuri lisatyn artikkelivinkin lukuprosentin vari on listauksessa {string}")
