@@ -390,7 +390,7 @@ public class Stepdefs {
         System.out.println("*****************" + vari);
         System.out.println("*****************" + Varit.KELTAINEN);
          //kts. huomiot kirjavinkin värin etsivässä testissä
-        assertTrue(outputTaulukkona[otsikonIndeksi + 3].contains(vari));
+        assertTrue(outputTaulukkona[otsikonIndeksi + 2].contains(vari));
     }
     
     @Then("juuri lisatyn artikkelivinkin lukuprosentin vari on listauksessa {string}")

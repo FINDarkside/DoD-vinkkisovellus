@@ -11,7 +11,7 @@ Scenario: Käyttäjä voi muuttaa tietyn lukuvinkin lukuprosenttia
         Then  ohjelmaan tulostuu "Lukuprosentti päivitetty"
 
 Scenario: Tulostettujen kirjavinkkien lukuprosentit näkyvät eri väreissä
-        Given uusi kirjavinkki, otsikolla "The Art of Computer POGramming", kirjoittajalla "Nuth, Donald", jonka ISBN on "0-201-03801-3", julkaisupaikalla "USA", kustantajalla "kustantaja", julkaisuvuodella "2008" ja lukuprosentilla "25" lisataan     
+        Given uusi kirjavinkki, otsikolla "The Art of Computer POGramming", kirjoittajalla "Nuth, Donald", jonka ISBN on "", julkaisupaikalla "USA", kustantajalla "kustantaja", julkaisuvuodella "2008" ja lukuprosentilla "25" lisataan
 	When  listataan kaikki lukuvinkit
         Then  juuri lisatyn kirjavinkin lukuprosentin vari on listauksessa "keltainen"
 
