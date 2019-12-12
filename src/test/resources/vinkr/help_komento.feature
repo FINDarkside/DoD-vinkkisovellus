@@ -1,7 +1,7 @@
 Feature: Help komento
 
     Scenario: Käyttäjälle listataan komennot, kun hän kirjoittaa komentoriville sanan "apua"
-        Given komento "help" annetaan ohjelmalle
+        Given komento "apua" annetaan ohjelmalle
 	When  komento suoritetaan
         Then  ohjelmaan tulostuu "Kaikki käytettävissä olevat komennot:"
 
