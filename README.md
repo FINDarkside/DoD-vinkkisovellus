@@ -80,7 +80,7 @@ Ohjelmaa käytetään syöttämällä komentoja komentotulkkiin. Komennoilla on 
 
 [Sprinttiin 2 valitut storyt ja niiden hyväksymisehdot](https://github.com/Ohjelmistotuotanto-DoD/vinkr/blob/master/hyvaksymiskriteerit.md)
 
-Sprintiin 3 valitut storyt on kirjattu [backlogiin](https://github.com/Ohjelmistotuotanto-DoD/vinkr/projects/2) milestoneina, linkit cucumber-featureihin milestoneissa sekä alla:
+Sprintiin 3 valitut storyt on kirjattu [backlogiin](https://github.com/Ohjelmistotuotanto-DoD/vinkr/projects/2) sekä alle milestoneina, linkit cucumber-featureihin milestoneissa:
 * [Käyttäjä voi syöttää komennon ensimmäiset kirjaimet jonka jälkeen ohjelma täydentää komennon loppuosan automaattisesti](https://github.com/Ohjelmistotuotanto-DoD/vinkr/milestone/14)
 * [Käyttäjä voi merkitä lukuvinkkiin kuinka monta prosenttia siitä on lukenut, nähdä vinkkien lukuprosentit listauksessa ja päivittää niitä](https://github.com/Ohjelmistotuotanto-DoD/vinkr/milestone/7)
 * [Käyttäjä voi hakea kirjaVinkin tiedot automaattisesti verkosta syöttämällä teoksen ISBN-numeron](https://github.com/Ohjelmistotuotanto-DoD/vinkr/milestone/19)
