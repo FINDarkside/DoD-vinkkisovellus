@@ -6,12 +6,12 @@ Scenario: Listattu kirjavinkki tulostuu halutulla värillä
         Then  ohjelma vastaa tulosteella, jossa kirjan vari "sininen"
 
 Scenario: Listattu artikkelivinkki tulostuu halutulla värillä
-        Given uusi artikkelivinkki, urlilla "http://www.testiartikkeli.com/artikkeli1", otsikolla "Cucumberista", kirjoittajalla "Maestro, P", julkaisulla "" ja julkaisupaivalla "" annetaan
+        Given uusi artikkelivinkki, urlilla "http://www.testiartikkeli.com/artikkeli1", otsikolla "Cucumberista", kirjoittajalla "Maestro, P", julkaisulla "" ja julkaisupaivalla "" lisataan
         When  listataan kaikki lukuvinkit
         Then  ohjelma vastaa tulosteella, jossa artikkelin vari "sinivihrea"
 
 Scenario: Listattu youtubevinkki tulostuu halutulla värillä
-        Given uusi youtubevinkki, urlilla "https://www.youtube.com/watch?v=dQw4w9WgXcQ", otsikolla "RickRolling", kanavalla "Official Rick Astley" ja julkaisupaivalla "24.10.2009" annetaan
+        Given uusi youtubevinkki, urlilla "https://www.youtube.com/watch?v=dQw4w9WgXcQ", otsikolla "RickRolling", kanavalla "Official Rick Astley" ja julkaisupaivalla "24.10.2009" lisataan
         When  listataan kaikki lukuvinkit
         Then  ohjelma vastaa tulosteella, jossa youtubevideon vari "violetti"
 
