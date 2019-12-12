@@ -417,9 +417,11 @@ public class Stepdefs {
             throw new RuntimeException(ex.toString());
         }
         ui.run();
-        /*System.out.println("*****************");
-        System.out.println(uiOutput.toString());
-        System.out.println("*****************");*/
+        /*
+         * System.out.println("*****************");
+         * System.out.println(uiOutput.toString());
+         * System.out.println("*****************");
+         */
     }
 
     /*
@@ -448,20 +450,15 @@ public class Stepdefs {
     private String muunnaAnsiKoodiksi(String vari) {
         if (vari.equals("sininen")) {
             return Varit.SININEN;
-        }
-        if (vari.equals("sinivihrea")) {
+        } else if (vari.equals("sinivihrea")) {
             return Varit.SINIVIHREA;
-        }
-        if (vari.equals("violetti")) {
+        } else if (vari.equals("violetti")) {
             return Varit.VIOLETTI;
-        }
-        if (vari.equals("keltainen")) {
+        } else if (vari.equals("keltainen")) {
             return Varit.KELTAINEN;
-        }
-        if (vari.equals("vihrea")) {
+        } else if (vari.equals("vihrea")) {
             return Varit.VIHREA;
-        }
-        if (vari.equals("punainen")) {
+        } else if (vari.equals("punainen")) {
             return Varit.PUNAINEN;
         }
         return null;

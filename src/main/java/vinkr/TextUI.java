@@ -1,6 +1,8 @@
 package vinkr;
 
 import java.io.IOException;
+
+import vinkr.io.ISBNTuonti;
 import vinkr.vinkit.*;
 
 import java.io.*;
@@ -164,16 +166,46 @@ public class TextUI {
     }
 
     private void lisaaKirja() {
+        KirjaVinkki kirjaVinkki;
         String isbn = kysyIsbn();
+        if (isbn.equals("")) {
+            kirjaVinkki = kysyKirjanTiedot(isbn);
+
+        } else {
+            output.println("Haetaan kirjan tietoja...");
+            kirjaVinkki = haeIsbnTiedot(isbn);
+        }
+        kirjaVinkki.setLukuprosentti(kysyLukuprosentti());
+        app.lisaaVinkki(kirjaVinkki);
+        output.println("Kirja lisätty");
+    }
+
+    private KirjaVinkki kysyKirjanTiedot(String isbn) {
         String otsikko = kysyOtsikko();
         ArrayList<String> kirjoittajat = kysyKirjoittajat();
         KirjaVinkki kirjaVinkki = new KirjaVinkki(otsikko, kirjoittajat, isbn);
         kirjaVinkki.setJulkaisupaikka(kysyJulkaisupaikka());
         kirjaVinkki.setKustantaja(kysyKustantaja());
         kirjaVinkki.setJulkaisuvuosi(kysyJulkaisuvuosi());
-        kirjaVinkki.setLukuprosentti(kysyLukuprosentti());
-        app.lisaaVinkki(kirjaVinkki);
-        output.println("Kirja lisätty");
+        return kirjaVinkki;
+    }
+
+    private KirjaVinkki haeIsbnTiedot(String isbn) {
+        ISBNTuonti isbnTuonti;
+        try {
+            isbnTuonti = new ISBNTuonti(validoija, this);
+            isbnTuonti.haeKirja(isbn);
+            if (isbnTuonti.getOtsikko().equals("")) {
+                output.println("Virhe: ISBN-numerolla ei löytynyt kirjaa; syötä tiedot manuaalisesti.");
+                return kysyKirjanTiedot(isbn);
+            } else {
+                return isbnTuonti.luoKirjaVinkki(isbn);
+            }
+        } catch (IOException | IllegalArgumentException e) {
+            System.out.println(e);
+            output.println("Virhe: Kirjan haku ISBN-numerolla ei onnistunut; syötä tiedot manuaalisesti.");
+            return kysyKirjanTiedot(isbn);
+        }
     }
 
     private String kysyOtsikko() {
@@ -182,7 +214,7 @@ public class TextUI {
             if (validoija.validoiOtsikko(otsikko) == true) {
                 return otsikko;
             } else {
-                output.println("Virhe: Otsikko ei saa olla tyhjä");
+                output.println("Virhe: Otsikko ei saa olla tyhjä.");
             }
         }
     }
@@ -207,7 +239,7 @@ public class TextUI {
             if (validoija.validoiTekija(kirjoittaja) == true) {
                 return kirjoittaja;
             } else {
-                output.println("Virhe: Syötä kirjoittajan nimi muodossa 'Sukunimi, Etunimi'");
+                output.println("Virhe: Syötä kirjoittajan nimi muodossa 'Sukunimi, Etunimi'.");
             }
         }
     }
@@ -225,7 +257,7 @@ public class TextUI {
                 i++;
                 kirjoittajat.add(kirjoittaja);
             } else {
-                output.println("Virhe: Syötä kirjoittajan nimi muodossa 'Sukunimi, Etunimi'");
+                output.println("Virhe: Syötä kirjoittajan nimi muodossa 'Sukunimi, Etunimi'.");
             }
         }
     }
@@ -253,7 +285,7 @@ public class TextUI {
                 if (validoija.validoiVuosi(vuosi) == true) {
                     return Integer.parseInt(vuosi);
                 } else {
-                    output.println("Virhe: Anna kelvollinen vuosiluku tai jätä kenttä tyhjäksi");
+                    output.println("Virhe: Anna kelvollinen vuosiluku tai jätä kenttä tyhjäksi.");
                 }
             }
         }
@@ -271,7 +303,7 @@ public class TextUI {
                 pvmObjekti = pvmMuoto.parse(pvm);
                 return pvmObjekti;
             } catch (ParseException e) {
-                output.println("Virhe: Syötä päivämäärä muodossa 'pp.kk.vvvv'");
+                output.println("Virhe: Syötä päivämäärä muodossa 'pp.kk.vvvv'.");
             }
         }
     }
@@ -282,7 +314,7 @@ public class TextUI {
             if (validoija.validoiIsbn(isbn) == true) {
                 return isbn;
             } else {
-                output.println("Virhe: Anna kelvollinen ISBN");
+                output.println("Virhe: Anna kelvollinen ISBN-numero.");
             }
         }
     }
@@ -295,7 +327,7 @@ public class TextUI {
                 url = new URL(osoite);
                 return url;
             } catch (MalformedURLException e) {
-                output.println("Virhe: Anna kelvollinen URL-osoite");
+                output.println("Virhe: Anna kelvollinen URL-osoite.");
             }
         }
     }
@@ -338,9 +370,9 @@ public class TextUI {
                 try {
                     app.getVinkit().get(Integer.parseInt(vinkki) - 1).avaaLinkki();
                 } catch (IOException | URISyntaxException e) {
-                    output.println("Virhe: Linkin avaaminen ei onnistu");
+                    output.println("Virhe: Linkin avaaminen ei onnistu.");
                 } catch (Exception e) {
-                    output.println("Virhe: Vinkki ei sisällä linkkiä");
+                    output.println("Virhe: Vinkki ei sisällä linkkiä.");
                 }
                 break;
             } else {
@@ -356,12 +388,13 @@ public class TextUI {
             tallennus.tallenna(json);
             output.println("Tietojen tallennus onnistui.");
         } catch (IOException ex) {
-            output.println("Virhe: Tallennus epäonnistui");
+            output.println("Virhe: Tallennus epäonnistui.");
             System.out.println(ex);
         }
     }
 
-    private String getInput(String name) {
+    public String getInput(String name) {
         return this.lineReader.readLine(name + ": ");
     }
+
 }

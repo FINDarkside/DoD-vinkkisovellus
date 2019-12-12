@@ -30,7 +30,9 @@ dependencies {
     compile group: 'org.jline', name: 'jline-reader', version: '3.13.2'
     compile group: 'org.jline', name: 'jline-terminal-jansi', version: '3.13.2'
     compile group: 'org.fusesource.jansi', name: 'jansi', version: '1.18'
-
+    compile group: 'org.json', name: 'json', version: '20190722'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compile 'org.apache.httpcomponents:httpclient:4.5.10'
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.hamcrest:hamcrest:2.2'
