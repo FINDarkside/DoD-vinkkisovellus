@@ -285,6 +285,7 @@ public class TextUI {
             if (validoija.validoiLinkki(vinkki) == true) {
                 try {
                     app.getVinkit().get(Integer.parseInt(vinkki) - 1).avaaLinkki();
+                    output.println("Avataan linkkiä");
                 } catch (IOException | URISyntaxException e) {
                     output.println("Virhe: Linkin avaaminen ei onnistu");
                 } catch (Exception e) {
@@ -293,6 +294,7 @@ public class TextUI {
                 break;
             } else {
                 output.println("Virhe: Anna kelvollinen vinkin numero");
+                break;
             }
         }
     }
