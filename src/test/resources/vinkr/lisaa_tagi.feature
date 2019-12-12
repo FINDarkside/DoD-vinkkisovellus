@@ -1,0 +1,1 @@
+Feature: Käyttäjä voi lisätä tageja lukuvinkkeihin niin, että ne näkyvät vinkin tiedoissa

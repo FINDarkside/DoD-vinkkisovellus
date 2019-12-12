@@ -1,0 +1,1 @@
+Feature: Käyttäjä voi hakea kirjaVinkin tiedot automaattisesti verkosta syöttämällä teoksen ISBN-numeron
