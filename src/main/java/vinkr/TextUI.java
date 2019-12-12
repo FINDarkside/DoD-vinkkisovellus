@@ -44,7 +44,7 @@ public class TextUI {
                 .build();
         this.lineReader = LineReaderBuilder.builder()
                 .terminal(terminal)
-                .completer(new StringsCompleter("lisaa", "listaa", "apua", "tallenna"))
+                .completer(new StringsCompleter("lisaa", "listaa", "apua", "tallenna", "avaa", "lue", "lopeta"))
                 .build();
         this.app = app;
         this.output = new PrintStream(outputStream);
