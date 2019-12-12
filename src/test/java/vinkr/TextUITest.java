@@ -172,19 +172,36 @@ public class TextUITest {
 
     @Test
     public void lukuprosenttiTulostuuNollassaPunaisella() {
-        uiInput.println("lisaa");
-        uiInput.println("youtube");
-        uiInput.println("https://www.youtube.com/watch?v=9TycLR0TqFA");
-        uiInput.println("Introduction to Scrum - 7 Minutes");
-        uiInput.println("Uzility");
-        uiInput.println("26.07.2014");
-        uiInput.println("");
         uiInput.println("listaa");
         uiInput.println("lopeta");
         ui.run();
 
         String output = getOutput();
         assertTrue(output.contains(Varit.PUNAINEN));
+    }
+
+    @Test
+    public void lukuprosenttiKeskenKeltaisella() {
+        vinkit.get(0).setLukuprosentti(68);
+
+        uiInput.println("listaa");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains(Varit.KELTAINEN));
+    }
+
+    @Test
+    public void lukuprosenttiTulostuuSadassaVihrealla() {
+        vinkit.get(0).setLukuprosentti(100);
+
+        uiInput.println("listaa");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains(Varit.VIHREA));
     }
 
     @Test
