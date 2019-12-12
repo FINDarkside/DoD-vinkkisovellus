@@ -56,8 +56,9 @@ public class Stepdefs {
         input += julkaisupaikka + "\n";
         input += kustantaja + "\n";
         input += julkaisuvuosi + "\n";
-        
+        input += "\n";
         nykyOtsikko = otsikko;
+        
     }
     /* -- ei vielä toteutettu
     @Given("uusi kirjavinkki, otsikolla {string}, kirjoittajalla {string}, jonka ISBN on {string}, julkaisupaikalla {string}, kustantajalla {string}, julkaisuvuodella {string} ja lukuprosentilla {string} lisataan")
@@ -140,6 +141,7 @@ public class Stepdefs {
         input += julkaisupaikka + "\n";
         input += kustantaja + "\n";
         input += julkaisuvuosi + "\n";
+        input += "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
@@ -155,6 +157,7 @@ public class Stepdefs {
         input += julkaisupaikka + "\n";
         input += kustantaja + "\n";
         input += julkaisuvuosi + "\n";
+        input += "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
@@ -173,6 +176,7 @@ public class Stepdefs {
         input += julkaisupaikka + "\n";
         input += kustantaja + "\n";
         input += julkaisuvuosi + "\n";
+        input += "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
@@ -187,6 +191,7 @@ public class Stepdefs {
         input += kirjoittaja + "\n";
         input += julkaisu + "\n";
         input += julkaisupaiva + "\n";
+        input += "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
@@ -203,7 +208,7 @@ public class Stepdefs {
         input += kirjoittaja + "\n";
         input += julkaisu + "\n";
         input += julkaisupaiva + "\n";
-        
+        input += "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
@@ -219,7 +224,7 @@ public class Stepdefs {
         input += kirjoittaja + "\n";
         input += julkaisu + "\n";
         input += julkaisupaiva + "\n";
-        
+        input += "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
@@ -233,8 +238,8 @@ public class Stepdefs {
         input += otsikko + "\n";
         input += kanava + "\n";
         input += julkaisupaivamaara + "\n";
+        input += "\n";
         input += "lopeta" + "\n";
-        
         luoUIjaStreamit();
     }
     
@@ -248,6 +253,7 @@ public class Stepdefs {
         input += otsikko + "\n";
         input += kanava + "\n";
         input += julkaisupaivamaara + "\n";
+        input += "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
@@ -263,6 +269,7 @@ public class Stepdefs {
         input += validiOtsikko + "\n";
         input += kanava + "\n";
         input += julkaisupaivamaara + "\n";
+        input += "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();

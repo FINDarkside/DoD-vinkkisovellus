@@ -37,6 +37,7 @@ public class TextUITest {
         when(validoija.validoiOtsikko(anyString())).thenReturn(true);
         when(validoija.validoiTekija(anyString())).thenReturn(true);
         when(validoija.validoiIsbn(anyString())).thenReturn(true);
+        when(validoija.validoiLukuprosentti(anyInt())).thenReturn(true);
         tallennus = mock(Tallennus.class);
         when(vinkr.serialisoi()).thenReturn("{}");
         ui = new TextUI(vinkr, input, uiOutput, tallennus);
@@ -51,6 +52,11 @@ public class TextUITest {
         vinkit.add(new ArtikkeliVinkki(new URL("https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram"), "Internet celebrity cat Lil Bub has died", ""));
         vinkit.add(new YoutubeVinkki(new URL("https://www.youtube.com/watch?v=9TycLR0TqFA"), "Introduction to Scrum - 7 Minutes", ""));
     }
+
+    private void lisaaMockArtikkeli() {
+        ArtikkeliVinkki mockArtikkeli = mock(ArtikkeliVinkki.class);
+        vinkit.add(mockArtikkeli);
+    }
     
     @Test
     public void lisaaKomentoLisaaKirjanIlmanKustannustietoja() {
@@ -59,6 +65,7 @@ public class TextUITest {
         uiInput.println("013215871X");
         uiInput.println("A Discipline of Programming");
         uiInput.println("Dijkstra, Edsger");
+        uiInput.println("");
         uiInput.println("");
         uiInput.println("");
         uiInput.println("");
@@ -79,6 +86,7 @@ public class TextUITest {
         uiInput.println("Upper Saddle River");
         uiInput.println("Prentice Hall");
         uiInput.println("1997");
+        uiInput.println("");
         uiInput.println("lopeta");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
@@ -93,6 +101,7 @@ public class TextUITest {
         uiInput.println("Lee, Dami");
         uiInput.println("The Verge");
         uiInput.println("02.12.2019");
+        uiInput.println("");
         uiInput.println("lopeta");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
@@ -106,6 +115,7 @@ public class TextUITest {
         uiInput.println("Introduction to Scrum - 7 Minutes");
         uiInput.println("Uzility");
         uiInput.println("26.07.2014");
+        uiInput.println("");
         uiInput.println("lopeta");
         ui.run();
         verify(vinkr).lisaaVinkki(any());
@@ -134,22 +144,33 @@ public class TextUITest {
         assertTrue(output.contains("listaa"));
         assertTrue(output.contains("lopeta"));
         assertTrue(output.contains("avaa"));
+        assertTrue(output.contains("lue"));
         assertTrue(output.contains("tallenna"));
     }
 
-    /*
     @Test
-    public void linkinAvaaminenToimii() {
+    public void linkinAvaaminenToimii() throws Exception {
+        lisaaMockArtikkeli();
+
         uiInput.println("avaa");
-        uiInput.println("3");
-        uiInput.println(NL);
+        uiInput.println("5");
         uiInput.println("lopeta");
         ui.run();
 
         String output = getOutput();
-        assertTrue(output.contains("Opening in existing browser session."));
+        verify(vinkit.get(4)).avaaLinkki();
     }
-    */
+
+    @Test
+    public void kirjanLinkinAvaaminenValittaaOikein() throws Exception {
+        uiInput.println("avaa");
+        uiInput.println("1");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains("Virhe: Vinkki ei sisällä linkkiä"));
+    }
 
     @Test
     public void tallennaKomentoTallentaaJson() throws IOException {
@@ -158,6 +179,80 @@ public class TextUITest {
         ui.run();
         verify(vinkr).serialisoi();
         verify(tallennus).tallenna(anyString());
+    }
+
+    @Test
+    public void lukuprosenttiTulostuuNollassaPunaisella() {
+        uiInput.println("listaa");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains(Varit.PUNAINEN));
+    }
+
+    @Test
+    public void lukuprosenttiKeskenKeltaisella() {
+        vinkit.get(0).setLukuprosentti(68);
+
+        uiInput.println("listaa");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains(Varit.KELTAINEN));
+    }
+
+    @Test
+    public void lukuprosenttiTulostuuSadassaVihrealla() {
+        vinkit.get(0).setLukuprosentti(100);
+
+        uiInput.println("listaa");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains(Varit.VIHREA));
+    }
+
+    @Test
+    public void prosentinPaivitysOnnistuu() {
+        uiInput.println("lue");
+        uiInput.println("1");
+        uiInput.println("99");
+        uiInput.println("listaa");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains("99%"));
+    }
+
+    @Test
+    public void prosentinPaivitysValittaaVirheista() {
+        uiInput.println("lue");
+        uiInput.println("99");
+        uiInput.println("1");
+        uiInput.println("111");
+        uiInput.println("2");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains("Anna kelvollinen vinkin numero"));
+        assertTrue(output.contains("Anna kelvollinen lukuprosentti"));
+    }
+
+    @Test
+    public void vinkinLisaysKasitteleeVirheetOikein() {
+        uiInput.println("lisaa");
+        uiInput.println("enpäs");
+        uiInput.println("takaisin");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains("Vinkin tyyppiä ei tunnistettu"));
     }
 
     private String getOutput() {

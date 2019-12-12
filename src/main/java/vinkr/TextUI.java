@@ -45,7 +45,6 @@ public class TextUI {
                 break;
             }
             kasitteleKomento(komento);
-            tulostaVinkkiApukomennosta();
         }
     }
 
@@ -55,28 +54,45 @@ public class TextUI {
         output.println("  lisaa: Lisää uusi lukuvinkki");
         output.println("  listaa: Listaa kaikki lukuvinkit");
         output.println("  avaa: Avaa annetun vinkin sisältämä linkki");
+        output.println("  lue: Päivitä olemassa olevan vinkin lukuprosenttia");
         output.println("  tallenna: Tallenna vinkit");
         output.println("  lopeta: Sulje sovellus");
     }
 
     private void kasitteleKomento(String komento) {
-        switch (komento) {
-            case "lisaa":
-                lisaaVinkki();
+        if (komento.equals("lisaa")) {
+            lisaaVinkki();
+        } else if (komento.equals("listaa")) {
+            listaaVinkit();
+        } else if (komento.equals("avaa")) {
+            avaaLinkki();
+        } else if (komento.equals("apua")) {
+            listaaKomennot();
+        } else if (komento.equals("tallenna")) {
+            tallenna();
+        } else if (komento.equals("lue")) {
+            paivitaProsenttia();
+        } else {
+            output.println("Komentoa ei tunnistettu");
+            tulostaVinkkiApukomennosta();
+        }
+    }
+
+    private void paivitaProsenttia() {
+        while (true) {
+            String vinkki = getInput("Vinkin numero");
+            vinkki = vinkki.replace("#", "");
+            if (validoija.validoiLinkki(vinkki) == true) {
+                int prosentti = -1;
+                while (!validoija.validoiLukuprosentti(prosentti)) {
+                    prosentti = kysyLukuprosentti();
+                }
+                output.println("Lukuprosentti päivitetty." + NL);
+                app.getVinkit().get(Integer.parseInt(vinkki) - 1).setLukuprosentti(prosentti);
                 break;
-            case "listaa":
-                listaaVinkit();
-                break;
-            case "avaa":
-                avaaLinkki();
-            case "apua":
-                listaaKomennot();
-                break;
-            case "tallenna":
-                tallenna();
-                break;
-            default:
-                output.println("Komentoa ei tunnistettu");
+            } else {
+                output.println("Virhe: Anna kelvollinen vinkin numero");
+            }
         }
     }
 
@@ -112,6 +128,7 @@ public class TextUI {
         String kanava = kysyKanava();
         YoutubeVinkki youtubeVinkki = new YoutubeVinkki(url, otsikko, kanava);
         youtubeVinkki.setJulkaisupvm(kysyPvm());
+        youtubeVinkki.setLukuprosentti(kysyLukuprosentti());
         app.lisaaVinkki(youtubeVinkki);
         output.println("Video lisätty");
     }
@@ -123,6 +140,7 @@ public class TextUI {
         ArtikkeliVinkki artikkeliVinkki = new ArtikkeliVinkki(url, otsikko, kirjoittaja);
         artikkeliVinkki.setJulkaisu(kysyJulkaisu());
         artikkeliVinkki.setJulkaisupvm(kysyPvm());
+        artikkeliVinkki.setLukuprosentti(kysyLukuprosentti());
         app.lisaaVinkki(artikkeliVinkki);
         output.println("Artikkeli lisätty");
     }
@@ -135,6 +153,7 @@ public class TextUI {
         kirjaVinkki.setJulkaisupaikka(kysyJulkaisupaikka());
         kirjaVinkki.setKustantaja(kysyKustantaja());
         kirjaVinkki.setJulkaisuvuosi(kysyJulkaisuvuosi());
+        kirjaVinkki.setLukuprosentti(kysyLukuprosentti());
         app.lisaaVinkki(kirjaVinkki);
         output.println("Kirja lisätty");
     }
@@ -259,6 +278,21 @@ public class TextUI {
                 return url;
             } catch (MalformedURLException e) {
                 output.println("Virhe: Anna kelvollinen URL-osoite");
+            }
+        }
+    }
+
+    private int kysyLukuprosentti() {
+        int prosentti = -1;
+        while (true) {
+            try {
+                prosentti = Integer.parseInt("0" + getInput("Lukuprosentti"));
+            } catch (NumberFormatException e) {
+            }
+            if (validoija.validoiLukuprosentti(prosentti)) {
+                return prosentti;
+            } else {
+                output.println("Virhe: Anna kelvollinen lukuprosentti (0-100)");
             }
         }
     }
