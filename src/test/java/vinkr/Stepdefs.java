@@ -60,7 +60,7 @@ public class Stepdefs {
         nykyOtsikko = otsikko;
         
     }
-    /* -- ei vielä toteutettu
+    
     @Given("uusi kirjavinkki, otsikolla {string}, kirjoittajalla {string}, jonka ISBN on {string}, julkaisupaikalla {string}, kustantajalla {string}, julkaisuvuodella {string} ja lukuprosentilla {string} lisataan")
     public void lisataanJarjestelmaanTiettyKirjavinkkiLukuprosentilla(String otsikko, String kirjoittaja, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi, String lukuprosentti) {
         input += "lisaa" + "\n";
@@ -76,7 +76,7 @@ public class Stepdefs {
         
         nykyOtsikko = otsikko;
     }
-    */
+    
     @Given("uusi artikkelivinkki, urlilla {string}, otsikolla {string}, kirjoittajalla {string}, julkaisulla {string} ja julkaisupaivalla {string} annetaan")
     public void lisataanJarjestelmaanTiettyArtikkelivinkki(String url, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
         input += "lisaa" + "\n";
@@ -86,7 +86,21 @@ public class Stepdefs {
         input += kirjoittaja + "\n";
         input += julkaisu + "\n";
         input += julkaisupaiva + "\n";
-        
+        input += "\n";
+        nykyOtsikko = otsikko;
+    }
+    
+    @Given("uusi artikkelivinkki, urlilla {string}, otsikolla {string}, kirjoittajalla {string}, julkaisulla {string}, julkaisupaivalla {string} ja lukuprosentilla {string} annetaan")
+    public void lisataanJarjestelmaanTiettyArtikkelivinkkiLukuprosentilla(String url, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva, String lukuprosentti) {
+        input += "lisaa" + "\n";
+        input += "artikkeli" + "\n";
+        input += url + "\n";
+        input += otsikko + "\n";
+        input += kirjoittaja + "\n";
+        input += julkaisu + "\n";
+        input += julkaisupaiva + "\n";
+        input += lukuprosentti + "\n";
+
         nykyOtsikko = otsikko;
     }
     
@@ -98,7 +112,19 @@ public class Stepdefs {
         input += otsikko + "\n";
         input += kanava + "\n";
         input += julkaisupaiva + "\n";
-        
+        input += "\n";
+        nykyOtsikko = otsikko;
+    }
+    
+    @Given("uusi youtubevinkki, urlilla {string}, otsikolla {string}, kanavalla {string}, julkaisupaivalla {string} ja lukuprosentilla {string} annetaan")
+    public void lisataanJarjestelmaanTiettyYoutubevinkkiLukuprosentilla(String url, String otsikko, String kanava, String julkaisupaiva, String lukuprosentti) {
+        input += "lisaa" + "\n";
+        input += "youtube" + "\n";
+        input += url + "\n";
+        input += otsikko + "\n";
+        input += kanava + "\n";
+        input += julkaisupaiva + "\n";
+        input += lukuprosentti + "\n";
         nykyOtsikko = otsikko;
     }
         //WHENIT
@@ -118,14 +144,11 @@ public class Stepdefs {
     
     @When("kayttaja valitsee vinkin numero {string}")
     public void valitaanVinkki(String numero) {
-        System.out.println("************************hmm");
         input += numero + "\n";
         input += "\n";
         
         input += "lopeta" + "\n";
         
-        this.tulostaKonsoliinTanhetkinenInput();
-        debug = true;
         luoUIjaStreamit();
     }
     
@@ -274,16 +297,17 @@ public class Stepdefs {
         
         luoUIjaStreamit();
     }
-    /* -- ei vielä toteutettu
+    
     @When("kayttaja valitsee vinkin numero {string} ja maarittaa sen lukuprosentiksi {string}")
     public void kayttajaMuuttaaLukuprosentin(String numero, String lukuprosentti) {
         input += numero + "\n";
         input += lukuprosentti + "\n";
+        input += "\n";
         input += "lopeta" + "\n";
         
         luoUIjaStreamit();
     }
-    */
+    
         //THENIT
     
     @Then("ohjelmaan tulostuu {string}")
@@ -345,26 +369,47 @@ public class Stepdefs {
     @Then("ohjelma reagoi tulosteella {string}")
     public void ohjelmanViimeisinTulostettuRivi(String odotettuTuloste) throws UnsupportedEncodingException {
         String[] outputTaulukkona = muunnaOutputTaulukoksi();
-        //lisää koodia viimeisen rivin poimimiseen
+        //lisää koodia tietyn rivin poimimiseen
     }
-    /* -- ei vielä toteutettu
+    
     @Then("juuri lisatyn kirjavinkin lukuprosentti on listauksessa {string}")
     public void listauksessaOikeaLukuprosentti(String lukuprosentti) throws UnsupportedEncodingException {
         String[] outputTaulukkona = muunnaOutputTaulukoksi();
         int otsikonIndeksi = etsiTaulukostaKohta(outputTaulukkona, nykyOtsikko);
+        System.out.println("*****************" + outputTaulukkona[otsikonIndeksi + 3]);
          //kts. huomiot kirjavinkin värin etsivässä testissä
-        assertTrue(outputTaulukkona[otsikonIndeksi + 4].contains(lukuprosentti));
+        assertTrue(outputTaulukkona[otsikonIndeksi + 2].contains(lukuprosentti));
     }
+    
     @Then("juuri lisatyn kirjavinkin lukuprosentin vari on listauksessa {string}")
-    public void listauksessaOikeaLukuprosentinVari(String vari) throws UnsupportedEncodingException {
+    public void listauksessaKirjallaOikeaLukuprosentinVari(String vari) throws UnsupportedEncodingException {
+        vari = muunnaAnsiKoodiksi(vari);
+        String[] outputTaulukkona = muunnaOutputTaulukoksi();
+        int otsikonIndeksi = etsiTaulukostaKohta(outputTaulukkona, nykyOtsikko);
+        System.out.println("*****************" + vari);
+        System.out.println("*****************" + vari);
+        System.out.println("*****************" + Varit.KELTAINEN);
+         //kts. huomiot kirjavinkin värin etsivässä testissä
+        assertTrue(outputTaulukkona[otsikonIndeksi + 3].contains(vari));
+    }
+    
+    @Then("juuri lisatyn artikkelivinkin lukuprosentin vari on listauksessa {string}")
+    public void listauksessaArtikkelillaOikeaLukuprosentinVari(String vari) throws UnsupportedEncodingException {
+        vari = muunnaAnsiKoodiksi(vari);
+        String[] outputTaulukkona = muunnaOutputTaulukoksi();
+        int otsikonIndeksi = etsiTaulukostaKohta(outputTaulukkona, nykyOtsikko);
+         //kts. huomiot kirjavinkin värin etsivässä testissä
+        assertTrue(outputTaulukkona[otsikonIndeksi + 3].contains(vari));
+    }
+    
+    @Then("juuri lisatyn youtubevinkin lukuprosentin vari on listauksessa {string}")
+    public void listauksessaVideollaOikeaLukuprosentinVari(String vari) throws UnsupportedEncodingException {
         vari = muunnaAnsiKoodiksi(vari);
         String[] outputTaulukkona = muunnaOutputTaulukoksi();
         int otsikonIndeksi = etsiTaulukostaKohta(outputTaulukkona, nykyOtsikko);
          //kts. huomiot kirjavinkin värin etsivässä testissä
         assertTrue(outputTaulukkona[otsikonIndeksi + 4].contains(vari));
     }
-    
-    */
     
     // APUMETODEJA
     private void luoUIjaStreamit() {
@@ -375,7 +420,7 @@ public class Stepdefs {
         ui = new TextUI(app, uiInput, uiOutput, null);
         ui.run();
     }
-    
+    /*
     private void luoUIjaStreamitjaTallennus() throws URISyntaxException{
 
         String currentFolder = new File(TextUI.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
@@ -400,7 +445,7 @@ public class Stepdefs {
         ui = new TextUI(app, uiInput, uiOutput, tallennus);
         ui.run();
     }
-    
+    */
     private void tulostaKonsoliinTanhetkinenInput() {
         System.out.println("*******");
         System.out.println(input);
@@ -411,15 +456,21 @@ public class Stepdefs {
         if (vari.equals("sininen")) {
             return Varit.SININEN;
         }
-        
         if (vari.equals("sinivihrea")) {
             return Varit.SINIVIHREA;
         }
-        
         if (vari.equals("violetti")) {
             return Varit.VIOLETTI;
         }
-        
+        if (vari.equals("keltainen")) {
+            return Varit.KELTAINEN;
+        }
+        if (vari.equals("vihrea")) {
+            return Varit.VIHREA;
+        }
+        if (vari.equals("punainen")) {
+            return Varit.PUNAINEN;
+        }
         return null;
     }
         
