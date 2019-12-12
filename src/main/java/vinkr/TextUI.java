@@ -170,7 +170,6 @@ public class TextUI {
         }
     }
     
-    
     private String kysyOtsikko() {
         while (true) {
             String otsikko = getInput("Otsikko");
