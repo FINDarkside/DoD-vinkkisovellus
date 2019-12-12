@@ -59,7 +59,23 @@ public class Stepdefs {
         
         nykyOtsikko = otsikko;
     }
-    
+    /* -- ei vielä toteutettu
+    @Given("uusi kirjavinkki, otsikolla {string}, kirjoittajalla {string}, jonka ISBN on {string}, julkaisupaikalla {string}, kustantajalla {string}, julkaisuvuodella {string} ja lukuprosentilla {string} lisataan")
+    public void lisataanJarjestelmaanTiettyKirjavinkkiLukuprosentilla(String otsikko, String kirjoittaja, String isbn, String julkaisupaikka, String kustantaja, String julkaisuvuosi, String lukuprosentti) {
+        input += "lisaa" + "\n";
+        input += "kirja" + "\n";
+        input += isbn + "\n";
+        input += otsikko + "\n";
+        input += kirjoittaja + "\n";
+        input += "\n";
+        input += julkaisupaikka + "\n";
+        input += kustantaja + "\n";
+        input += julkaisuvuosi + "\n";
+        input += lukuprosentti + "\n";
+        
+        nykyOtsikko = otsikko;
+    }
+    */
     @Given("uusi artikkelivinkki, urlilla {string}, otsikolla {string}, kirjoittajalla {string}, julkaisulla {string} ja julkaisupaivalla {string} annetaan")
     public void lisataanJarjestelmaanTiettyArtikkelivinkki(String url, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
         input += "lisaa" + "\n";
@@ -251,7 +267,16 @@ public class Stepdefs {
         
         luoUIjaStreamit();
     }
-    
+    /* -- ei vielä toteutettu
+    @When("kayttaja valitsee vinkin numero {string} ja maarittaa sen lukuprosentiksi {string}")
+    public void kayttajaMuuttaaLukuprosentin(String numero, String lukuprosentti) {
+        input += numero + "\n";
+        input += lukuprosentti + "\n";
+        input += "lopeta" + "\n";
+        
+        luoUIjaStreamit();
+    }
+    */
         //THENIT
     
     @Then("ohjelmaan tulostuu {string}")
@@ -315,7 +340,24 @@ public class Stepdefs {
         String[] outputTaulukkona = muunnaOutputTaulukoksi();
         //lisää koodia viimeisen rivin poimimiseen
     }
+    /* -- ei vielä toteutettu
+    @Then("juuri lisatyn kirjavinkin lukuprosentti on listauksessa {string}")
+    public void listauksessaOikeaLukuprosentti(String lukuprosentti) throws UnsupportedEncodingException {
+        String[] outputTaulukkona = muunnaOutputTaulukoksi();
+        int otsikonIndeksi = etsiTaulukostaKohta(outputTaulukkona, nykyOtsikko);
+         //kts. huomiot kirjavinkin värin etsivässä testissä
+        assertTrue(outputTaulukkona[otsikonIndeksi + 4].contains(lukuprosentti));
+    }
+    @Then("juuri lisatyn kirjavinkin lukuprosentin vari on listauksessa {string}")
+    public void listauksessaOikeaLukuprosentinVari(String vari) throws UnsupportedEncodingException {
+        vari = muunnaAnsiKoodiksi(vari);
+        String[] outputTaulukkona = muunnaOutputTaulukoksi();
+        int otsikonIndeksi = etsiTaulukostaKohta(outputTaulukkona, nykyOtsikko);
+         //kts. huomiot kirjavinkin värin etsivässä testissä
+        assertTrue(outputTaulukkona[otsikonIndeksi + 4].contains(vari));
+    }
     
+    */
     
     // APUMETODEJA
     private void luoUIjaStreamit() {
