@@ -85,7 +85,7 @@ Sprintiin 3 valitut storyt on kirjattu [backlogiin](https://github.com/Ohjelmist
 * [Käyttäjä voi merkitä lukuvinkkiin kuinka monta prosenttia siitä on lukenut, nähdä vinkkien lukuprosentit listauksessa ja päivittää niitä](https://github.com/Ohjelmistotuotanto-DoD/vinkr/milestone/7)
 * [Käyttäjä voi hakea kirjaVinkin tiedot automaattisesti verkosta syöttämällä teoksen ISBN-numeron](https://github.com/Ohjelmistotuotanto-DoD/vinkr/milestone/19)
 * [Käyttäjä voi tunnistaa eri vinkkityypit värien perusteella ja nähdä niiden lukuasteen (aloittamatta/kesken/valmis) lukuprosentin väristä](https://github.com/Ohjelmistotuotanto-DoD/vinkr/milestone/15)
-* [https://github.com/Ohjelmistotuotanto-DoD/vinkr/milestone/16](https://github.com/Ohjelmistotuotanto-DoD/vinkr/milestone/16) (Toteuttamatta)
+* [Käyttäjä voi lisätä tageja lukuvinkkeihin niin, että ne näkyvät vinkin tiedoissa](https://github.com/Ohjelmistotuotanto-DoD/vinkr/milestone/16) (Toteuttamatta)
 
 ### Lisenssi
 
