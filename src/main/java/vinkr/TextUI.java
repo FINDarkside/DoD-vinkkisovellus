@@ -155,12 +155,13 @@ public class TextUI {
     private KirjaVinkki haeIsbnTiedot(String isbn) {
         ISBNTuonti isbnTuonti;
         try {
-            isbnTuonti = new ISBNTuonti(isbn, validoija);
+            isbnTuonti = new ISBNTuonti(validoija);
+            isbnTuonti.haeKirja(isbn);
             if (isbnTuonti.getOtsikko().equals("")) {
                 output.println("Virhe: ISBN-numerolla ei löytynyt kirjaa; syötä tiedot manuaalisesti.");
                 return kysyKirjanTiedot(isbn);
             } else {
-                return isbnTuonti.luoKirjaVinkki();
+                return isbnTuonti.luoKirjaVinkki(isbn);
             }
         } catch (IOException | IllegalArgumentException e) {
             System.out.println(e);

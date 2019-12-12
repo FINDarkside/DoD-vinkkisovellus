@@ -36,15 +36,19 @@ public class ISBNTuonti {
     private String siivottuIsbn;
     private JSONObject kirjanTiedot;
     
-    public ISBNTuonti(String isbn, Validoija validoija) throws IOException, IllegalArgumentException {
+    public ISBNTuonti(Validoija validoija) {
         this.validoija = validoija;
         this.tuontiUI = new ISBNTuontiUI(this, validoija);
+        
+    }
+
+    public void haeKirja(String isbn) throws IOException {
         this.isbn = isbn;
         this.siivottuIsbn = isbn.replaceAll("[\\-\\s]", "");
-        haeKirjanTiedot();
+        this.kirjanTiedot = haeKirjanTiedot();
     }
     
-    public KirjaVinkki luoKirjaVinkki() {
+    public KirjaVinkki luoKirjaVinkki(String isbn) {
         String otsikko = getOtsikko();
         ArrayList<String> kirjoittajat = getKirjoittajat();
         KirjaVinkki kirjaVinkki = new KirjaVinkki(otsikko, kirjoittajat, this.isbn); 

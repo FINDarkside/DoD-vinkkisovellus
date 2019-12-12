@@ -49,9 +49,8 @@ public class ISBNTuontiTest {
         when(validoija.validoiOtsikko(anyString())).thenReturn(true);
         when(validoija.validoiTekija(anyString())).thenReturn(true);
         when(validoija.validoiVuosi(anyString())).thenReturn(true);
-        isbnTuonti = new ISBNTuonti("0195083644", validoija);
+        isbnTuonti = new ISBNTuonti(validoija);
         ISBNTuonti isbnTuontiMock = Mockito.spy(isbnTuonti);
-        tuontiUI = new ISBNTuontiUI(isbnTuonti, validoija);
         when(isbnTuontiMock.haeKirjanTiedot()).thenReturn(testikirjaJson);
         when(isbnTuontiMock.haeViafId("http://www.viaf.org/viaf/AutoSuggest?query=douglas+biber")).thenReturn("85093260");
         when(isbnTuontiMock.haeViafId("http://www.viaf.org/viaf/AutoSuggest?query=edward+finegan")).thenReturn("51790592");
@@ -63,7 +62,8 @@ public class ISBNTuontiTest {
     /*
     
     @Test
-    public void otsikonHakuToimii() {
+    public void kirjaVinkinHakuToimii() {
+        isbnTuontiMock.luoKirjaVinkki("0195083644");
         assertEquals("Sociolinguistic perspectives on register", isbnTuonti.getOtsikko());
     }
     */
