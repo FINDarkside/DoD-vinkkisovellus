@@ -77,7 +77,7 @@ public class Stepdefs {
         nykyOtsikko = otsikko;
     }
     
-    @Given("uusi artikkelivinkki, urlilla {string}, otsikolla {string}, kirjoittajalla {string}, julkaisulla {string} ja julkaisupaivalla {string} annetaan")
+    @Given("uusi artikkelivinkki, urlilla {string}, otsikolla {string}, kirjoittajalla {string}, julkaisulla {string} ja julkaisupaivalla {string} lisataan")
     public void lisataanJarjestelmaanTiettyArtikkelivinkki(String url, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva) {
         input += "lisaa" + "\n";
         input += "artikkeli" + "\n";
@@ -90,7 +90,7 @@ public class Stepdefs {
         nykyOtsikko = otsikko;
     }
     
-    @Given("uusi artikkelivinkki, urlilla {string}, otsikolla {string}, kirjoittajalla {string}, julkaisulla {string}, julkaisupaivalla {string} ja lukuprosentilla {string} annetaan")
+    @Given("uusi artikkelivinkki, urlilla {string}, otsikolla {string}, kirjoittajalla {string}, julkaisulla {string}, julkaisupaivalla {string} ja lukuprosentilla {string} lisataan")
     public void lisataanJarjestelmaanTiettyArtikkelivinkkiLukuprosentilla(String url, String otsikko, String kirjoittaja, String julkaisu, String julkaisupaiva, String lukuprosentti) {
         input += "lisaa" + "\n";
         input += "artikkeli" + "\n";
@@ -104,7 +104,7 @@ public class Stepdefs {
         nykyOtsikko = otsikko;
     }
     
-    @Given("uusi youtubevinkki, urlilla {string}, otsikolla {string}, kanavalla {string} ja julkaisupaivalla {string} annetaan")
+    @Given("uusi youtubevinkki, urlilla {string}, otsikolla {string}, kanavalla {string} ja julkaisupaivalla {string} lisataan")
     public void lisataanJarjestelmaanTiettyYoutubevinkki(String url, String otsikko, String kanava, String julkaisupaiva) {
         input += "lisaa" + "\n";
         input += "youtube" + "\n";
@@ -116,7 +116,7 @@ public class Stepdefs {
         nykyOtsikko = otsikko;
     }
     
-    @Given("uusi youtubevinkki, urlilla {string}, otsikolla {string}, kanavalla {string}, julkaisupaivalla {string} ja lukuprosentilla {string} annetaan")
+    @Given("uusi youtubevinkki, urlilla {string}, otsikolla {string}, kanavalla {string}, julkaisupaivalla {string} ja lukuprosentilla {string} lisataan")
     public void lisataanJarjestelmaanTiettyYoutubevinkkiLukuprosentilla(String url, String otsikko, String kanava, String julkaisupaiva, String lukuprosentti) {
         input += "lisaa" + "\n";
         input += "youtube" + "\n";
@@ -297,7 +297,7 @@ public class Stepdefs {
         
         luoUIjaStreamit();
     }
-    
+    /*
     @When("kayttaja valitsee vinkin numero {string} ja maarittaa sen lukuprosentiksi {string}")
     public void kayttajaMuuttaaLukuprosentin(String numero, String lukuprosentti) {
         input += numero + "\n";
@@ -307,7 +307,7 @@ public class Stepdefs {
         
         luoUIjaStreamit();
     }
-    
+    */
         //THENIT
     
     @Then("ohjelmaan tulostuu {string}")

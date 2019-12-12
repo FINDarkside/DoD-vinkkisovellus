@@ -5,7 +5,7 @@ Scenario: Käyttäjän määrittämä lukuprosentti lukuvinkille näkyy listauks
         When  listataan kaikki lukuvinkit
         Then  juuri lisatyn kirjavinkin lukuprosentti on listauksessa "0"
 
-Scenario: Käyttäjän voi muuttaa tietyn lukuvinkin lukuprosenttia
+Scenario: Käyttäjä voi muuttaa tietyn lukuvinkin lukuprosenttia
         Given komento "lue" annetaan ohjelmalle
         When  kayttaja valitsee vinkin numero "1" ja maarittaa sen lukuprosentiksi "25"
         Then  ohjelmaan tulostuu "Lukuprosentti päivitetty"
@@ -16,11 +16,11 @@ Scenario: Tulostettujen kirjavinkkien lukuprosentit näkyvät eri väreissä
         Then  juuri lisatyn kirjavinkin lukuprosentin vari on listauksessa "keltainen"
 
 Scenario: Tulostettujen artikkelivinkkien lukuprosentit näkyvät eri väreissä
-        Given uusi artikkelivinkki, urlilla "http://www.testiartikkeli.com/artikkeli15", otsikolla "CucumberistaTaas", kirjoittajalla "Maestro, P", julkaisulla "", julkaisupaivalla "" ja lukuprosentilla "100" annetaan
+        Given uusi artikkelivinkki, urlilla "http://www.testiartikkeli.com/artikkeli15", otsikolla "CucumberistaTaas", kirjoittajalla "Maestro, P", julkaisulla "", julkaisupaivalla "" ja lukuprosentilla "100" lisataan
 	When  listataan kaikki lukuvinkit
         Then  juuri lisatyn artikkelivinkin lukuprosentin vari on listauksessa "vihrea"
 
 Scenario: Tulostettujen youtubevinkkien lukuprosentit näkyvät eri väreissä
-        Given uusi youtubevinkki, urlilla "https://www.youtube.com/watch?v=dQw4w9WgXcQ", otsikolla "RickRollingAgain", kanavalla "Official RickRoller Astley", julkaisupaivalla "24.10.2009" ja lukuprosentilla "0" annetaan
+        Given uusi youtubevinkki, urlilla "https://www.youtube.com/watch?v=dQw4w9WgXcQ", otsikolla "RickRollingAgain", kanavalla "Official RickRoller Astley", julkaisupaivalla "24.10.2009" ja lukuprosentilla "0" lisataan
 	When  listataan kaikki lukuvinkit
         Then  juuri lisatyn youtubevinkin lukuprosentin vari on listauksessa "punainen"
