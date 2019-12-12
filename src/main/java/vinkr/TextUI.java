@@ -36,7 +36,7 @@ public class TextUI {
     }
 
     public void run() {
-        output.println(logo.logoStringiksi());
+        output.println(Varit.varjaa(Varit.VAALEANSININEN, logo.logoStringiksi()));
         listaaKomennot();
 
         while (true) {
