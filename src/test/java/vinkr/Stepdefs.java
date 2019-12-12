@@ -390,7 +390,7 @@ public class Stepdefs {
         System.out.println("*****************" + vari);
         System.out.println("*****************" + Varit.KELTAINEN);
          //kts. huomiot kirjavinkin värin etsivässä testissä
-        assertTrue(outputTaulukkona[otsikonIndeksi + 3].contains(vari));
+        assertTrue(outputTaulukkona[otsikonIndeksi + 2].contains(vari));
     }
     
     @Then("juuri lisatyn artikkelivinkin lukuprosentin vari on listauksessa {string}")
@@ -455,20 +455,15 @@ public class Stepdefs {
     private String muunnaAnsiKoodiksi(String vari) {
         if (vari.equals("sininen")) {
             return Varit.SININEN;
-        }
-        if (vari.equals("sinivihrea")) {
+        } else if (vari.equals("sinivihrea")) {
             return Varit.SINIVIHREA;
-        }
-        if (vari.equals("violetti")) {
+        } else if (vari.equals("violetti")) {
             return Varit.VIOLETTI;
-        }
-        if (vari.equals("keltainen")) {
+        } else if (vari.equals("keltainen")) {
             return Varit.KELTAINEN;
-        }
-        if (vari.equals("vihrea")) {
+        } else if (vari.equals("vihrea")) {
             return Varit.VIHREA;
-        }
-        if (vari.equals("punainen")) {
+        } else if (vari.equals("punainen")) {
             return Varit.PUNAINEN;
         }
         return null;

@@ -2,7 +2,7 @@ Feature: Käyttäjä voi lisätä järjestelmään kirjamuotoisen lukuvinkin, jo
 
     Scenario: Kirja lisätään, kun kaikki pyydetyt tiedot annetaan
         Given komento "lisaa" annetaan ohjelmalle
-        When  tyyppi "kirja", otsikko "Clean Code: A Handbook of Agile Software Craftsmanship", kirjoittaja "Martin, Robert", ISBN "978-0132350884", julkaisupaikka "USA", kustantaja "Someone" ja julkaisuvuosi "2008" annetaan
+        When  tyyppi "kirja", otsikko "Clean Code: A Handbook of Agile Software Craftsmanship", kirjoittaja "Martin, Robert", ISBN "", julkaisupaikka "USA", kustantaja "Someone" ja julkaisuvuosi "2008" annetaan
         Then  ohjelmaan tulostuu "Kirja lisätty"
 
     Scenario: Kirja lisätään, kun ainoastaan otsikko annetaan
@@ -12,6 +12,6 @@ Feature: Käyttäjä voi lisätä järjestelmään kirjamuotoisen lukuvinkin, jo
 
     Scenario: Kirjan lisääminen ei onnistu, jos käyttäjä jättää sen otsikon tyhjäksi
         Given komento "lisaa" annetaan ohjelmalle
-        When  tyyppi "kirja", virheellinen otsikko "", kirjoittaja "Martin, Robert", ISBN "978-0132350884", julkaisupaikka "USA", kustantaja "Someone" ja julkaisuvuosi "2008" annetaan
+        When  tyyppi "kirja", virheellinen otsikko "", kirjoittaja "Martin, Robert", ISBN "", julkaisupaikka "USA", kustantaja "Someone" ja julkaisuvuosi "2008" annetaan
         Then  ohjelmaan tulostuu "Virhe: Otsikko ei saa olla tyhjä"
 
