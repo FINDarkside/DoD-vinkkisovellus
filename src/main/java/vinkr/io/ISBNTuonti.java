@@ -42,7 +42,7 @@ public class ISBNTuonti {
         this.kirjanTiedot = haeKirjanTiedot();
     }
 
-    public KirjaVinkki luoKirjaVinkki(String isbn) {
+    public KirjaVinkki luoKirjaVinkki() {
         String otsikko = getOtsikko();
         ArrayList<String> kirjoittajat = getKirjoittajat();
         KirjaVinkki kirjaVinkki = new KirjaVinkki(otsikko, kirjoittajat, this.isbn);
@@ -104,7 +104,7 @@ public class ISBNTuonti {
     }
 
     // Apumetodit
-    public JSONObject haeKirjanTiedot() throws IOException {
+    private JSONObject haeKirjanTiedot() throws IOException {
         String url = OLBASEURL + this.siivottuIsbn + OLSUFFIX;
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet pyynto = new HttpGet(url);
@@ -134,7 +134,7 @@ public class ISBNTuonti {
         }
     }
 
-    public String haeViafId(String hakutermi) throws IOException {
+    private String haeViafId(String hakutermi) throws IOException {
         String url = "http://www.viaf.org/viaf/AutoSuggest?query=" + hakutermi;
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet pyynto = new HttpGet(url);
@@ -145,7 +145,7 @@ public class ISBNTuonti {
         return viafId;
     }
 
-    public String haeViafNimi(String url) throws IOException {
+    private String haeViafNimi(String url) throws IOException {
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet pyynto = new HttpGet(url);
         pyynto.addHeader("accept", "application/json");
