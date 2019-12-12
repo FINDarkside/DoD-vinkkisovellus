@@ -199,7 +199,7 @@ public class TextUI {
                 output.println("Virhe: ISBN-numerolla ei löytynyt kirjaa; syötä tiedot manuaalisesti.");
                 return kysyKirjanTiedot(isbn);
             } else {
-                return isbnTuonti.luoKirjaVinkki(isbn);
+                return isbnTuonti.luoKirjaVinkki();
             }
         } catch (IOException | IllegalArgumentException e) {
             System.out.println(e);
