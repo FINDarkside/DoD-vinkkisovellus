@@ -376,7 +376,6 @@ public class Stepdefs {
     public void listauksessaOikeaLukuprosentti(String lukuprosentti) throws UnsupportedEncodingException {
         String[] outputTaulukkona = muunnaOutputTaulukoksi();
         int otsikonIndeksi = etsiTaulukostaKohta(outputTaulukkona, nykyOtsikko);
-        System.out.println("*****************" + outputTaulukkona[otsikonIndeksi + 3]);
          //kts. huomiot kirjavinkin värin etsivässä testissä
         assertTrue(outputTaulukkona[otsikonIndeksi + 2].contains(lukuprosentti));
     }
@@ -386,9 +385,6 @@ public class Stepdefs {
         vari = muunnaAnsiKoodiksi(vari);
         String[] outputTaulukkona = muunnaOutputTaulukoksi();
         int otsikonIndeksi = etsiTaulukostaKohta(outputTaulukkona, nykyOtsikko);
-        System.out.println("*****************" + vari);
-        System.out.println("*****************" + vari);
-        System.out.println("*****************" + Varit.KELTAINEN);
          //kts. huomiot kirjavinkin värin etsivässä testissä
         assertTrue(outputTaulukkona[otsikonIndeksi + 2].contains(vari));
     }
