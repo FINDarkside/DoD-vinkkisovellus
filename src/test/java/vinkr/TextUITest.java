@@ -52,6 +52,11 @@ public class TextUITest {
         vinkit.add(new ArtikkeliVinkki(new URL("https://www.theverge.com/2019/12/2/20992023/lil-bub-cat-dead-viral-internet-celebrity-animal-welfare-instagram"), "Internet celebrity cat Lil Bub has died", ""));
         vinkit.add(new YoutubeVinkki(new URL("https://www.youtube.com/watch?v=9TycLR0TqFA"), "Introduction to Scrum - 7 Minutes", ""));
     }
+
+    private void lisaaMockArtikkeli() {
+        ArtikkeliVinkki mockArtikkeli = mock(ArtikkeliVinkki.class);
+        vinkit.add(mockArtikkeli);
+    }
     
     @Test
     public void lisaaKomentoLisaaKirjanIlmanKustannustietoja() {
@@ -143,19 +148,18 @@ public class TextUITest {
         assertTrue(output.contains("tallenna"));
     }
 
-    /*
     @Test
-    public void linkinAvaaminenToimii() {
+    public void linkinAvaaminenToimii() throws Exception {
+        lisaaMockArtikkeli();
+
         uiInput.println("avaa");
-        uiInput.println("3");
-        uiInput.println(NL);
+        uiInput.println("5");
         uiInput.println("lopeta");
         ui.run();
 
         String output = getOutput();
-        assertTrue(output.contains("Opening in existing browser session."));
+        verify(vinkit.get(4)).avaaLinkki();
     }
-    */
 
     @Test
     public void tallennaKomentoTallentaaJson() throws IOException {
@@ -209,6 +213,18 @@ public class TextUITest {
         String output = getOutput();
         assertTrue(output.contains("Anna kelvollinen vinkin numero"));
         assertTrue(output.contains("Anna kelvollinen lukuprosentti"));
+    }
+
+    @Test
+    public void vinkinLisaysKasitteleeVirheetOikein() {
+        uiInput.println("lisaa");
+        uiInput.println("enpäs");
+        uiInput.println("takaisin");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains("Vinkin tyyppiä ei tunnistettu"));
     }
 
     private String getOutput() {
