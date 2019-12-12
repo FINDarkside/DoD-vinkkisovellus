@@ -1,37 +1,14 @@
-package vinkr.IO;
+package vinkr.io;
 
-import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
-import java.io.PrintStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
-import org.hamcrest.core.*;
 import org.json.JSONObject;
 
-import vinkr.Tallennus;
-import vinkr.TextUI;
 import vinkr.Validoija;
-import vinkr.Vinkr;
-import vinkr.vinkit.KirjaVinkki;
-import vinkr.vinkit.Vinkki;
 
 public class ISBNTuontiTest {
 

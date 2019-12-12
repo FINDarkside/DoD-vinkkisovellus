@@ -1,16 +1,11 @@
-package vinkr.IO;
+package vinkr.io;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
 import vinkr.App;
-import vinkr.Logo;
-import vinkr.Tallennus;
 import vinkr.Validoija;
 import vinkr.Varit;
-import vinkr.Vinkr;
 
 public class ISBNTuontiUI {
     private ISBNTuonti tuonti;

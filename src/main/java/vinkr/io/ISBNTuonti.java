@@ -1,10 +1,7 @@
-package vinkr.IO;
+package vinkr.io;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,19 +14,15 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
 import vinkr.App;
-import vinkr.TextUI;
 import vinkr.Validoija;
 import vinkr.vinkit.KirjaVinkki;
 
 public class ISBNTuonti {
 
-    private static String GBBASEURL = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
-    private static String OLBASEURL = "https://openlibrary.org/api/books?bibkeys=ISBN:";
-    private static String OLSUFFIX = "&jscmd=data&format=json";
+    private static final String GBBASEURL = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
+    private static final String OLBASEURL = "https://openlibrary.org/api/books?bibkeys=ISBN:";
+    private static final String OLSUFFIX = "&jscmd=data&format=json";
     private Validoija validoija;
     private ISBNTuontiUI tuontiUI;
     private String isbn;

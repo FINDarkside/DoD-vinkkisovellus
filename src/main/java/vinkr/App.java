@@ -11,8 +11,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class App {
-    public static InputStream INPUT = System.in;
-    public static OutputStream OUTPUT = System.out;
+    public static final InputStream INPUT = System.in;
+    public static final OutputStream OUTPUT = System.out;
     
     public static void main(String[] args) throws URISyntaxException {
         String currentFolder = new File(TextUI.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();

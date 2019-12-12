@@ -2,7 +2,7 @@ package vinkr;
 
 import java.io.IOException;
 
-import vinkr.IO.ISBNTuonti;
+import vinkr.io.ISBNTuonti;
 import vinkr.vinkit.*;
 
 import java.io.*;
@@ -13,10 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class TextUI {
 
