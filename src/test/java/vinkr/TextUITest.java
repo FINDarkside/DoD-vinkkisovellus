@@ -162,6 +162,17 @@ public class TextUITest {
     }
 
     @Test
+    public void kirjanLinkinAvaaminenValittaaOikein() throws Exception {
+        uiInput.println("avaa");
+        uiInput.println("1");
+        uiInput.println("lopeta");
+        ui.run();
+
+        String output = getOutput();
+        assertTrue(output.contains("Virhe: Vinkki ei sisällä linkkiä"));
+    }
+
+    @Test
     public void tallennaKomentoTallentaaJson() throws IOException {
         uiInput.println("tallenna");
         uiInput.println("lopeta");
