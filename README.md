@@ -68,3 +68,9 @@ Kun projekti käynnistyy, tekstikäyttöliittymä toivottaa sinut tervetulleeksi
 ### Storyjen hyväksymisehdot
 
 [Sprinttiin 2 valitut storyt ja niiden hyväksymisehdot](https://github.com/Ohjelmistotuotanto-DoD/vinkr/blob/master/hyvaksymiskriteerit.md)
+
+Sprintiin 3 valitut storyt on kirjattu [backlogiin](https://github.com/Ohjelmistotuotanto-DoD/vinkr/projects/4), linkit cucumber-featureihin storyissä
+
+### Lisenssi
+
+vinkr on lisensoitu [MIT-lisensillä](https://github.com/Ohjelmistotuotanto-DoD/vinkr/blob/master/LICENSE.md)

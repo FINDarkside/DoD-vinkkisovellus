@@ -8,42 +8,24 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ArtikkeliVinkki implements Vinkki {
+public class ArtikkeliVinkki extends Vinkki {
 
-    public static final String NL = System.getProperty("line.separator");
     public static final SimpleDateFormat PVMMUOTO = new SimpleDateFormat("dd.MM.yyy");
     private static final String VARI = Varit.SINIVIHREA;
-    private String id;
-    private String otsikko;
-    private String tyyppi = "artikkeli";
+    private static final String TYYPPI = "artikkeli";
+
     private String tekija = ""; // Tekijän nimi tallennetaan muodossa "Sukunimi, Etunimi"
     private String julkaisu = "";
     private Date julkaisupvm = null;
     private URL url;
 
     public ArtikkeliVinkki(URL url, String otsikko, String tekija) {
-        this.id = luoID();
-        this.otsikko = otsikko;
+        super(TYYPPI, VARI, otsikko);
         this.tekija = tekija;
         this.url = url;
     }
     
     // Getterit
-    @Override
-    public String getID() {
-        return this.id;
-    }
-
-    @Override
-    public String getOtsikko() {
-        return this.otsikko;
-    }
-
-    @Override
-    public String getTyyppi() {
-        return this.tyyppi;
-    }
-
     public String getTekija() {
         return this.tekija;
     }
@@ -68,16 +50,7 @@ public class ArtikkeliVinkki implements Vinkki {
         return this.url;
     }
 
-    public String getVari() {
-        return this.VARI;
-    }
-
     // Setterit
-    @Override
-    public void setOtsikko(String otsikko) {
-        this.otsikko = otsikko;
-    }
-
     public void setTekija(String tekija) {
         this.tekija = tekija;
     }
@@ -108,6 +81,8 @@ public class ArtikkeliVinkki implements Vinkki {
             tuloste += "Julkaistu: " + PVMMUOTO.format(this.getJulkaisupvm()) + NL;
         }
         tuloste += "URL: " + this.getUrl().toString() + NL;
+        tuloste += "Luettu: " + super.tulostaLukuprosentti() + NL;
+
         return tuloste;
     }
     
@@ -126,13 +101,4 @@ public class ArtikkeliVinkki implements Vinkki {
     public void avaaLinkki() throws IOException, URISyntaxException {
         java.awt.Desktop.getDesktop().browse(this.getUrl().toURI());
     }
-    
- // Apumetodit
-    private String luoID() {
-        Date nykyhetki = new Date();
-        SimpleDateFormat ft = new SimpleDateFormat("yyMMddhhmmssMs");
-        String id = ft.format(nykyhetki);
-        return id;
-    }
-    
 }
