@@ -5,6 +5,8 @@
 
 **vinkr** on syksyn 2019 Ohjelmistotuotanto-kurssin miniprojekti, jossa tehtävänä on luoda lukuvinkkejä hallinnoiva sovellus. Sovellusta käytetään tekstikäyttöliittymällä komentorivin kautta.
 
+[Loppuraportti](https://docs.google.com/document/d/1Unuc1-r5c5dkiaVtA_bytRDB7InGhOA34Mbf44VeYrI/edit?usp=sharing)
+
 ### Asennus- ja käyttöohje
 
 
